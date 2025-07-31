@@ -791,14 +791,14 @@
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        date: document.getElementById("fecha").value,
-        time: document.getElementById("hora").value,
-        name: document.getElementById("nombre").value,
+        date: document.getElementById("date").value,
+        time: document.getElementById("time").value,
+        name: document.getElementById("name").value,
         email: document.getElementById("email").value,
-        phone: document.getElementById("telefono").value,
+        phone: document.getElementById("phone").value,
         carModel: document.getElementById("car-model").value,
-        message: document.getElementById("mensaje").value
-      })
+        message: document.getElementById("message").value
+    })
     })
             .then(res => res.text())
             .then(text => {
