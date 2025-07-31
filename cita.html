@@ -785,33 +785,33 @@
       message: formData.get('message')
     };
 
-    fetch("https://script.google.com/macros/s/AKfycbx2oFzJ4NbAGYSveMyN5qYGxvu3Ox7T9oSjM9cnB5EJPuPl-0Dstoqz6AOf-bPzzN6V3g/exec", {
+    fetch("https://script.google.com/macros/s/AKfycbyAwJoe77HFaQdKjZTp2wX724OxRdA5doJsZVgXklsXCViQXU8LhWYSKRhTrNLmn44tZQ/exec", {
       method: "POST",
-      body: JSON.stringify(data),
       headers: {
         "Content-Type": "application/json"
-      }
+      },
+      body: JSON.stringify({
+        date: document.getElementById("fecha").value,
+        time: document.getElementById("hora").value,
+        name: document.getElementById("nombre").value,
+        email: document.getElementById("email").value,
+        phone: document.getElementById("telefono").value,
+        carModel: document.getElementById("marca").value,
+        message: document.getElementById("mensaje").value
+      })
     })
-            .then(response => {
-              if (response.ok) {
-                alert(`¡Gracias, ${data.name}! Tu cita ha sido añadida al calendario.`);
-                bookingForm.reset();
-                serviceCards.forEach(card => card.classList.remove('selected'));
-                selectedService = null;
-                selectedPrice = 0;
-                updateSummary();
-              } else {
-                alert("Error al conectar con el calendario.");
-              }
+            .then(res => res.text())
+            .then(text => {
+              alert("¡Cita enviada correctamente!");
             })
-            .catch(error => {
-              console.error("Error:", error);
-              alert("No se pudo enviar la cita al calendario.");
+            .catch(err => {
+              alert("Error al enviar la cita: " + err);
             });
+
   });
 
 
-  // Set minimum date for date input to today
+    // Set minimum date for date input to today
   const today = new Date();
   const yyyy = today.getFullYear();
   const mm = String(today.getMonth() + 1).padStart(2, '0'); // Months start at 0!
