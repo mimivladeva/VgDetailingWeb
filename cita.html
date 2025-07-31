@@ -614,6 +614,10 @@
               <label for="message">Mensaje Adicional (Opcional)</label>
               <textarea id="message" name="message" placeholder="¿Alguna instrucción especial o pregunta?"></textarea>
             </div>
+            <input type="hidden" name="service" id="hidden-service">
+            <input type="hidden" name="price" id="hidden-price">
+            <input type="hidden" name="title" id="hidden-title">
+
             <button type="submit" class="btn btn-primary">
               <i class="fas fa-paper-plane"></i>
               Confirmar Reserva
@@ -777,6 +781,7 @@
     // Insertar servicio y precio en campos ocultos del formulario
     document.getElementById('hidden-service').value = selectedService;
     document.getElementById('hidden-price').value = selectedPrice;
+    document.getElementById('hidden-title').value = selectedService;
 
     // NO usamos fetch, dejamos que el formulario HTML lo envíe directamente
     // El action del formulario ya apunta al Google Apps Script
