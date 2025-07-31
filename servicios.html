@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuestros Servicios - VG Detailing</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --federal-blue: #03045E;
+            --honolulu-blue: #0077B6;
+            --pacific-cyan: #00BAD8;
+            --non-photo-blue: #90E0EF;
+            --light-cyan: #CAF0F8;
+            --white: #ffffff;
+            --text-dark: #333333;
+            --text-light: #666666;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            background:linear-gradient(135deg,var(--pacific-cyan) , var(--honolulu-blue),var(--federal-blue));
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo {
+            height: 40px;
+            width: auto;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--light-cyan);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--light-cyan);
+            transform: translateY(-2px);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 50%;
+            background: var(--light-cyan);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .mobile-menu {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, rgba(3, 4, 94, 0.8), rgba(0, 119, 182, 0.8)), url('/photos/logoVG.png') no-repeat center center;
+            background-size: contain;
+            background-position: center;
+            padding: 8rem 0 4rem;
+            text-align: center;
+            color: white;
+            margin-top: 70px;
+        }
+
+        .page-header h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+        }
+
+        .page-header p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Service Details Section */
+        .service-details-section {
+            padding: 6rem 0;
+            background: var(--light-cyan);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--federal-blue);
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-bottom: 4rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .service-detail-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            margin-bottom: 4rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .service-detail-card:nth-child(even) {
+            flex-direction: column-reverse; /* Alternate image/text layout */
+        }
+
+        .service-detail-card .content-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            width: 100%;
+            max-width: 1000px;
+        }
+
+        .service-detail-card .text-content {
+            flex: 1;
+            padding: 0 2rem;
+        }
+
+        .service-detail-card .image-content {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .service-detail-card img {
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+            border-radius: 10px;
+            object-fit: cover;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .service-detail-card h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--federal-blue);
+            margin-bottom: 1rem;
+        }
+
+        .service-detail-card .price {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--pacific-cyan);
+            margin-bottom: 1.5rem;
+        }
+
+        .service-detail-card p {
+            font-size: 1rem;
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-detail-card ul {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 2rem;
+            text-align: left;
+            display: inline-block; /* To center the list */
+        }
+
+        .service-detail-card ul li {
+            font-size: 0.95rem;
+            color: var(--text-dark);
+            margin-bottom: 0.6rem;
+            position: relative;
+            padding-left: 1.8rem;
+        }
+
+        .service-detail-card ul li::before {
+            content: '\f00c'; /* FontAwesome check icon */
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            color: var(--honolulu-blue);
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--pacific-cyan), var(--honolulu-blue));
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, var(--honolulu-blue), var(--federal-blue));
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: var(--federal-blue);
+            transform: translateY(-3px);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, var(--federal-blue), var(--honolulu-blue));
+            color: white;
+            text-align: center;
+        }
+
+        .cta-content h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .cta-content p {
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--federal-blue);
+            color: white;
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--light-cyan);
+        }
+
+        .footer-section p {
+            line-height: 1.8;
+            opacity: 0.8;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            width: 45px;
+            height: 45px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--pacific-cyan);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: var(--non-photo-blue);
+        }
+
+        /* Responsive Design */
+        @media (min-width: 769px) {
+            .service-detail-card:nth-child(odd) .content-wrapper {
+                flex-direction: row;
+            }
+            .service-detail-card:nth-child(even) .content-wrapper {
+                flex-direction: row-reverse;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--federal-blue);
+                flex-direction: column;
+                padding: 2rem;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 2.2rem;
+            }
+
+            .service-detail-card {
+                padding: 2rem;
+            }
+
+            .service-detail-card .content-wrapper {
+                flex-direction: column !important; /* Force column on small screens */
+            }
+
+            .service-detail-card .text-content {
+                padding: 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .btn {
+                padding: 1rem 2rem;
+                font-size: 1rem;
+            }
+
+            .service-detail-card h2 {
+                font-size: 1.6rem;
+            }
+
+            .service-detail-card .price {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<!-- Header -->
+<header>
+    <nav>
+        <div class="logo-container">
+            <img src="/photos/logoBlanco.png" alt="VG Detailing Logo" class="logo">
+            <div class="logo-text">DETAILING</div>
+        </div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="sobre-nosotros.html">Sobre Nosotros</a></li>
+            <li><a href="servicios.html">Servicios</a></li>
+            <li><a href="galeria.html">Galería</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="cita.html">Cita</a></li>
+        </ul>
+        <button class="mobile-menu" id="mobileMenu">
+            <i class="fas fa-bars"></i>
+        </button>
+    </nav>
+</header>
+
+<!-- Page Header -->
+<section class="page-header">
+    <div class="container">
+        <h1>Nuestros Servicios</h1>
+        <p>Descubre la gama completa de servicios de detailing que ofrecemos para transformar y proteger tu vehículo.</p>
+    </div>
+</section>
+
+<!-- Service Details Section -->
+<section class="service-details-section">
+    <div class="container">
+        <h2 class="section-title">Detalles de Cada Servicio</h2>
+        <p class="section-subtitle">Explora lo que cada paquete incluye y elige el ideal para tu auto.</p>
+
+        <!-- Service Detail: Lavado Premium -->
+        <div class="service-detail-card" id="lavado-premium">
+            <div class="content-wrapper">
+                <div class="text-content">
+                    <h2>Lavado Premium</h2>
+                    <div class="price">$50</div>
+                    <p>Nuestro Lavado Premium va más allá de un simple lavado. Es una limpieza profunda y cuidadosa que revitaliza el exterior e interior de tu vehículo, utilizando productos de alta calidad y técnicas que protegen la pintura y los acabados.</p>
+                    <ul>
+                        <li>Lavado exterior a mano con shampoo pH neutro.</li>
+                        <li>Limpieza detallada de rines y neumáticos.</li>
+                        <li>Aspirado profundo de alfombras y tapicería.</li>
+                        <li>Limpieza de cristales interiores y exteriores.</li>
+                        <li>Aplicación de acondicionador de plásticos interiores.</li>
+                        <li>Secado con toallas de microfibra de alta calidad.</li>
+                    </ul>
+                    <a href="cita.html" class="btn btn-primary">
+                        <i class="fas fa-calendar-check"></i>
+                        Agendar Lavado Premium
+                    </a>
+                </div>
+                <div class="image-content">
+                    <img src="/placeholder.svg?height=400&width=600" alt="Coche siendo lavado a mano">
+                </div>
+            </div>
+        </div>
+
+        <!-- Service Detail: Encerado y Pulido -->
+        <div class="service-detail-card" id="encerado-pulido">
+            <div class="content-wrapper">
+                <div class="text-content">
+                    <h2>Encerado y Pulido</h2>
+                    <div class="price">$120</div>
+                    <p>Devuelve el brillo original a la pintura de tu coche con nuestro servicio de Encerado y Pulido. Eliminamos imperfecciones superficiales, rayones leves y oxidación, preparando la superficie para una protección duradera y un acabado espejo.</p>
+                    <ul>
+                        <li>Descontaminación de la pintura.</li>
+                        <li>Pulido de un paso para eliminar remolinos y rayones leves.</li>
+                        <li>Aplicación de cera de carnauba de alta calidad o sellador sintético.</li>
+                        <li>Mejora significativa del brillo y la profundidad del color.</li>
+                        <li>Protección contra los elementos y los rayos UV.</li>
+                    </ul>
+                    <a href="cita.html" class="btn btn-primary">
+                        <i class="fas fa-calendar-check"></i>
+                        Agendar Encerado y Pulido
+                    </a>
+                </div>
+                <div class="image-content">
+                    <img src="/placeholder.svg?height=400&width=600" alt="Coche siendo pulido">
+                </div>
+            </div>
+        </div>
+
+        <!-- Service Detail: Protección Cerámica -->
+        <div class="service-detail-card" id="proteccion-ceramica">
+            <div class="content-wrapper">
+                <div class="text-content">
+                    <h2>Protección Cerámica</h2>
+                    <div class="price">$300</div>
+                    <p>La Protección Cerámica es la máxima defensa para la pintura de tu vehículo. Un coating cerámico crea una capa protectora duradera que repele el agua, la suciedad y los contaminantes, manteniendo tu coche impecable por más tiempo y facilitando su limpieza.</p>
+                    <ul>
+                        <li>Preparación exhaustiva de la superficie (lavado, descontaminación, pulido).</li>
+                        <li>Aplicación de coating cerámico de grado profesional.</li>
+                        <li>Protección superior contra rayones, químicos y rayos UV.</li>
+                        <li>Brillo intenso y efecto hidrofóbico (repelente al agua).</li>
+                        <li>Durabilidad de varios años (dependiendo del coating).</li>
+                    </ul>
+                    <a href="cita.html" class="btn btn-primary">
+                        <i class="fas fa-calendar-check"></i>
+                        Agendar Protección Cerámica
+                    </a>
+                </div>
+                <div class="image-content">
+                    <img src="/placeholder.svg?height=400&width=600" alt="Aplicación de coating cerámico">
+                </div>
+            </div>
+        </div>
+
+        <!-- Service Detail: Detailing Interior -->
+        <div class="service-detail-card" id="detailing-interior">
+            <div class="content-wrapper">
+                <div class="text-content">
+                    <h2>Detailing Interior</h2>
+                    <div class="price">$80</div>
+                    <p>Transforma el interior de tu vehículo en un espacio fresco y renovado. Nuestro Detailing Interior se enfoca en cada rincón, eliminando suciedad, manchas y olores, y restaurando la apariencia original de cada superficie.</p>
+                    <ul>
+                        <li>Aspirado profundo de todo el interior.</li>
+                        <li>Limpieza y acondicionamiento de plásticos, vinilos y cuero.</li>
+                        <li>Limpieza de alfombras y tapicería con extractor (si aplica).</li>
+                        <li>Limpieza y desinfección de ventilas y consolas.</li>
+                        <li>Limpieza de cristales interiores.</li>
+                        <li>Eliminación de olores y aromatización.</li>
+                    </ul>
+                    <a href="cita.html" class="btn btn-primary">
+                        <i class="fas fa-calendar-check"></i>
+                        Agendar Detailing Interior
+                    </a>
+                </div>
+                <div class="image-content">
+                    <img src="/placeholder.svg?height=400&width=600" alt="Interior de coche limpio">
+                </div>
+            </div>
+        </div>
+
+        <!-- Service Detail: Restauración de Faros -->
+        <div class="service-detail-card" id="restauracion-faros">
+            <div class="content-wrapper">
+                <div class="text-content">
+                    <h2>Restauración de Faros</h2>
+                    <div class="price">$60</div>
+                    <p>Mejora la visibilidad y la estética de tu vehículo con nuestra Restauración de Faros. Eliminamos la opacidad y el amarillamiento causados por el sol y el tiempo, devolviendo la claridad original a tus faros.</p>
+                    <ul>
+                        <li>Lijado y pulido de faros para eliminar oxidación.</li>
+                        <li>Aplicación de sellador protector UV.</li>
+                        <li>Mejora drástica de la claridad y el rendimiento de la iluminación.</li>
+                        <li>Aumento de la seguridad al conducir de noche.</li>
+                    </ul>
+                    <a href="cita.html" class="btn btn-primary">
+                        <i class="fas fa-calendar-check"></i>
+                        Agendar Restauración de Faros
+                    </a>
+                </div>
+                <div class="image-content">
+                    <img src="/placeholder.svg?height=400&width=600" alt="Faros de coche restaurados">
+                </div>
+            </div>
+        </div>
+
+        <!-- Service Detail: Paquete Completo -->
+        <div class="service-detail-card" id="paquete-completo">
+            <div class="content-wrapper">
+                <div class="text-content">
+                    <h2>Paquete Completo</h2>
+                    <div class="price">$200</div>
+                    <p>Nuestro Paquete Completo es la solución definitiva para una transformación total de tu vehículo. Combina lo mejor de nuestros servicios para dejar tu coche como nuevo, tanto por dentro como por fuera.</p>
+                    <ul>
+                        <li>Incluye Lavado Premium.</li>
+                        <li>Incluye Encerado y Pulido.</li>
+                        <li>Incluye Detailing Interior.</li>
+                        <li>Descontaminación de pintura.</li>
+                        <li>Protección de larga duración.</li>
+                        <li>Ideal para una renovación completa.</li>
+                    </ul>
+                    <a href="cita.html" class="btn btn-primary">
+                        <i class="fas fa-calendar-check"></i>
+                        Agendar Paquete Completo
+                    </a>
+                </div>
+                <div class="image-content">
+                    <img src="/placeholder.svg?height=400&width=600" alt="Coche completamente detallado">
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section">
+    <div class="container">
+        <div class="cta-content">
+            <h2>¿Listo para Transformar tu Vehículo?</h2>
+            <p>Experimenta la diferencia que hace un servicio profesional de detailing. Tu auto merece lo mejor.</p>
+            <div class="cta-buttons">
+                <a href="cita.html" class="btn btn-primary">
+                    <i class="fas fa-calendar-check"></i>
+                    Agendar Cita
+                </a>
+                <a href="sobre-nosotros.html" class="btn btn-secondary">
+                    <i class="fas fa-info-circle"></i>
+                    Conoce Más
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>VG Detailing</h3>
+                <p>Elevando tu experiencia automotriz con servicios profesionales de detailing que transforman y protegen tu inversión.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/vgdetailing_?igsh=MTh3N244YXc3ODh6Yg==" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>Contacto</h3>
+                <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                <p><i class="fas fa-envelope"></i> info@vgdetailing.com</p>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Main Street, Ciudad</p>
+                <p><i class="fas fa-clock"></i> Lun - Sáb: 8:00 AM - 6:00 PM</p>
+            </div>
+
+            <div class="footer-section">
+                <h3>Servicios</h3>
+                <p>• Lavado Premium</p>
+                <p>• Encerado y Pulido</p>
+                <p>• Protección Cerámica</p>
+                <p>• Detailing Interior</p>
+                <p>• Restauración de Faros</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2024 VG Detailing. Todos los derechos reservados. | Diseño por M.Vladeva</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Mobile menu toggle
+    const mobileMenu = document.getElementById('mobileMenu');
+    const navLinks = document.getElementById('navLinks');
+
+    mobileMenu.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+    });
+
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+            navLinks.classList.remove('active');
+        });
+    });
+
+    // Header scroll effect
+    window.addEventListener('scroll', () => {
+        const header = document.querySelector('header');
+        if (window.scrollY > 100) {
+            header.style.background = 'linear-gradient(135deg, var(--pacific-cyan), var(--honolulu-blue), var(--federal-blue))';
+            header.style.backdropFilter = 'blur(10px)';
+        } else {
+            header.style.background = 'linear-gradient(135deg, var(--pacific-cyan), var(--honolulu-blue), var(--federal-blue))';
+            header.style.backdropFilter = 'none';
+        }
+    });
+</script>
+</body>
+</html>

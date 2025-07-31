@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre Nosotros - VG Detailing</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --federal-blue: #03045e;
+            --honolulu-blue: #0077B6;
+            --pacific-cyan: #00BAD8;
+            --non-photo-blue: #90E0EF;
+            --light-cyan: #CAF0F8;
+            --white: #ffffff;
+            --text-dark: #333333;
+            --text-light: #666666;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg,var(--pacific-cyan) , var(--honolulu-blue),var(--federal-blue));
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo {
+            height: 40px;
+            width: auto;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--light-cyan);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--light-cyan);
+            transform: translateY(-2px);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 50%;
+            background: var(--light-cyan);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .mobile-menu {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, rgba(3, 4, 94, 0.8), rgba(0, 119, 182, 0.8)), url('/photos/logoVG.png') no-repeat center center;
+            background-size: contain; /* Cambiado de 'cover' a 'contain' */
+            background-position: center;
+            padding: 8rem 0 4rem;
+            text-align: center;
+            color: white;
+            margin-top: 70px;
+        }
+
+        .page-header h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+        }
+
+        .page-header p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* About Viktor Section */
+        .about-viktor {
+            padding: 6rem 0;
+            background: white;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr; /* Ajustado para dar más espacio al texto */
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--federal-blue);
+            margin-bottom: 2rem;
+        }
+
+        .about-text h3 {
+            font-size: 1.5rem;
+            color: var(--pacific-cyan);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            color: var(--text-light);
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        .highlight {
+            color: var(--federal-blue);
+            font-weight: 600;
+        }
+
+        .about-image {
+            text-align: center;
+            position: relative;
+        }
+
+        .about-image img {
+            width: 100%;
+            /* Eliminado max-width para que la imagen llene su columna asignada */
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        .experience-badge {
+            position: absolute;
+            top: -20px;
+            right: 20px;
+            background: linear-gradient(135deg, var(--pacific-cyan), var(--honolulu-blue));
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .experience-badge .number {
+            font-size: 2rem;
+            font-weight: 700;
+            display: block;
+        }
+
+        .experience-badge .text {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* Values Section */
+        .values {
+            padding: 6rem 0;
+            background: var(--light-cyan);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--federal-blue);
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-bottom: 4rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+        }
+
+        .value-card {
+            background: white;
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 186, 216, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .value-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, var(--pacific-cyan), var(--honolulu-blue));
+        }
+
+        .value-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 70px rgba(0,0,0,0.15);
+        }
+
+        .value-icon {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, var(--pacific-cyan), var(--honolulu-blue));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            font-size: 2.5rem;
+            color: white;
+        }
+
+        .value-card h3 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--federal-blue);
+            margin-bottom: 1.5rem;
+        }
+
+        .value-card p {
+            color: var(--text-light);
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        /* Process Section */
+        .process {
+            padding: 6rem 0;
+            background: white;
+        }
+
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .process-step {
+            text-align: center;
+            position: relative;
+        }
+
+        .process-step::after {
+            content: '';
+            position: absolute;
+            top: 50px;
+            right: -50%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--pacific-cyan), transparent);
+            z-index: 1;
+        }
+
+        .process-step:last-child::after {
+            display: none;
+        }
+
+        .step-number {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--federal-blue), var(--honolulu-blue));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            position: relative;
+            z-index: 2;
+        }
+
+        .process-step h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--federal-blue);
+            margin-bottom: 1rem;
+        }
+
+        .process-step p {
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+
+        /* Stats Section */
+        .stats {
+            padding: 4rem 0;
+            background: linear-gradient(135deg, var(--federal-blue), var(--honolulu-blue));
+            color: white;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--light-cyan);
+        }
+
+        .stat-item p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, var(--federal-blue), var(--honolulu-blue));
+            color: white;
+            text-align: center;
+        }
+
+        .cta-content h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .cta-content p {
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn {
+            padding: 1.2rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--pacific-cyan), var(--honolulu-blue));
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, var(--honolulu-blue), var(--federal-blue));
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: var(--federal-blue);
+            transform: translateY(-3px);
+        }
+        /* Footer */
+        footer {
+            background: var(--federal-blue);
+            color: white;
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--light-cyan);
+        }
+
+        .footer-section p {
+            line-height: 1.8;
+            opacity: 0.8;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            width: 45px;
+            height: 45px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--pacific-cyan);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: var(--non-photo-blue);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--federal-blue);
+                flex-direction: column;
+                padding: 2rem;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .about-image {
+                order: -1;
+            }
+
+            .section-title {
+                font-size: 2.2rem;
+            }
+
+            .values-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .process-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .process-step::after {
+                display: none;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .about-text h2 {
+                font-size: 2rem;
+            }
+
+            .value-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+<!-- Header -->
+<header>
+    <nav>
+        <div class="logo-container">
+            <img src="/photos/logoBlanco.png" alt="VG Detailing Logo" class="logo">
+            <div class="logo-text">DETAILING</div>
+        </div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="sobre-nosotros.html">Sobre Nosotros</a></li>
+            <li><a href="servicios.html">Servicios</a></li>
+            <li><a href="galeria.html">Galería</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="cita.html">Cita</a></li>
+        </ul>
+        <button class="mobile-menu" id="mobileMenu">
+            <i class="fas fa-bars"></i>
+        </button>
+    </nav>
+</header>
+
+<!-- Page Header -->
+<section class="page-header">
+    <div class="container">
+        <h1>Sobre Nosotros</h1>
+        <p>Conoce la historia, valores y pasión que impulsan a VG Detailing hacia la excelencia automotriz.</p>
+    </div>
+</section>
+
+<!-- About Viktor Section -->
+<section class="about-viktor">
+    <div class="container">
+        <div class="about-content">
+            <div class="about-text">
+                <h2>Viktor Georgiev</h2>
+                <h3>Fundador y Especialista en Detailing</h3>
+                <p>Mi nombre es <span class="highlight">Viktor Georgiev</span> y soy el fundador de VG Detailing. Con más de <span class="highlight">X años de experiencia</span> en el mundo del detailing automotriz, mi pasión por los automóviles y la búsqueda constante de la perfección me llevaron a crear este proyecto.</p>
+
+                <p>Todo comenzó como un hobby personal: cuidar mi propio vehículo con técnicas que iba aprendiendo y perfeccionando. Con el tiempo, amigos y conocidos comenzaron a pedirme que trabajara en sus autos, y fue entonces cuando me di cuenta de que tenía algo especial entre mis manos.</p>
+
+                <p>Mi filosofía se basa en tres pilares fundamentales que definen cada aspecto de nuestro servicio:</p>
+
+                <p><span class="highlight">Responsabilidad:</span> Cada vehículo que llega a mis manos es tratado como si fuera mío. Entiendo que tu auto no es solo un medio de transporte, sino una inversión importante que merece el máximo cuidado y respeto.</p>
+
+                <p><span class="highlight">Confiabilidad:</span> Cumplir con lo prometido es fundamental. Desde la puntualidad en las citas hasta la calidad del trabajo final, puedes confiar en que siempre recibirás exactamente lo que esperabas, o incluso más.</p>
+
+                <p><span class="highlight">Seguridad:</span> Utilizo únicamente técnicas probadas y productos de la más alta calidad para garantizar que tu vehículo no solo luzca increíble, sino que también esté protegido a largo plazo.</p>
+            </div>
+
+            <div class="about-image">
+                <img src="/photos/sobrenosotros.png" alt="Viktor Georgiev trabajando en un vehículo">
+                <div class="experience-badge">
+                    <span class="number">X+</span>
+                    <span class="text">Años de Experiencia</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Values Section -->
+<section class="values">
+    <div class="container">
+        <h2 class="section-title">Nuestros Valores</h2>
+        <p class="section-subtitle">Los principios que guían cada servicio y definen nuestra identidad como empresa.</p>
+
+        <div class="values-grid">
+            <div class="value-card">
+                <div class="value-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>Responsabilidad</h3>
+                <p>Asumimos la responsabilidad completa de cada trabajo. Tu vehículo está en manos expertas que entienden el valor de tu inversión y la importancia de cuidar cada detalle con la máxima profesionalidad.</p>
+            </div>
+
+            <div class="value-card">
+                <div class="value-icon">
+                    <i class="fas fa-handshake"></i>
+                </div>
+                <h3>Confiabilidad</h3>
+                <p>Construimos relaciones duraderas basadas en la confianza. Cumplimos nuestras promesas, respetamos los tiempos acordados y mantenemos la transparencia en cada proceso y precio.</p>
+            </div>
+
+            <div class="value-card">
+                <div class="value-icon">
+                    <i class="fas fa-lock"></i>
+                </div>
+                <h3>Seguridad</h3>
+                <p>La seguridad de tu vehículo es nuestra prioridad. Utilizamos técnicas seguras, productos certificados y procesos que protegen la integridad de tu auto mientras lo transformamos.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Process Section -->
+<section class="process">
+    <div class="container">
+        <h2 class="section-title">Nuestro Proceso</h2>
+        <p class="section-subtitle">Un enfoque sistemático y profesional que garantiza resultados excepcionales en cada servicio.</p>
+
+        <div class="process-grid">
+            <div class="process-step">
+                <div class="step-number">1</div>
+                <h3>Evaluación Inicial</h3>
+                <p>Inspeccionamos detalladamente tu vehículo para identificar necesidades específicas y crear un plan personalizado.</p>
+            </div>
+
+            <div class="process-step">
+                <div class="step-number">2</div>
+                <h3>Preparación</h3>
+                <p>Preparamos el área de trabajo y seleccionamos los productos y herramientas adecuados para tu tipo de vehículo.</p>
+            </div>
+
+            <div class="process-step">
+                <div class="step-number">3</div>
+                <h3>Ejecución</h3>
+                <p>Aplicamos técnicas profesionales con precisión y cuidado, siguiendo los más altos estándares de calidad.</p>
+            </div>
+
+            <div class="process-step">
+                <div class="step-number">4</div>
+                <h3>Inspección Final</h3>
+                <p>Realizamos una revisión exhaustiva para asegurar que cada detalle cumple con nuestros estándares de excelencia.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Stats Section -->
+<section class="stats">
+    <div class="container">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <h3>500+</h3>
+                <p>Vehículos Transformados</p>
+            </div>
+
+            <div class="stat-item">
+                <h3>X+</h3>
+                <p>Años de Experiencia</p>
+            </div>
+
+            <div class="stat-item">
+                <h3>100%</h3>
+                <p>Clientes Satisfechos</p>
+            </div>
+
+            <div class="stat-item">
+                <h3>24/7</h3>
+                <p>Soporte al Cliente</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section">
+    <div class="container">
+        <div class="cta-content">
+            <h2>¿Listo para Transformar tu Vehículo?</h2>
+            <p>Experimenta la diferencia que hace un servicio profesional de detailing. Tu auto merece lo mejor.</p>
+            <div class="cta-buttons">
+                <a href="cita.html" class="btn btn-primary">
+                    <i class="fas fa-calendar-check"></i>
+                    Agendar Cita
+                </a>
+                <a href="sobre-nosotros.html" class="btn btn-secondary">
+                    <i class="fas fa-info-circle"></i>
+                    Conoce Más
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>VG Detailing</h3>
+                <p>Elevando tu experiencia automotriz con servicios profesionales de detailing que transforman y protegen tu inversión.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/vgdetailing_?igsh=MTh3N244YXc3ODh6Yg==" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>Contacto</h3>
+                <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                <p><i class="fas fa-envelope"></i> info@vgdetailing.com</p>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Main Street, Ciudad</p>
+                <p><i class="fas fa-clock"></i> Lun - Sáb: 8:00 AM - 6:00 PM</p>
+            </div>
+
+            <div class="footer-section">
+                <h3>Servicios</h3>
+                <p>• Lavado Premium</p>
+                <p>• Encerado y Pulido</p>
+                <p>• Protección Cerámica</p>
+                <p>• Detailing Interior</p>
+                <p>• Restauración de Faros</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2024 VG Detailing. Todos los derechos reservados. | Diseño por M.Vladeva</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Mobile menu toggle
+    const mobileMenu = document.getElementById('mobileMenu');
+    const navLinks = document.getElementById('navLinks');
+
+    mobileMenu.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+    });
+
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+            navLinks.classList.remove('active');
+        });
+    });
+
+    // Header scroll effect
+    window.addEventListener('scroll', () => {
+        const header = document.querySelector('header');
+        if (window.scrollY > 100) {
+            header.style.background = 'linear-gradient(135deg, var(--pacific-cyan), var(--honolulu-blue), var(--federal-blue))';
+            header.style.backdropFilter = 'blur(10px)';
+        } else {
+            header.style.background = 'linear-gradient(135deg, var(--pacific-cyan), var(--honolulu-blue), var(--federal-blue))';
+            header.style.backdropFilter = 'none';
+        }
+    });
+
+    // Animate elements on scroll
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
+
+    // Observe all cards and sections
+    document.querySelectorAll('.value-card, .process-step, .stat-item').forEach(element => {
+        element.style.opacity = '0';
+        element.style.transform = 'translateY(30px)';
+        element.style.transition = 'all 0.6s ease';
+        observer.observe(element);
+    });
+
+    // Counter animation for stats
+    const animateCounters = () => {
+        const counters = document.querySelectorAll('.stat-item h3');
+        counters.forEach(counter => {
+            const target = parseInt(counter.textContent);
+            const increment = target / 100;
+            let current = 0;
+
+            const updateCounter = () => {
+                if (current < target) {
+                    current += increment;
+                    counter.textContent = Math.ceil(current) + (counter.textContent.includes('+') ? '+' : '') + (counter.textContent.includes('%') ? '%' : '');
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    counter.textContent = counter.textContent; // Reset to original
+                }
+            };
+
+            updateCounter();
+        });
+    };
+
+    // Trigger counter animation when stats section is visible
+    const statsSection = document.querySelector('.stats');
+    const statsObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                animateCounters();
+                statsObserver.unobserve(entry.target);
+            }
+        });
+    });
+
+    if (statsSection) {
+        statsObserver.observe(statsSection);
+    }
+</script>
+</body>
+</html>
