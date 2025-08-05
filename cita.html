@@ -583,7 +583,7 @@
 
         <div class="booking-form">
           <h2>2. Tus Datos y Fecha</h2>
-          <form id="bookingForm" method="POST" action="https://script.google.com/macros/s/AKfycbwYuwsgjfzRVxVcczReVzx7IBwrtaTlLpdEZqdH23BTs6BNYHqXSGyRthucSl3_BYRv/exec">
+          <form id="bookingForm">
 
           <div class="form-group">
               <label for="name">Nombre Completo</label>
@@ -792,6 +792,42 @@
 
 
 
+
+  //Llevar el usuario a confirmacion.html y guardar cita
+    bookingForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    if (!selectedService) {
+      alert('Por favor, selecciona un servicio antes de confirmar tu reserva.');
+      return;
+    }
+
+    const formData = new FormData(bookingForm);
+      formData.append("service", selectedService);
+      formData.append("price", selectedPrice);
+      formData.append("title", selectedService); // Aquí se manda como title
+
+    try {
+      const res = await fetch("https://script.google.com/macros/s/AKfycbwYuwsgjfzRVxVcczReVzx7IBwrtaTlLpdEZqdH23BTs6BNYHqXSGyRthucSl3_BYRv/exec", {
+        method: "POST",
+        body: formData
+      });
+
+      const text = await res.text();
+      console.log("Respuesta del servidor:", text);
+
+      if (text.includes("✅")) {
+        window.location.href = "confirmacion.html"; // Redirige si todo va bien
+      } else {
+        alert("Hubo un problema al crear tu cita. Inténtalo de nuevo.");
+      }
+
+    } catch (error) {
+      console.error("Error al enviar el formulario:", error);
+      alert("Error de conexión. Intenta más tarde.");
+    }
+  });
+
   // Set minimum date for date input to today
   const today = new Date();
   const yyyy = today.getFullYear();
@@ -801,23 +837,7 @@
   document.getElementById('date').setAttribute('min', minDate);
 
   // Generar opciones de hora cada 30 minutos desde las 8:00 hasta las 19:00
-  /*
-  const timeSelect = document.getElementById('time');
-  for (let hour = 8; hour <= 19; hour++) {
-    for (let minute of [0, 30]) {
-      if (hour === 19 && minute > 0) continue; // No añadir 19:30
-      const h = String(hour).padStart(2, '0');
-      const m = String(minute).padStart(2, '0');
-      const timeValue = `${h}:${m}`;
-      const option = document.createElement('option');
-      option.value = timeValue;
-      option.textContent = `${h}:${m}`;
-      timeSelect.appendChild(option);
-    }
-  }
 
-
-   */
   const calendarURL = "https://script.google.com/macros/s/AKfycbwYuwsgjfzRVxVcczReVzx7IBwrtaTlLpdEZqdH23BTs6BNYHqXSGyRthucSl3_BYRv/exec";
   const dateInput = document.getElementById("date");
   const timeSelect = document.getElementById("time");
