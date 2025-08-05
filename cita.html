@@ -583,9 +583,8 @@
 
         <div class="booking-form">
           <h2>2. Tus Datos y Fecha</h2>
-          <form id="bookingForm"
-                method="POST"
-                action="https://script.google.com/macros/s/AKfycbxqqhgu61YRxQFGcoWI0taxVcl05YxdhHaEvQL0rHNR36RBhYNR1FZYDMqpY7nUDK_kbw/exec">
+          <form id="bookingForm" method="POST" action="https://script.google.com/macros/s/AKfycbwYuwsgjfzRVxVcczReVzx7IBwrtaTlLpdEZqdH23BTs6BNYHqXSGyRthucSl3_BYRv/exec">
+
           <div class="form-group">
               <label for="name">Nombre Completo</label>
               <input type="text" id="name" name="name" required>
@@ -604,7 +603,11 @@
             </div>
             <div class="form-group">
               <label for="time">Hora Preferida</label>
-              <input type="time" id="time" name="time" required>
+              <!--<input type="time" id="time" name="time" required>-->
+              <select id="time" name="time" required>
+                <option value="" disabled selected>Selecciona una hora</option>
+                <!-- Generadas dinámicamente con JS -->
+              </select>
             </div>
             <div class="form-group">
               <label for="car-model">Marca y Modelo del Vehículo</label>
@@ -796,6 +799,86 @@
   const dd = String(today.getDate()).padStart(2, '0');
   const minDate = `${yyyy}-${mm}-${dd}`;
   document.getElementById('date').setAttribute('min', minDate);
+
+  // Generar opciones de hora cada 30 minutos desde las 8:00 hasta las 19:00
+  /*
+  const timeSelect = document.getElementById('time');
+  for (let hour = 8; hour <= 19; hour++) {
+    for (let minute of [0, 30]) {
+      if (hour === 19 && minute > 0) continue; // No añadir 19:30
+      const h = String(hour).padStart(2, '0');
+      const m = String(minute).padStart(2, '0');
+      const timeValue = `${h}:${m}`;
+      const option = document.createElement('option');
+      option.value = timeValue;
+      option.textContent = `${h}:${m}`;
+      timeSelect.appendChild(option);
+    }
+  }
+
+
+   */
+  const calendarURL = "https://script.google.com/macros/s/AKfycbwYuwsgjfzRVxVcczReVzx7IBwrtaTlLpdEZqdH23BTs6BNYHqXSGyRthucSl3_BYRv/exec";
+  const dateInput = document.getElementById("date");
+  const timeSelect = document.getElementById("time");
+
+  // Función para generar todas las horas del día cada 30 minutos
+  function generarHoras() {
+    const horas = [];
+    for (let h = 8; h <= 19; h++) {
+      for (let m of [0, 30]) {
+        if (h === 19 && m > 0) continue; // No incluir 19:30
+        horas.push(`${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`);
+      }
+    }
+    return horas;
+  }
+
+  dateInput.addEventListener("change", async () => {
+    const selectedDate = dateInput.value;
+    if (!selectedDate) return;
+
+    timeSelect.innerHTML = `<option value="">Cargando horas disponibles...</option>`;
+
+    try {
+      const res = await fetch(calendarURL);
+      const citas = await res.json();
+
+      const citasDelDia = citas.filter(cita =>
+              new Date(cita.start).toISOString().startsWith(selectedDate)
+      );
+
+      const ocupadas = citasDelDia.map(cita => ({
+        start: new Date(cita.start),
+        end: new Date(cita.end)
+      }));
+
+      const posiblesHoras = generarHoras();
+
+      const disponibles = posiblesHoras.filter(hora => {
+        const horaActual = new Date(`${selectedDate}T${hora}`);
+        return !ocupadas.some(cita =>
+                horaActual >= new Date(cita.start) &&
+                horaActual < new Date(new Date(cita.end).getTime() + 60 * 60 * 1000) // margen +1h
+        );
+      });
+
+      if (disponibles.length > 0) {
+        timeSelect.innerHTML = `<option value="">Selecciona una hora</option>` +
+                disponibles.map(h => `<option value="${h}">${h}</option>`).join('');
+      } else {
+        timeSelect.innerHTML = `<option value="">No hay horas disponibles</option>`;
+      }
+
+    } catch (err) {
+      console.error("Error al obtener disponibilidad:", err);
+      timeSelect.innerHTML = `<option value="">Error al cargar</option>`;
+    }
+  });
+
+
+
+
 </script>
 </body>
 </html>
