@@ -447,8 +447,9 @@
     <h2 class="section-title">Últimas Publicaciones</h2>
     <p class="section-subtitle">Mantente al día con nuestras reseñas de productos, guías y secretos de detailing.</p>
 
-    <div class="blog-grid">
-      <!-- Example Blog Post 1 -->
+    <div class="blog-grid" id="entradas">
+
+    <!-- Example Blog Post 1
       <div class="blog-post-card">
         <img src="/placeholder.svg?height=300&width=500" alt="Botella de jabón para coche">
         <div class="blog-content">
@@ -462,7 +463,8 @@
         </div>
       </div>
 
-      <!-- Example Blog Post 2 -->
+-->
+      <!-- Example Blog Post 2
       <div class="blog-post-card">
         <img src="/placeholder.svg?height=300&width=500" alt="Productos de limpieza interior de coche">
         <div class="blog-content">
@@ -475,8 +477,8 @@
           <a href="#" class="read-more">Leer Más <i class="fas fa-arrow-right"></i></a>
         </div>
       </div>
-
-      <!-- Example Blog Post 3 -->
+-->
+      <!-- Example Blog Post 3
       <div class="blog-post-card">
         <img src="/placeholder.svg?height=300&width=500" alt="Aplicación de cera de coche">
         <div class="blog-content">
@@ -489,8 +491,8 @@
           <a href="#" class="read-more">Leer Más <i class="fas fa-arrow-right"></i></a>
         </div>
       </div>
-
-      <!-- Example Blog Post 4 -->
+-->
+      <!-- Example Blog Post 4
       <div class="blog-post-card">
         <img src="/placeholder.svg?height=300&width=500" alt="Toallas de microfibra para detailing">
         <div class="blog-content">
@@ -503,6 +505,7 @@
           <a href="#" class="read-more">Leer Más <i class="fas fa-arrow-right"></i></a>
         </div>
       </div>
+      -->
     </div>
   </div>
 </section>
@@ -601,6 +604,105 @@
       header.style.backdropFilter = 'none';
     }
   });
+
+
+
+  // URL de tu Google Apps Script
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbwhXAf069V0BB5NP8zkpbqMQesVksgsKF-KjYfIaQpzttxambMhPhSyDUdX3Q3oNQSXwg/exec';
+  function toDirectImageURL(url) {
+    if (!url) return "";
+    let u = url.trim();
+
+    // http -> https
+    if (u.startsWith("http://")) u = "https://" + u.slice(7);
+
+    // Google Drive /file/d/ID/view
+    let m = u.match(/https:\/\/drive\.google\.com\/file\/d\/([^/]+)\//);
+    if (m) return `https://drive.google.com/uc?export=view&id=${m[1]}`;
+    // Google Drive open?id=ID
+    m = u.match(/https:\/\/drive\.google\.com\/open\?id=([^&]+)/);
+    if (m) return `https://drive.google.com/uc?export=view&id=${m[1]}`;
+
+    // Dropbox -> raw=1
+    if (u.includes("dropbox.com")) {
+      u = u.replace("?dl=0", "").replace("?dl=1", "");
+      return u + (u.includes("?") ? "&raw=1" : "?raw=1");
+    }
+
+    // i.ibb.co es enlace directo
+    if (u.includes("ibb.co/") && !u.includes("i.ibb.co/")) {
+      console.warn("Enlace de ibb.co no es directo, usa el 'Direct link' de iBB.");
+      return "";
+    }
+
+    return u;
+  }
+
+  function cargarEntradasBlog() {
+    const contenedor = document.getElementById("entradas");
+
+    // Mensaje de carga inicial
+    contenedor.innerHTML = "<p>⏳ Cargando publicaciones...</p>";
+    fetch(scriptURL)
+            .then(async res => {
+              const text = await res.text();
+              try {
+                return JSON.parse(text);
+              } catch (e) {
+                console.error("La respuesta no es JSON válido:", text);
+                throw new Error("Respuesta no JSON del Apps Script");
+              }
+            })
+            .then(data => {
+              if (!Array.isArray(data)) {
+                console.error("El servidor devolvió un error:", data);
+                document.getElementById("entradas").innerHTML = "<p>Error del servidor: " + (data.error || "Desconocido") + "</p>";
+                return;
+              }
+
+             // const contenedor = document.getElementById("entradas");
+              contenedor.innerHTML = "";
+              const orden = [...data].reverse();
+
+              orden.forEach(entry => {
+                const card = document.createElement("div");
+                card.className = "blog-post-card";
+
+                const candidate =
+                        entry.imagenDataUrl && entry.imagenDataUrl.startsWith("data:")
+                                ? entry.imagenDataUrl
+                                : toDirectImageURL(entry.imagen || "");
+
+                const imgSrc = candidate || "https://placehold.co/800x450?text=VG+Detailing";
+
+                card.innerHTML = `
+          <img src="${imgSrc}" alt="${entry.titulo || 'Imagen'}" loading="lazy"
+               onerror="this.onerror=null; this.src='https://placehold.co/800x450?text=Imagen+no+disponible'">
+          <div class="blog-content">
+            <h3>${entry.titulo || ''}</h3>
+            <div class="blog-meta">
+              <span><i class="fas fa-user"></i> ${entry.autor || 'Anónimo'}</span>
+              <span><i class="fas fa-calendar-alt"></i> ${entry.fecha || ''}</span>
+            </div>
+            <p>${(entry.contenido || '').length > 150 ? entry.contenido.substring(0, 150) + '...' : (entry.contenido || '')}</p>
+            <a href="blog-page.html?id=${entry.id}" class="read-more">Leer Más <i class="fas fa-arrow-right"></i></a>
+
+
+          </div>
+        `;
+                contenedor.appendChild(card);
+              });
+            })
+            .catch(err => {
+              console.error("Error cargando entradas:", err);
+              document.getElementById("entradas").innerHTML = "<p>Error al cargar las publicaciones.</p>";
+            });
+  }
+
+  window.addEventListener('load', cargarEntradasBlog);
+
+
+
 </script>
 </body>
 </html>

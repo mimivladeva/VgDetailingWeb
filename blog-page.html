@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Publicación | VG Detailing</title>
+    <meta name="description" content="Artículo del blog de VG Detailing" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --federal-blue: #03045E;
+            --honolulu-blue: #0077B6;
+            --pacific-cyan: #00BAD8;
+            --non-photo-blue: #90E0EF;
+            --light-cyan: #CAF0F8;
+            --white: #ffffff;
+            --text-dark: #333333;
+            --text-light: #666666;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Montserrat', sans-serif; line-height: 1.7; color: var(--text-dark); background: #fff; }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--federal-blue), var(--honolulu-blue));
+            color: white; padding: 1rem 0; position: fixed; width: 100%; top: 0; z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        nav { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+        .logo-container { display: flex; align-items: center; gap: 1rem; }
+        .logo { height: 40px; width: auto; }
+        .logo-text { font-size: 1.5rem; font-weight: 700; color: var(--light-cyan); }
+        .nav-links { display: flex; list-style: none; gap: 2.0rem; }
+        .nav-links a { color: white; text-decoration: none; font-weight: 500; font-size: 1rem; }
+        .nav-links a.active, .nav-links a:hover { color: var(--light-cyan); }
+        .mobile-menu { display: none; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; }
+
+        /* Main */
+        .main-content { max-width: 900px; margin: 0 auto; padding: 120px 2rem 4rem; }
+
+        .article-title { text-align: center; margin-bottom: 2rem; }
+        .article-title h1 { font-size: 2.6rem; font-weight: 700; color: var(--federal-blue); line-height: 1.2; }
+        .article-meta { color: var(--text-light); font-size: 1rem; display: flex; justify-content: center; gap: 1.2rem; margin-top: .8rem; }
+
+        .featured-image {
+            width: 100%; height: 420px; object-fit: cover; border-radius: 12px; margin: 2rem 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        .article-content { font-size: 1.08rem; line-height: 1.85; }
+        .article-content h2 { font-size: 1.9rem; font-weight: 700; color: var(--federal-blue); margin: 2rem 0 1rem; }
+        .article-content h3 { font-size: 1.4rem; font-weight: 600; color: var(--honolulu-blue); margin: 1.5rem 0 .8rem; }
+        .article-content p { margin-bottom: 1rem; }
+        .article-content ul, .article-content ol { margin: 1rem 0; padding-left: 1.4rem; }
+        .article-content li { margin-bottom: .5rem; }
+
+        .back-to-blog { text-align: center; margin: 3rem 0 0; }
+        .btn {
+            display: inline-flex; align-items: center; gap: .5rem; padding: .9rem 1.6rem;
+            background: linear-gradient(135deg, var(--pacific-cyan), var(--honolulu-blue));
+            color: white; text-decoration: none; border-radius: 999px; font-weight: 600;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15); transition: transform .2s ease;
+        }
+        .btn:hover { transform: translateY(-2px); }
+
+        /* Loader */
+        .loader {
+            display: flex; align-items: center; gap: .6rem; color: var(--text-light);
+            justify-content: center; margin: 2rem 0;
+        }
+        .spinner {
+            width: 18px; height: 18px; border-radius: 50%;
+            border: 3px solid #ddd; border-top-color: var(--honolulu-blue);
+            animation: spin 0.9s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* Footer */
+        footer { background: var(--federal-blue); color: white; padding: 3rem 0 2rem; margin-top: 3rem; }
+        .footer-content {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px,1fr)); gap: 2rem;
+            max-width: 1200px; margin: 0 auto 2rem; padding: 0 2rem;
+        }
+        .footer-section h3 { font-size: 1.2rem; margin-bottom: .8rem; color: var(--light-cyan); }
+        .social-links { display: flex; gap: .8rem; margin-top: .8rem; }
+        .social-links a { width: 40px; height: 40px; background: rgba(255,255,255,0.1); border-radius: 50%;
+            display:flex; align-items:center; justify-content:center; color:white; }
+        .footer-bottom { text-align: center; color: var(--non-photo-blue); padding: 0 2rem; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links { display: none; position: absolute; top: 100%; left: 0; width: 100%;
+                background: var(--federal-blue); flex-direction: column; padding: 1rem 2rem; }
+            .nav-links.active { display: flex; }
+            .mobile-menu { display: block; }
+            .main-content { padding: 100px 1rem 2rem; }
+            .featured-image { height: 260px; }
+            .article-title h1 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+<!-- Header -->
+<header>
+    <nav>
+        <div class="logo-container">
+            <img src="photos/logoBlanco.png" alt="VG Detailing Logo" class="logo">
+            <div class="logo-text">VG DETAILING</div>
+        </div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="sobre-nosotros.html">Sobre Nosotros</a></li>
+            <li><a href="servicios.html">Servicios</a></li>
+            <li><a href="galeria.html">Galería</a></li>
+            <li><a class="active" href="blog.html">Blog</a></li>
+            <li><a href="cita.html">Cita</a></li>
+            <li><a href="index.html#contacto">Contacto</a></li>
+        </ul>
+        <button class="mobile-menu" id="mobileMenu"><i class="fas fa-bars"></i></button>
+    </nav>
+</header>
+
+<!-- Main -->
+<main class="main-content">
+    <div class="article-title">
+        <h1 id="articleTitle">Cargando…</h1>
+        <div class="article-meta">
+            <span><i class="fas fa-calendar"></i> <span id="articleDate">—</span></span>
+            <span><i class="fas fa-user"></i> <span id="articleAuthor">—</span></span>
+            <span><i class="fas fa-clock"></i> <span id="articleRead">—</span></span>
+        </div>
+    </div>
+
+    <div class="loader" id="imageLoader"><span class="spinner"></span> <span>Cargando imagen…</span></div>
+    <img id="featuredImage" class="featured-image" src="https://placehold.co/900x420?text=Cargando+imagen" alt="Imagen del artículo" style="display:none;">
+
+    <div id="articleBody" class="article-content">
+        <div class="loader"><span class="spinner"></span> <span>Cargando contenido…</span></div>
+    </div>
+
+    <div class="back-to-blog">
+        <a href="blog.html" class="btn"><i class="fas fa-arrow-left"></i> Volver al Blog</a>
+    </div>
+</main>
+
+<!-- Footer -->
+<footer>
+    <div class="footer-content">
+        <div class="footer-section">
+            <h3>VG Detailing</h3>
+            <p>Servicios profesionales de detailing que transforman y protegen tu inversión.</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/vgdetailing_?igsh=MTh3N244YXc3ODh6Yg=="><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-tiktok"></i></a>
+            </div>
+        </div>
+        <div class="footer-section">
+            <h3>Contacto</h3>
+            <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+            <p><i class="fas fa-envelope"></i> info@vgdetailing.com</p>
+            <p><i class="fas fa-map-marker-alt"></i> 123 Main Street, Ciudad</p>
+            <p><i class="fas fa-clock"></i> Lun - Sáb: 8:00 - 18:00</p>
+        </div>
+        <div class="footer-section">
+            <h3>Servicios</h3>
+            <p>• Lavado Premium</p>
+            <p>• Encerado y Pulido</p>
+            <p>• Protección Cerámica</p>
+            <p>• Detailing Interior</p>
+            <p>• Restauración de Faros</p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2024 VG Detailing. Todos los derechos reservados.</p>
+    </div>
+</footer>
+
+<script>
+    // === CONFIG ===
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbwhXAf069V0BB5NP8zkpbqMQesVksgsKF-KjYfIaQpzttxambMhPhSyDUdX3Q3oNQSXwg/exec'; // <-- Pega aquí tu Web App URL
+
+    // Menú móvil
+    const mobileMenu = document.getElementById('mobileMenu');
+    const navLinks = document.getElementById('navLinks');
+    mobileMenu?.addEventListener('click', () => navLinks.classList.toggle('active'));
+
+    // Utils
+
+    function toDirectImageURL(url) {
+        if (!url) return "";
+        let u = String(url).trim();
+
+        // http -> https
+        if (u.startsWith("http://")) u = "https://" + u.slice(7);
+
+        // ✅ ya es enlace directo de Drive (uc?export=view&id=...)
+        if (u.includes("drive.google.com/uc?") && u.includes("id=")) return u;
+
+        // Google Drive /file/d/ID/view -> directo
+        let m = u.match(/https:\/\/drive\.google\.com\/file\/d\/([^/]+)\//);
+        if (m) return `https://drive.google.com/uc?export=view&id=${m[1]}`;
+
+        // Google Drive open?id=ID -> directo
+        m = u.match(/https:\/\/drive\.google\.com\/open\?id=([^&]+)/);
+        if (m) return `https://drive.google.com/uc?export=view&id=${m[1]}`;
+
+        // Dropbox -> raw=1
+        if (u.includes("dropbox.com")) {
+            u = u.replace("?dl=0", "").replace("?dl=1", "");
+            return u + (u.includes("?") ? "&raw=1" : "?raw=1");
+        }
+
+        // i.ibb.co (link directo); si es ibb.co (no directo), devuelve vacío
+        if (u.includes("ibb.co/") && !u.includes("i.ibb.co/")) return "";
+
+        // Cualquier otra URL, tal cual
+        return u;
+    }
+
+    function nl2br(text) { return (text || "").replace(/\n/g, "<br>"); }
+    function estimateReadTime(text) {
+        const words = (text || "").trim().split(/\s+/).filter(Boolean).length;
+        const minutes = Math.max(1, Math.round(words / 200));
+        return `${minutes} min de lectura`;
+    }
+
+    async function loadPost() {
+        const params = new URLSearchParams(location.search);
+        const id = params.get('id');
+
+        const elTitle = document.getElementById('articleTitle');
+        const elDate  = document.getElementById('articleDate');
+        const elAuthor= document.getElementById('articleAuthor');
+        const elRead  = document.getElementById('articleRead');
+        const elImg   = document.getElementById('featuredImage');
+        const imgLoader = document.getElementById('imageLoader');
+        const elBody  = document.getElementById('articleBody');
+
+        if (!id) {
+            elTitle.textContent = 'Publicación no encontrada';
+            elBody.innerHTML = '<p>Falta el parámetro <code>?id=</code> en la URL.</p>';
+            imgLoader.style.display = 'none';
+            return;
+        }
+
+        let data;
+        try {
+            const res = await fetch(scriptURL);
+            const text = await res.text();
+            try { data = JSON.parse(text); }
+            catch { throw new Error("Respuesta no JSON del Apps Script: " + text.slice(0, 200)); }
+        } catch (err) {
+            elTitle.textContent = 'Error cargando publicación';
+            elBody.innerHTML = `<p>❌ ${err.message}</p>`;
+            imgLoader.style.display = 'none';
+            return;
+        }
+
+        if (!Array.isArray(data) || data.length === 0) {
+            elTitle.textContent = 'Sin publicaciones';
+            elBody.innerHTML = '<p>Aún no hay contenido.</p>';
+            imgLoader.style.display = 'none';
+            return;
+        }
+
+        // Busca por id (servidor debe enviar "id")
+        let entry = data.find(x => String(x.id) === String(id));
+
+        // Fallback si no viene 'id' en JSON (intentos comunes)
+        if (!entry) {
+            const idx = Number(id);
+            if (!isNaN(idx)) entry = data[idx] || data[idx - 2] || null;
+        }
+
+        if (!entry) {
+            elTitle.textContent = 'Publicación no encontrada';
+            elBody.innerHTML = '<p>No existe una entrada con ese ID.</p>';
+            imgLoader.style.display = 'none';
+            return;
+        }
+
+        // DEBUG: mira qué llega realmente
+        console.log("ENTRY:", entry);
+
+// Cadena de candidatos (prioridad): imagenDirecta -> dataURL -> imagen -> placeholder
+        const imgSrc =
+            (entry.imagenDirecta && String(entry.imagenDirecta).trim()) ||
+            (entry.imagenDataUrl && String(entry.imagenDataUrl).startsWith("data:") && String(entry.imagenDataUrl)) ||
+            toDirectImageURL(entry.imagen || "") ||
+            "";
+
+// Más DEBUG: qué se decidió
+        console.log("imagenDirecta:", entry.imagenDirecta);
+        console.log("imagenDataUrl:", entry.imagenDataUrl ? "(dataURL)" : "");
+        console.log("imagen cruda:", entry.imagen);
+        console.log("imgSrc final:", imgSrc);
+
+// Pinta imagen
+        if (imgSrc) {
+            elImg.src = imgSrc;
+            elImg.style.display = "";
+            elImg.onerror = () => {
+                console.warn("No se pudo cargar la imagen:", imgSrc);
+                elImg.src = "https://placehold.co/900x420?text=Imagen+no+disponible";
+            };
+        } else {
+            elImg.src = "https://placehold.co/900x420?text=Sin+imagen";
+            elImg.style.display = "";
+        }
+        imgLoader.style.display = "none";
+
+
+
+        // Pinta datos
+        elTitle.textContent = entry.titulo || 'Sin título';
+        elAuthor.textContent = entry.autor || 'Anónimo';
+        elDate.textContent = entry.fecha || '';
+        elRead.textContent = estimateReadTime(entry.contenido || '');
+
+        // Imagen
+        if (imgSrc) {
+            elImg.src = imgSrc;
+            elImg.style.display = '';
+            elImg.onerror = () => { elImg.src = 'https://placehold.co/900x420?text=Imagen+no+disponible'; };
+        } else {
+            elImg.src = 'https://placehold.co/900x420?text=Sin+imagen';
+            elImg.style.display = '';
+        }
+        imgLoader.style.display = 'none';
+
+        // Contenido (respetando saltos de línea)
+        const html = nl2br(entry.contenido || '');
+        elBody.innerHTML = html || '<p>Sin contenido.</p>';
+
+        // Actualiza <title>
+        document.title = (entry.titulo ? `${entry.titulo} | VG Detailing` : 'Publicación | VG Detailing');
+    }
+
+    window.addEventListener('load', loadPost);
+</script>
+</body>
+</html>
