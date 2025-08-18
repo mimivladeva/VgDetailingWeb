@@ -320,6 +320,9 @@
             box-shadow: 0 15px 50px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
             border: 1px solid rgba(0, 186, 216, 0.1);
+            min-height: 600px;
+            display: flex;
+            flex-direction: column;
         }
 
 
@@ -348,26 +351,12 @@
          */
 
         /* Contenido general */
-        .service-content {
-            padding: 1rem;
-            text-align: left;
-        }
-        .service-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 25px 70px rgba(0,0,0,0.15);
-        }
-
-        .service-image {
-            height: 250px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 4rem;
-            color: var(--federal-blue);
-        }
 
         .service-content {
             padding: 2rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
         }
 
         .service-card h3 {
@@ -390,6 +379,109 @@
             margin-bottom: 1.5rem;
         }
 
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 70px rgba(0,0,0,0.15);
+        }
+
+        .service-image {
+            height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: var(--federal-blue);
+        }
+
+        .service-card h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--federal-blue);
+            margin-bottom: 1rem;
+        }
+
+        .service-price {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--pacific-cyan);
+            margin-bottom: 1rem;
+        }
+
+        .service-card p {
+            color: var(--text-light);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+
+        .service-duration {
+            font-size: 1rem;
+            color: var(--honolulu-blue);
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        .service-includes, .service-extras {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .service-includes h4, .service-extras h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--federal-blue);
+            margin-bottom: 0.8rem;
+            border-bottom: 2px solid var(--pacific-cyan);
+            padding-bottom: 0.3rem;
+        }
+
+        .service-includes ul, .service-extras ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .service-includes li, .service-extras li {
+            padding: 0.3rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            color: var(--text-dark);
+        }
+
+        .service-includes li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--pacific-cyan);
+            font-weight: bold;
+        }
+
+        .service-extras li::before {
+            content: '+';
+            position: absolute;
+            left: 0;
+            color: var(--honolulu-blue);
+            font-weight: bold;
+        }
+
+        .service-content .btn {
+            margin-top: auto;
+            align-self: center;
+        }
+
+        /* Responsive adjustments for service cards */
+        @media (max-width: 768px) {
+            .service-card {
+                min-height: auto;
+            }
+
+            .service-includes li, .service-extras li {
+                font-size: 0.85rem;
+            }
+        }
         /* CTA Section */
         .cta-section {
             padding: 6rem 0;
@@ -616,50 +708,128 @@
 </section>
 
 <!-- Services Preview -->
+<!-- Services Preview -->
 <section class="services-preview">
     <div class="container">
         <h2 class="section-title">Nuestros Servicios Destacados</h2>
-        <p class="section-subtitle">Desde lavado básico hasta protección cerámica avanzada, tenemos la solución perfecta para tu vehículo.</p>
+        <p class="section-subtitle">Servicios profesionales de detailing con productos premium y técnicas avanzadas.</p>
 
         <div class="services-grid">
+            <!-- Detailing Exterior -->
             <div class="service-card">
-                <div class="service-image">
-                    <img src="photos/LavadoProfecional.png" alt="Lavado Premium de coche">
-                </div>
+                <div class="service-image"> <img src="photos/LavadoProfecional.png" alt="Paquete Completo"> </div>
                 <div class="service-content">
-                    <h3>Lavado Premium</h3>
-                    <div class="service-price">$50</div>
-                    <p>Lavado completo exterior e interior con productos de alta calidad, incluyendo aspirado profundo y limpieza de cristales.</p>
-                    <a href="#servicios" class="btn btn-primary">Ver Detalles</a>
+                    <h3>Detailing Exterior</h3>
+                    <div class="service-price">Desde 40€</div>
+                    <div class="service-duration">Duración: 1h30 – 2h30</div>
+
+                    <div class="service-includes">
+                        <h4>Incluye:</h4>
+                        <ul>
+                            <li>Prelavado sin contacto (Gyeon Q²M Foam)</li>
+                            <li>Lavado a mano con champú (Gyeon Q²M Bathe+)</li>
+                            <li>Limpieza profunda de llantas (Gyeon Q²M Iron Redefined)</li>
+                            <li>Descontaminación química de pintura</li>
+                            <li>Limpieza de logos, parrillas e insignias</li>
+                            <li>Hidratación de plásticos y neumáticos</li>
+                            <li>Aplicación de sellador cerámico (8–12 semanas)</li>
+                        </ul>
+                    </div>
+
+                    <div class="service-extras">
+                        <h4>Extras:</h4>
+                        <ul>
+                            <li>Tratamiento llantas (25€)</li>
+                            <li>Antilluvia en cristales (15€)</li>
+                            <li>Pulido de faros (50€)</li>
+                            <li>Pulido cromados (desde 30€)</li>
+                            <li>Protección cerámica 12 meses</li>
+                        </ul>
+                    </div>
+
+                    <a href="servicios.html#detailing-exterior" class="btn btn-primary">Ver Detalles</a>
                 </div>
             </div>
 
+            <!-- Detailing Interior -->
             <div class="service-card">
-                <div class="service-image">
-                    <img src="photos/protecionCeramica.png" alt="Protección Cerámica">
-                </div>
+                <div class="service-image"> <img src="photos/protecionCeramica.png" alt="Protección Cerámica"> </div>
                 <div class="service-content">
-                    <h3>Protección Cerámica</h3>
-                    <div class="service-price">$300</div>
-                    <p>Aplicación de coating cerámico profesional para máxima protección, brillo duradero y facilidad de mantenimiento.</p>
-                    <a href="#servicios" class="btn btn-primary">Ver Detalles</a>
+                    <h3>Detailing Interior</h3>
+                    <div class="service-price">Desde 50€</div>
+                    <div class="service-duration">Duración: 2h – 4h</div>
+
+                    <div class="service-includes">
+                        <h4>Incluye:</h4>
+                        <ul>
+                            <li>Limpieza y desinfección completa sin siliconas</li>
+                            <li>Hidratador para evitar grietas/envejecimiento</li>
+                            <li>Limpieza de textil/cuero/alcántara (Koch Chemie + Karcher)</li>
+                            <li>Inyección/extracción alfombrillas</li>
+                            <li>Limpieza de moqueta con Tornador</li>
+                            <li>Limpieza de cristales interiores</li>
+                        </ul>
+                    </div>
+
+                    <div class="service-extras">
+                        <h4>Extras:</h4>
+                        <ul>
+                            <li>Sin tapicería 50€</li>
+                            <li>Con tapicería 90€</li>
+                            <li>Desmontaje de asientos 150€</li>
+                            <li>Pulido de paneles desde 30€</li>
+                            <li>Tratamiento cuero 6–8 meses (30€)</li>
+                            <li>Tratamiento cerámico textil 6–8 meses (30€)</li>
+                        </ul>
+                    </div>
+
+                    <a href="servicios.html#detailing-interior" class="btn btn-primary">Ver Detalles</a>
                 </div>
             </div>
 
+            <!-- Pulido -->
             <div class="service-card">
-                <div class="service-image">
-                    <img src="photos/paqueteCompleto.png" alt="Paquete Completo">
-                </div>
+                <div class="service-image"> <img src="photos/paqueteCompleto.png" alt="Paquete Completo"> </div>
                 <div class="service-content">
-                    <h3>Paquete Completo</h3>
-                    <div class="service-price">$200</div>
-                    <p>Servicio integral que incluye lavado, pulido, encerado y detailing interior para una transformación completa.</p>
-                    <a href="#servicios" class="btn btn-primary">Ver Detalles</a>
+                    <h3>Pulido</h3>
+                    <div class="service-price">Desde 150€</div>
+                    <div class="service-duration">Duración: 4h – 10h</div>
+
+                    <div class="service-includes">
+                        <h4>Incluye:</h4>
+                        <ul>
+                            <li>Evaluación de la pintura</li>
+                            <li>Lavado + descontaminación química y física (Gyeon Prep)</li>
+                            <li>Pulido en 1, 2 o 3 fases</li>
+                            <li>Uso de pulidora rotativa y roto-orbital</li>
+                            <li>Pads de lana agresiva hasta acabado de finish (Koch Chemie)</li>
+                            <li>Resultado: alto brillo sin swirls ni hologramas</li>
+                        </ul>
+                    </div>
+
+                    <div class="service-extras">
+                        <h4>Precios por fases:</h4>
+                        <ul>
+                            <li>1 fase → desde 150€</li>
+                            <li>2 fases → desde 200€</li>
+                            <li>3 fases → desde 250€</li>
+                            <li>Quitar arañazos → consultar</li>
+                        </ul>
+                        <h4>Protección extra pintura:</h4>
+                        <ul>
+                            <li>Cera líquida (50€, 3–5 meses)</li>
+                            <li>Cerámico básico (80€, 12 meses)</li>
+                            <li>Cerámico Gyeon (140€, 24 meses)</li>
+                        </ul>
+                    </div>
+
+                    <a href="servicios.html#pulido" class="btn btn-primary">Ver Detalles</a>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
 
 <!-- CTA Section -->
 <section class="cta-section">
