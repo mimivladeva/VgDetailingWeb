@@ -149,10 +149,20 @@
             padding: 0 2rem;
         }
 
-        /* Gallery Section */
+        /* Section Styles */
         .gallery-section {
             padding: 6rem 0;
             background: var(--light-cyan);
+        }
+
+        .single-photos-section {
+            padding: 6rem 0;
+            background: white;
+        }
+
+        .videos-section {
+            padding: 6rem 0;
+            background: var(--non-photo-blue);
         }
 
         .section-title {
@@ -173,29 +183,49 @@
             margin-right: auto;
         }
 
+        /* Gallery Grid - 2 columnas exactas */
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); /* Ajustado para 2-3 columnas más grandes */
+            grid-template-columns: 1fr 1fr;
             gap: 2rem;
+            align-items: start;
         }
 
-        /* Before/After Comparison Container */
+        /* Before/After Comparison Container - Adaptive */
         .comparison-container {
             position: relative;
             overflow: hidden;
             border-radius: 15px;
             box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-            aspect-ratio: 16 / 9;
             cursor: grab;
             user-select: none;
-        }.comparison-container:active {
-             cursor: grabbing;
-         }
+            width: 100%;
+            min-height: 250px;
+            max-height: 80vh;
+        }
+
+        .comparison-container:active {
+            cursor: grabbing;
+        }
+
+        .comparison-container.horizontal {
+            aspect-ratio: 16 / 9;
+        }
+
+        .comparison-container.vertical {
+            aspect-ratio: 9 / 16;
+            max-height: 70vh;
+        }
+
+        .comparison-container.square {
+            aspect-ratio: 1 / 1;
+        }
 
         .comparison-container img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            object-position: center;
             position: absolute;
             top: 0;
             left: 0;
@@ -272,6 +302,7 @@
         .after-label {
             right: 1rem;
         }
+
         /* Service Label */
         .service-label {
             position: absolute;
@@ -311,6 +342,161 @@
         .instructions i {
             color: var(--pacific-cyan);
             margin-right: 0.5rem;
+        }
+
+        /* Loading indicator */
+        .comparison-container.loading {
+            background: linear-gradient(45deg, #f0f0f0 25%, transparent 25%),
+            linear-gradient(-45deg, #f0f0f0 25%, transparent 25%),
+            linear-gradient(45deg, transparent 75%, #f0f0f0 75%),
+            linear-gradient(-45deg, transparent 75%, #f0f0f0 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+            animation: loading 1s linear infinite;
+        }
+
+        @keyframes loading {
+            0% { background-position: 0 0, 0 10px, 10px -10px, -10px 0px; }
+            100% { background-position: 20px 20px, 20px 30px, 30px 10px, 10px 20px; }
+        }
+
+        /* Single Photo Container */
+        .single-photo-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .single-photo-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        .single-photo-container img {
+            width: 100%;
+            height: 400px; /* Cambiar de height: auto a altura fija */
+            object-fit: cover; /* Agregar para mantener proporciones */
+            object-position: center; /* Agregar para centrar la imagen */
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .single-photo-container:hover img {
+            transform: scale(1.02);
+        }
+
+        .photo-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: white;
+            padding: 2rem 1.5rem 1.5rem;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .single-photo-container:hover .photo-overlay {
+            transform: translateY(0);
+        }
+
+        .photo-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .photo-description {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            line-height: 1.4;
+        }
+
+        /* Video Container */
+        .video-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            background: black;
+        }
+
+        .video-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        .video-container video {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 15px;
+        }
+
+        .video-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: white;
+            padding: 2rem 1.5rem 1.5rem;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .video-container:hover .video-overlay {
+            transform: translateY(0);
+        }
+
+        .video-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .video-description {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            line-height: 1.4;
+        }
+
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            background: rgba(0, 186, 216, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .play-button:hover {
+            background: var(--pacific-cyan);
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        .play-button i {
+            color: white;
+            font-size: 2rem;
+            margin-left: 4px;
+        }
+
+        .play-button.playing {
+            opacity: 0;
+            pointer-events: none;
         }
 
         /* CTA Section */
@@ -372,6 +558,7 @@
             color: var(--federal-blue);
             transform: translateY(-3px);
         }
+
         /* Footer */
         footer {
             background: var(--federal-blue);
@@ -461,7 +648,13 @@
 
             .gallery-grid {
                 grid-template-columns: 1fr;
+                gap: 1.5rem;
             }
+
+            .comparison-container.vertical {
+                max-height: 60vh;
+            }
+
             .slider-handle::before {
                 width: 35px;
                 height: 35px;
@@ -469,6 +662,19 @@
 
             .slider-handle::after {
                 font-size: 14px;
+            }
+
+            .play-button {
+                width: 60px;
+                height: 60px;
+            }
+
+            .play-button i {
+                font-size: 1.5rem;
+            }
+
+            .single-photo-container img {
+                height: 250px;
             }
         }
 
@@ -485,6 +691,7 @@
                 padding: 1rem 2rem;
                 font-size: 1rem;
             }
+
             .before-label, .after-label {
                 font-size: 0.8rem;
                 padding: 0.4rem 0.8rem;
@@ -493,6 +700,23 @@
             .service-label {
                 font-size: 0.8rem;
                 padding: 0.4rem 0.8rem;
+            }
+
+            .comparison-container.vertical {
+                max-height: 50vh;
+            }
+
+            .play-button {
+                width: 50px;
+                height: 50px;
+            }
+
+            .play-button i {
+                font-size: 1.2rem;
+            }
+
+            .single-photo-container img {
+                height: 200px;
             }
         }
     </style>
@@ -509,9 +733,10 @@
             <li><a href="index.html">Inicio</a></li>
             <li><a href="sobre-nosotros.html">Sobre Nosotros</a></li>
             <li><a href="servicios.html">Servicios</a></li>
-            <li><a href="galeria.html">Galería</a></li>
+            <li><a href="galeria.html" class="active">Galería</a></li>
             <li><a href="blog.html">Blog</a></li>
             <li><a href="cita.html">Cita</a></li>
+            <li><a href="index.html#contacto">Contacto</a></li>
         </ul>
         <button class="mobile-menu" id="mobileMenu">
             <i class="fas fa-bars"></i>
@@ -526,10 +751,11 @@
         <p>Descubre la transformación asombrosa que logramos en cada vehículo.</p>
     </div>
 </section>
-<!-- Gallery Section -->
+
+<!-- Gallery Section - Comparaciones Interactivas -->
 <section class="gallery-section">
     <div class="container">
-        <h2 class="section-title">Nuestros Trabajos</h2>
+        <h2 class="section-title">Comparaciones Interactivas</h2>
         <p class="section-subtitle">Arrastra el divisor o haz clic para comparar el antes y después de nuestros trabajos.</p>
 
         <!-- Instructions -->
@@ -538,20 +764,20 @@
         </div>
 
         <div class="gallery-grid">
-            <!-- Gallery Item 1 -->
-            <div class="comparison-container" data-service="Lavado Premium">
-                <img src="photos/cocheDespues.png" alt="Coche sucio antes del detailing" class="before-image">
-                <img src="photos/cocheAntes.png" alt="Coche limpio después del detailing" class="after-image">
+            <!-- Gallery Item 1 - Interior Vertical -->
+            <div class="comparison-container loading" data-service="Detailing Interior">
+                <img src="photos/interiorDespues_1.jpg" alt="Interior sucio antes del detailing" class="before-image">
+                <img src="photos/interiorAntes_1.jpg" alt="Interior limpio después del detailing" class="after-image">
                 <div class="slider-handle"></div>
                 <div class="before-label">ANTES</div>
                 <div class="after-label">DESPUÉS</div>
-                <a href="servicios.html#detailing-exterior" class="service-label">Lavado Premium</a>
+                <a href="servicios.html#detailing-interior" class="service-label">Detailing Interior</a>
             </div>
 
-            <!-- Gallery Item 2 -->
-            <div class="comparison-container" data-service="Pulido Profesional">
-                <img src="photos/cocheralladoDespues.png" alt="Pintura rayada antes de pulir" class="before-image">
-                <img src="photos/cocheralladoAntes.png" alt="Pintura brillante después de pulir" class="after-image">
+            <!-- Gallery Item 2 - Pulido Horizontal -->
+            <div class="comparison-container loading" data-service="Pulido Profesional">
+                <img src="photos/llantaDespues.jpg" alt="Pintura rayada antes de pulir" class="before-image">
+                <img src="photos/llantaAntes.jpg" alt="Pintura brillante después de pulir" class="after-image">
                 <div class="slider-handle"></div>
                 <div class="before-label">ANTES</div>
                 <div class="after-label">DESPUÉS</div>
@@ -559,9 +785,9 @@
             </div>
 
             <!-- Gallery Item 3 -->
-            <div class="comparison-container" data-service="Detailing Interior">
-                <img src="/placeholder.svg?height=400&width=600&text=Interior+Sucio" alt="Interior de coche sucio antes del detailing" class="before-image">
-                <img src="/placeholder.svg?height=400&width=600&text=Interior+Limpio" alt="Interior de coche limpio después del detailing" class="after-image">
+            <div class="comparison-container loading" data-service="Detailing Interior">
+                <img src="photos/cocheLimpioDespues.jpg" alt="Interior de coche sucio antes del detailing" class="before-image">
+                <img src="photos/cocheSucioAntes.jpg" alt="Interior de coche limpio después del detailing" class="after-image">
                 <div class="slider-handle"></div>
                 <div class="before-label">ANTES</div>
                 <div class="after-label">DESPUÉS</div>
@@ -569,7 +795,7 @@
             </div>
 
             <!-- Gallery Item 4 -->
-            <div class="comparison-container" data-service="Restauración de Faros">
+            <div class="comparison-container loading" data-service="Restauración de Faros">
                 <img src="/placeholder.svg?height=400&width=600&text=Faros+Opacos" alt="Faros opacos antes de restaurar" class="before-image">
                 <img src="/placeholder.svg?height=400&width=600&text=Faros+Claros" alt="Faros claros después de restaurar" class="after-image">
                 <div class="slider-handle"></div>
@@ -577,25 +803,179 @@
                 <div class="after-label">DESPUÉS</div>
                 <a href="servicios.html#restauracion-faros" class="service-label">Restauración de Faros</a>
             </div>
+        </div>
+    </div>
+</section>
 
-            <!-- Gallery Item 5 -->
-            <div class="comparison-container" data-service="Protección Cerámica">
-                <img src="/placeholder.svg?height=400&width=600&text=Sin+Protección" alt="Coche con manchas de agua antes de protección cerámica" class="before-image">
-                <img src="/placeholder.svg?height=400&width=600&text=Con+Protección" alt="Coche con efecto perla después de protección cerámica" class="after-image">
-                <div class="slider-handle"></div>
-                <div class="before-label">ANTES</div>
-                <div class="after-label">DESPUÉS</div>
-                <a href="servicios.html#proteccion-ceramica" class="service-label">Protección Cerámica</a>
+<!-- Single Photos Section - Transformaciones en Una Imagen -->
+<section class="single-photos-section">
+    <div class="container">
+        <h2 class="section-title">Transformaciones en Una Imagen</h2>
+        <p class="section-subtitle">Fotos que muestran el antes y después en una sola imagen, demostrando el contraste de nuestro trabajo.</p>
+
+        <div class="gallery-grid">
+            <!-- Single Photo 1 -->
+            <div class="single-photo-container">
+                <img src="photos/asiento.jpg" alt="Medio asiento limpio y medio sucio">
+                <div class="photo-overlay">
+                    <div class="photo-title">Detailing de Asientos</div>
+                    <div class="photo-description">Contraste perfecto: la mitad del asiento muestra el resultado de nuestro detailing profesional.</div>
+                </div>
             </div>
 
-            <!-- Gallery Item 6 -->
-            <div class="comparison-container" data-service="Lavado Exterior">
-                <img src="/placeholder.svg?height=400&width=600&text=SUV+Embarrado" alt="SUV embarrado antes de lavar" class="before-image">
-                <img src="/placeholder.svg?height=400&width=600&text=SUV+Limpio" alt="SUV limpio después de lavar" class="after-image">
-                <div class="slider-handle"></div>
-                <div class="before-label">ANTES</div>
-                <div class="after-label">DESPUÉS</div>
-                <a href="servicios.html#detailing-exterior" class="service-label">Lavado Exterior</a>
+            <!-- Single Photo 2 -->
+            <div class="single-photo-container">
+                <img src="photos/japka.jpg" alt="Media guantera antes y después">
+                <div class="photo-overlay">
+                    <div class="photo-title">Restauración de guantera</div>
+                    <div class="photo-description">
+                        Eliminamos suciedad, brillos grasos y microarañazos; limpiamos y nutrimos el plástico/vinilo para recuperar su color original. Acabado satinado tipo OEM y tacto como nuevo.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Single Photo 3 -->
+            <div class="single-photo-container">
+                <img src="photos/nalakatnik.jpg" alt="Medio  limpio y sucio">
+                <div class="photo-overlay">
+                    <div class="photo-title">Limpieza de Reposabrazos</div>
+                    <div class="photo-description">
+                        Desincrustamos manchas y aceites, desinfectamos y acondicionamos (piel o textil) para devolver suavidad y uniformidad de color. Sin sobrebrillo y con protección duradera.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Single Photo 4 -->
+            <div class="single-photo-container">
+                <img src="/placeholder.svg?height=400&width=600&text=Medio+Faro+Restaurado" alt="Medio faro restaurado">
+                <div class="photo-overlay">
+                    <div class="photo-title">Restauración de Faros</div>
+                    <div class="photo-description">De opaco a cristalino: mejoramos la visibilidad y la estética de tus faros.</div>
+                </div>
+            </div>
+
+            <!-- Single Photo 5 -->
+            <div class="single-photo-container">
+                <img src="/placeholder.svg?height=400&width=600&text=Medio+Tapizado+Antes+Después" alt="Medio tapizado antes y después">
+                <div class="photo-overlay">
+                    <div class="photo-title">Limpieza de Tapicería</div>
+                    <div class="photo-description">Eliminación completa de manchas y suciedad del tapizado original.</div>
+                </div>
+            </div>
+
+            <!-- Single Photo 6 -->
+            <div class="single-photo-container">
+                <img src="/placeholder.svg?height=400&width=600&text=Medio+Motor+Limpio+Sucio" alt="Medio motor limpio y sucio">
+                <div class="photo-overlay">
+                    <div class="photo-title">Detailing de Motor</div>
+                    <div class="photo-description">Limpieza profunda del compartimento del motor, dejándolo como nuevo.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Videos Section -->
+<section class="videos-section">
+    <div class="container">
+        <h2 class="section-title">Videos de Nuestro Trabajo</h2>
+        <p class="section-subtitle">Mira en acción nuestras técnicas profesionales y los resultados increíbles que logramos.</p>
+
+        <div class="gallery-grid">
+            <!-- Video 1 -->
+            <div class="video-container">
+                <video preload="metadata" muted>
+                    <source src="/placeholder-video.mp4" type="video/mp4">
+                    <source src="/placeholder-video.webm" type="video/webm">
+                    Tu navegador no soporta el elemento video.
+                </video>
+                <button class="play-button">
+                    <i class="fas fa-play"></i>
+                </button>
+                <div class="video-overlay">
+                    <div class="video-title">Proceso de Pulido Completo</div>
+                    <div class="video-description">Observa cómo eliminamos rayones y devolvemos el brillo original a la pintura.</div>
+                </div>
+            </div>
+
+            <!-- Video 2 -->
+            <div class="video-container">
+                <video preload="metadata" muted>
+                    <source src="/placeholder-video2.mp4" type="video/mp4">
+                    <source src="/placeholder-video2.webm" type="video/webm">
+                    Tu navegador no soporta el elemento video.
+                </video>
+                <button class="play-button">
+                    <i class="fas fa-play"></i>
+                </button>
+                <div class="video-overlay">
+                    <div class="video-title">Detailing Interior Profundo</div>
+                    <div class="video-description">Técnicas profesionales para una limpieza interior completa y detallada.</div>
+                </div>
+            </div>
+
+            <!-- Video 3 -->
+            <div class="video-container">
+                <video preload="metadata" muted>
+                    <source src="/placeholder-video3.mp4" type="video/mp4">
+                    <source src="/placeholder-video3.webm" type="video/webm">
+                    Tu navegador no soporta el elemento video.
+                </video>
+                <button class="play-button">
+                    <i class="fas fa-play"></i>
+                </button>
+                <div class="video-overlay">
+                    <div class="video-title">Aplicación de Protección Cerámica</div>
+                    <div class="video-description">El proceso completo de aplicación de coating cerámico para máxima protección.</div>
+                </div>
+            </div>
+
+            <!-- Video 4 -->
+            <div class="video-container">
+                <video preload="metadata" muted>
+                    <source src="/placeholder-video4.mp4" type="video/mp4">
+                    <source src="/placeholder-video4.webm" type="video/webm">
+                    Tu navegador no soporta el elemento video.
+                </video>
+                <button class="play-button">
+                    <i class="fas fa-play"></i>
+                </button>
+                <div class="video-overlay">
+                    <div class="video-title">Restauración de Faros</div>
+                    <div class="video-description">Transformación completa de faros opacos a cristalinos en minutos.</div>
+                </div>
+            </div>
+
+            <!-- Video 5 -->
+            <div class="video-container">
+                <video preload="metadata" muted>
+                    <source src="/placeholder-video5.mp4" type="video/mp4">
+                    <source src="/placeholder-video5.webm" type="video/webm">
+                    Tu navegador no soporta el elemento video.
+                </video>
+                <button class="play-button">
+                    <i class="fas fa-play"></i>
+                </button>
+                <div class="video-overlay">
+                    <div class="video-title">Lavado Premium Completo</div>
+                    <div class="video-description">Todo el proceso de nuestro lavado premium desde el inicio hasta el resultado final.</div>
+                </div>
+            </div>
+
+            <!-- Video 6 -->
+            <div class="video-container">
+                <video preload="metadata" muted>
+                    <source src="/placeholder-video6.mp4" type="video/mp4">
+                    <source src="/placeholder-video6.webm" type="video/webm">
+                    Tu navegador no soporta el elemento video.
+                </video>
+                <button class="play-button">
+                    <i class="fas fa-play"></i>
+                </button>
+                <div class="video-overlay">
+                    <div class="video-title">Técnicas de Encerado</div>
+                    <div class="video-description">Aplicación profesional de cera para un acabado perfecto y duradero.</div>
+                </div>
             </div>
         </div>
     </div>
@@ -696,11 +1076,55 @@
         }
     });
 
-    // Before/After Image Comparison Functionality
+    // Smart Image Comparison System
     document.querySelectorAll('.comparison-container').forEach(container => {
+        const beforeImage = container.querySelector('.before-image');
         const afterImage = container.querySelector('.after-image');
         const sliderHandle = container.querySelector('.slider-handle');
         let isDragging = false;
+        let imagesLoaded = 0;
+
+        // Function to determine image orientation and set container class
+        function setContainerOrientation() {
+            const img = new Image();
+            img.onload = function() {
+                const aspectRatio = this.width / this.height;
+
+                // Remove loading class
+                container.classList.remove('loading');
+
+                // Determine orientation
+                if (aspectRatio > 1.3) {
+                    // Horizontal image
+                    container.classList.add('horizontal');
+                    container.classList.remove('vertical', 'square');
+                } else if (aspectRatio < 0.8) {
+                    // Vertical image
+                    container.classList.add('vertical');
+                    container.classList.remove('horizontal', 'square');
+                } else {
+                    // Square-ish image
+                    container.classList.add('square');
+                    container.classList.remove('horizontal', 'vertical');
+                }
+
+                imagesLoaded++;
+                if (imagesLoaded === 2) {
+                    // Both images loaded, enable interaction
+                    setupInteraction();
+                }
+            };
+
+            img.onerror = function() {
+                // If image fails to load, default to horizontal
+                container.classList.remove('loading');
+                container.classList.add('horizontal');
+                setupInteraction();
+            };
+
+            // Use the before image to determine orientation
+            img.src = beforeImage.src;
+        }
 
         // Function to update the comparison
         function updateComparison(x) {
@@ -711,55 +1135,128 @@
             sliderHandle.style.left = `${percentage}%`;
         }
 
-        // Mouse events
-        container.addEventListener('mousedown', (e) => {
-            isDragging = true;
-            updateComparison(e.clientX);
-            container.style.cursor = 'grabbing';
-        });
-
-        document.addEventListener('mousemove', (e) => {
-            if (isDragging) {
+        // Function to setup interaction after images are loaded
+        function setupInteraction() {
+            // Mouse events
+            container.addEventListener('mousedown', (e) => {
+                isDragging = true;
                 updateComparison(e.clientX);
-            }
-        });
+                container.style.cursor = 'grabbing';
+            });
 
-        document.addEventListener('mouseup', () => {
-            isDragging = false;
-            container.style.cursor = 'grab';
-        });
+            document.addEventListener('mousemove', (e) => {
+                if (isDragging) {
+                    updateComparison(e.clientX);
+                }
+            });
 
-        // Click to position
-        container.addEventListener('click', (e) => {
-            if (!isDragging) {
-                updateComparison(e.clientX);
-            }
-        });
+            document.addEventListener('mouseup', () => {
+                isDragging = false;
+                container.style.cursor = 'grab';
+            });
 
-        // Touch events for mobile
-        container.addEventListener('touchstart', (e) => {
-            isDragging = true;
-            const touch = e.touches[0];
-            updateComparison(touch.clientX);
-            e.preventDefault();
-        });
+            // Click to position
+            container.addEventListener('click', (e) => {
+                if (!isDragging) {
+                    updateComparison(e.clientX);
+                }
+            });
 
-        document.addEventListener('touchmove', (e) => {
-            if (isDragging) {
+            // Touch events for mobile
+            container.addEventListener('touchstart', (e) => {
+                isDragging = true;
                 const touch = e.touches[0];
                 updateComparison(touch.clientX);
                 e.preventDefault();
-            }
-        });
+            });
 
-        document.addEventListener('touchend', () => {
-            isDragging = false;
-        });
+            document.addEventListener('touchmove', (e) => {
+                if (isDragging) {
+                    const touch = e.touches[0];
+                    updateComparison(touch.clientX);
+                    e.preventDefault();
+                }
+            });
+
+            document.addEventListener('touchend', () => {
+                isDragging = false;
+            });
+        }
 
         // Prevent default drag behavior on images
         container.querySelectorAll('img').forEach(img => {
             img.addEventListener('dragstart', (e) => e.preventDefault());
         });
+
+        // Initialize the container
+        setContainerOrientation();
+
+        // Also check the after image to ensure consistency
+        const afterImg = new Image();
+        afterImg.onload = function() {
+            imagesLoaded++;
+            if (imagesLoaded === 2) {
+                setupInteraction();
+            }
+        };
+        afterImg.src = afterImage.src;
+    });
+
+    // Video Controls
+    document.querySelectorAll('.video-container').forEach(container => {
+        const video = container.querySelector('video');
+        const playButton = container.querySelector('.play-button');
+
+        playButton.addEventListener('click', () => {
+            if (video.paused) {
+                video.play();
+                playButton.classList.add('playing');
+            } else {
+                video.pause();
+                playButton.classList.remove('playing');
+            }
+        });
+
+        video.addEventListener('click', () => {
+            if (video.paused) {
+                video.play();
+                playButton.classList.add('playing');
+            } else {
+                video.pause();
+                playButton.classList.remove('playing');
+            }
+        });
+
+        video.addEventListener('ended', () => {
+            playButton.classList.remove('playing');
+        });
+
+        video.addEventListener('pause', () => {
+            playButton.classList.remove('playing');
+        });
+    });
+
+    // Intersection Observer for lazy loading and animations
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
+
+    // Observe all containers
+    document.querySelectorAll('.comparison-container, .single-photo-container, .video-container').forEach(container => {
+        container.style.opacity = '0';
+        container.style.transform = 'translateY(30px)';
+        container.style.transition = 'all 0.6s ease';
+        observer.observe(container);
     });
 </script>
 </body>
