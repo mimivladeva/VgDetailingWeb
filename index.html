@@ -247,7 +247,7 @@
             text-align: center;
             font-size: 1.2rem;
             color: var(--text-light);
-            margin-bottom: 4rem;
+            margin-bottom: 2rem;
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
@@ -256,7 +256,7 @@
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 3rem;
+            gap: 2rem;
         }
 
         .feature-card {
@@ -292,6 +292,69 @@
             font-weight: 600;
             color: var(--federal-blue);
             margin-bottom: 1rem;
+        }
+
+
+        /* Bloque de historia / copy destacado */
+        .brand-story {
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 2rem 2rem 2.2rem;
+            margin: 1.5rem auto 3rem;
+            max-width: 900px;
+            position: relative;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+            border: 1px solid rgba(0,186,216,0.15);
+        }
+
+        .brand-story::before {
+            content: "“";
+            position: absolute;
+            top: -18px;
+            left: 18px;
+            font-size: 4rem;
+            line-height: 1;
+            color: rgba(0, 119, 182, 0.25);
+            font-weight: 800;
+        }
+
+        .brand-story p {
+            color: var(--text-dark);
+            font-size: 1.05rem;
+            line-height: 1.9;
+            margin: 0.4rem 0;
+        }
+
+        .brand-story .highlight {
+            color: var(--federal-blue);
+            font-weight: 700;
+        }
+
+        .brand-story .tagline {
+            margin-top: 0.8rem;
+            font-weight: 700;
+            color: var(--honolulu-blue);
+        }
+
+        .brand-story .em {
+            font-style: italic;
+            color: var(--text-light);
+        }
+
+
+        .luxury-arrow {
+            margin-right: 8px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            background: linear-gradient(90deg, #0077B6, #00BAD8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* versión compacta en móvil */
+        @media (max-width: 768px) {
+            .brand-story { padding: 1.4rem 1.2rem 1.6rem; }
+            .brand-story::before { font-size: 3rem; top: -14px; left: 14px; }
         }
 
         .feature-card p {
@@ -719,9 +782,9 @@
         </div>
         <ul class="nav-links" id="navLinks">
             <li><a href="index.html">Inicio</a></li>
-            <li><a href="sobre-nosotros.html">Sobre Nosotros</a></li>
             <li><a href="servicios.html">Servicios</a></li>
             <li><a href="galeria.html">Galería</a></li>
+            <li><a href="sobre-nosotros.html">Sobre Nosotros</a></li>
             <li><a href="blog.html">Blog</a></li>
             <li><a href="cita.html">Cita</a></li>
         </ul>
@@ -734,13 +797,14 @@
 <!-- Hero Section -->
 <section class="hero">
     <div class="hero-content">
-        <h1>Transformamos tu Auto. Superamos tus Expectativas</h1>
-        <p class="hero-subtitle">Detailing Profesional de Clase Mundial</p>
-        <p class="hero-description">Transformamos tu vehículo con técnicas avanzadas, productos premium y un servicio excepcional que supera todas las expectativas.</p>
+        <h1>Vive la Experiencia VG Detailing </h1>
+        <p class="hero-subtitle">Crea tu historia</p>
+        <p class="hero-description">Brillo de estreno, protección duradera y un servicio que convierte cada detalle en una
+            experiencia única para tu coche. </p>
         <div class="cta-buttons">
             <a href="cita.html" class="btn btn-primary">
                 <i class="fas fa-calendar-alt"></i>
-                Reservar Cita
+                Reserva Ahora
             </a>
            <!-- <a href="tel:+1234567890" class="btn btn-secondary">
                 <i class="fas fa-phone"></i>
@@ -755,34 +819,64 @@
 <section class="features">
     <div class="container">
         <h2 class="section-title">¿Por Qué Elegir VG Detailing?</h2>
-        <p class="section-subtitle">Nos comprometemos con la excelencia en cada detalle, ofreciendo un servicio que va más allá de tus expectativas.</p>
+        <p class="section-subtitle">Más que limpieza: una experiencia pensada para tu coche y para ti.</p>
 
-        <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-shield-alt"></i>
-                </div>
-                <h3>Responsabilidad</h3>
-                <p>Cada trabajo es tratado con el máximo cuidado y profesionalismo. Tu vehículo está en las mejores manos.</p>
-            </div>
+        <!-- Bloque de historia / copy del cliente -->
+        <div class="brand-story">
+            <p>
+                <span class="highlight">VG Detailing no es solo lavar el coche, es vivir una historia.</span>
+                Una historia de cuidado, detalle y pasión, donde cada acabado refleja el compromiso con la excelencia.
+            </p>
+            <p class="em">
+                Porque cuando conduces un coche detallado, no solo manejas un vehículo…
+            </p>
+            <p class="closing-line">
+                <span class="luxury-arrow">➤</span>
+                Porque tu coche merece algo más que un lavado.
+            </p>
+            <p class="tagline">¡Vive la experiencia VG Detailing!</p>
 
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-handshake"></i>
-                </div>
-                <h3>Confiabilidad</h3>
-                <p>Cumplimos nuestras promesas. Puntualidad, calidad y transparencia en cada servicio que ofrecemos.</p>
-            </div>
-
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-lock"></i>
-                </div>
-                <h3>Seguridad</h3>
-                <p>Utilizamos técnicas y productos seguros que protegen tu inversión y mantienen la integridad de tu vehículo.</p>
-            </div>
         </div>
+            <!-- Features Grid -->
+            <div class="features-grid">
+                <!-- 1 Experiencia y pasión -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-heart"></i> <!-- Corazón = pasión -->
+                    </div>
+                    <h3>Experiencia y pasión</h3>
+                    <p>Amamos el detalle, y tratamos cada coche como si fuera el nuestro.</p>
+                </div>
+
+                <!-- 2 Productos premium -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-gem"></i> <!-- Diamante = premium/lujo -->
+                    </div>
+                    <h3>Productos premium</h3>
+                    <p>Usamos marcas líderes en el mercado para resultados duraderos.</p>
+                </div>
+
+                <!-- 3 Servicio a medida -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-sliders-h"></i> <!-- Sliders = personalización/adaptación -->
+                    </div>
+                    <h3>Servicio a medida</h3>
+                    <p>Adaptamos cada tratamiento al estado y uso de tu coche.</p>
+                </div>
+
+                <!-- 4 Cuidado seguro -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i> <!-- Escudo = seguridad/protección -->
+                    </div>
+                    <h3>Cuidado seguro</h3>
+                    <p>Técnicas profesionales que evitan microarañazos y daños.</p>
+                </div>
+            </div>
     </div>
+
 </section>
 
 <!-- Services Preview -->
@@ -913,12 +1007,12 @@
 <section class="cta-section">
     <div class="container">
         <div class="cta-content">
-            <h2>¿Listo para Transformar tu Vehículo?</h2>
+            <h2>¿Listo para empe?</h2>
             <p>Experimenta la diferencia que hace un servicio profesional de detailing. Tu auto merece lo mejor.</p>
             <div class="cta-buttons">
                 <a href="cita.html" class="btn btn-primary">
                     <i class="fas fa-calendar-check"></i>
-                    Agendar Cita
+                    Reserva Ahora
                 </a>
                 <a href="sobre-nosotros.html" class="btn btn-secondary">
                     <i class="fas fa-info-circle"></i>
@@ -966,12 +1060,6 @@
                 </div>
             </div>
 
-            <div class="footer-section">
-                <h3>Servicios</h3>
-                <p>• Detailing Exterior </p>
-                <p>• Detailing Interior</p>
-                <p>• Pulido</p>
-            </div>
         </div>
 
         <div class="footer-bottom">

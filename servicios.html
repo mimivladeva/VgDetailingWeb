@@ -143,27 +143,23 @@
         }
 
         /* Container */
+
         .container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 0 2rem;
+            padding: 2rem;
         }
 
-        /* Service Details Section */
-        .service-details-section {
-            padding: 6rem 0;
-            background: var(--light-cyan);
-        }
-
-        .section-title {
+        .main-title {
             text-align: center;
-            font-size: 2.8rem;
-            font-weight: 700;
+            font-size: 3rem;
+            font-weight: 800;
             color: var(--federal-blue);
             margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
         }
 
-        .section-subtitle {
+        .main-subtitle {
             text-align: center;
             font-size: 1.2rem;
             color: var(--text-light);
@@ -173,97 +169,230 @@
             margin-right: auto;
         }
 
-        .service-detail-card {
-            background: white;
-            border-radius: 15px;
+        /* Category Section */
+        .category-section {
+            margin-bottom: 5rem;
+        }
+
+        .category-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--honolulu-blue);
+            margin-bottom: 1rem;
+            text-align: center;
+            position: relative;
+            margin-top: 2rem;
+        }
+
+        .category-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--pacific-cyan), var(--honolulu-blue));
+            border-radius: 2px;
+        }
+
+        .category-description {
+            text-align: center;
+            color: var(--text-light);
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+        }
+
+        /* Carousel Container */
+        .carousel-container {
+            position: relative;
             overflow: hidden;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-            margin-bottom: 4rem;
+            padding: 0 60px;
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s ease;
+            gap: 2rem;
+        }
+
+        /* Service Card */
+        .service-card {
+            min-width: 350px;
+            height: 400px;
+            perspective: 1000px;
+            cursor: pointer;
+        }
+
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+        }
+
+        .service-card:hover .card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             display: flex;
             flex-direction: column;
+            justify-content: center;
             align-items: center;
-            text-align: center;
             padding: 2rem;
         }
 
-        .service-detail-card:nth-child(even) {
-            flex-direction: column-reverse; /* Alternate image/text layout */
+        .card-front {
+            background: linear-gradient(135deg, var(--white), var(--light-cyan));
+            border: 2px solid var(--non-photo-blue);
         }
 
-        .service-detail-card .content-wrapper {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-            width: 100%;
-            max-width: 1000px;
+        .card-back {
+            background: linear-gradient(135deg, var(--honolulu-blue), var(--federal-blue));
+            color: white;
+            transform: rotateY(180deg);
         }
 
-        .service-detail-card .text-content {
-            flex: 1;
-            padding: 0 2rem;
-        }
-
-        .service-detail-card .image-content {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .service-detail-card img {
-            width: 100%;
-            max-width: 600px;
-            height: auto;
-            border-radius: 10px;
-            object-fit: cover;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-        }
-
-        .service-detail-card h2 {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--federal-blue);
+        .service-icon {
+            font-size: 3rem;
+            color: var(--pacific-cyan);
             margin-bottom: 1rem;
         }
 
-        .service-detail-card .price {
-            font-size: 2.2rem;
-            font-weight: 800;
-            color: var(--pacific-cyan);
-            margin-bottom: 1.5rem;
+        .card-back .service-icon {
+            color: var(--light-cyan);
         }
 
-        .service-detail-card p {
+        .service-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--federal-blue);
+        }
+
+        .card-back .service-title {
+            color: white;
+        }
+
+        .service-description {
             font-size: 1rem;
+            line-height: 1.5;
             color: var(--text-light);
-            line-height: 1.8;
             margin-bottom: 1.5rem;
         }
 
-        .service-detail-card ul {
-            list-style: none;
-            padding: 0;
-            margin-bottom: 2rem;
-            text-align: left;
-            display: inline-block; /* To center the list */
+        .card-back .service-description {
+            color: var(--light-cyan);
         }
 
-        .service-detail-card ul li {
-            font-size: 0.95rem;
-            color: var(--text-dark);
-            margin-bottom: 0.6rem;
-            position: relative;
-            padding-left: 1.8rem;
-        }
-
-        .service-detail-card ul li::before {
-            content: '\f00c'; /* FontAwesome check icon */
-            font-family: 'Font Awesome 5 Free';
-            font-weight: 900;
+        .service-price {
+            font-size: 1.8rem;
+            font-weight: 800;
             color: var(--honolulu-blue);
+        }
+
+        .card-back .service-price {
+            color: var(--non-photo-blue);
+        }
+
+        .service-features {
+            list-style: none;
+            text-align: left;
+        }
+
+        .service-features li {
+            margin-bottom: 0.5rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .service-features li::before {
+            content: '✓';
             position: absolute;
             left: 0;
-            top: 0;
+            color: var(--light-cyan);
+            font-weight: bold;
+        }
+
+        /* Carousel Navigation */
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--honolulu-blue);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .carousel-nav:hover {
+            background: var(--federal-blue);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .carousel-nav.prev {
+            left: 10px;
+        }
+
+        .carousel-nav.next {
+            right: 10px;
+        }
+
+        /* Carousel Indicators */
+        .carousel-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 2rem;
+        }
+
+        .indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--non-photo-blue);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .indicator.active {
+            background: var(--honolulu-blue);
+            transform: scale(1.2);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .carousel-container {
+                padding: 0 20px;
+            }
+
+            .service-card {
+                min-width: 280px;
+                height: 350px;
+            }
+
+            .main-title {
+                font-size: 2rem;
+            }
+
+            .category-title {
+                font-size: 1.8rem;
+            }
         }
 
         .btn {
@@ -572,164 +701,434 @@
 </section>
 
 <!-- Service Details Section -->
-<section class="service-details-section">
-    <div class="container">
-        <h2 class="section-title">Detalles de Cada Servicio</h2>
-        <p class="section-subtitle">Explora lo que cada paquete incluye y elige el ideal para tu auto.</p>
 
-        <!-- Service Detail: Lavado Premium -->
-        <div class="service-detail-card" id="lavado-premium">
-            <div class="content-wrapper">
-                <div class="text-content">
-                    <h2>Lavado Premium</h2>
-                    <div class="price">$50</div>
-                    <p>Nuestro Lavado Premium va más allá de un simple lavado. Es una limpieza profunda y cuidadosa que revitaliza el exterior e interior de tu vehículo, utilizando productos de alta calidad y técnicas que protegen la pintura y los acabados.</p>
-                    <ul>
-                        <li>Lavado exterior a mano con shampoo pH neutro.</li>
-                        <li>Limpieza detallada de rines y neumáticos.</li>
-                        <li>Aspirado profundo de alfombras y tapicería.</li>
-                        <li>Limpieza de cristales interiores y exteriores.</li>
-                        <li>Aplicación de acondicionador de plásticos interiores.</li>
-                        <li>Secado con toallas de microfibra de alta calidad.</li>
-                    </ul>
-                    <a href="cita.html" class="btn btn-primary">
-                        <i class="fas fa-calendar-check"></i>
-                        Agendar Lavado Premium
-                    </a>
+<!-- Categoría 1: Detailing -->
+<div class="category-section">
+    <h2 class="category-title">Detailing</h2>
+    <p class="category-description">Servicios esenciales para mantener tu vehículo limpio y protegido</p>
+
+    <div class="carousel-container" data-category="basicos">
+        <button class="carousel-nav prev" onclick="moveCarousel('basicos', -1)">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+
+        <div class="carousel-track" id="carousel-basicos">
+            <div class="service-card">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <i class="fas fa-couch service-icon"></i>
+                        <h3 class="service-title">Detailing Interior </h3>
+                        <p class="service-description">Limpieza profunda de tapicerías, plásticos y superficies,
+                            aspirado profesional y neutralización de olores. Cada detalle es tratado para que tu
+                            coche luzca y huela como nuevo</p>
+                        <div class="service-price">Desde 50€</div>
+                    </div>
+                    <div class="card-back">
+                        <i class="fas fa-couch service-icon"></i>
+                        <h3 class="service-title">Detailing Interior</h3>
+                        <p>En VG Detailing cuidamos cada centímetro de tu interior.
+                            Desde el tablero hasta los rincones más ocultos, aplicamos técnicas profesionales y
+                            productos premium para transformar tu coche en un espacio impecable, confortable
+                            y elegante.</p>
+                       <!-- <ul class="service-features">
+                            <li>Aspirado completo</li>
+                            <li>Limpieza de superficies</li>
+                            <li>Tratamiento de plásticos</li>
+                            <li>Limpieza de cristales interiores</li>
+                        </ul>
+                        -->
+                        <div class="service-price">Desde 25€</div>
+                    </div>
                 </div>
-                <div class="image-content">
-                    <img src="/placeholder.svg?height=400&width=600" alt="Coche siendo lavado a mano">
+            </div>
+
+            <div class="service-card">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <i class="fas fa-car service-icon"></i>
+                        <h3 class="service-title">Detailing Exterior</h3>
+                        <p class="service-description">Lavado premium, descontaminado y tratamiento de pintura para devolver
+                            el color y el reflejo original, cuidando cada panel y eliminando imperfecciones de
+                            insectos y excrementos</p>
+                        <div class="service-price">Desde 50€</div>
+                    </div>
+                    <div class="card-back">
+                        <i class="fas fa-car service-icon"></i>
+                        <h3 class="service-title">Detailing Exterior</h3>
+                        <p>No solo limpiamos, realzamos la belleza de tu coche. Cada superficie es
+                            tratada con precisión, protegiendo la pintura y resaltando el brillo natural, para que tu
+                            vehículo luzca impecable y con presencia en cada detalle.</p>
+                      <!--  <ul class="service-features">
+                            <li>Prelavado sin contacto</li>
+                            <li>Lavado a mano con productos premium</li>
+                            <li>Secado con toallas de microfibra</li>
+                            <li>Limpieza de llantas y neumáticos</li>
+                        </ul>
+                        -->
+                        <div class="service-price">Desde 50€</div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="service-card">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <i class="fas fa-shield-alt service-icon"></i>
+                        <h3 class="service-title">Limpieza Motor</h3>
+                        <p class="service-description">Limpieza segura de vano motor, eliminando grasa y suciedad sin
+                            dañar componentes</p>
+                        <div class="service-price">Desde 40€</div>
+                    </div>
+                    <div class="card-back">
+                        <i class="fas fa-shield-alt service-icon"></i>
+                        <h3 class="service-title">Limpieza Motor</h3>
+                        <p>
+                            El corazón de tu coche también merece cuidado premium. Limpieza
+                            profesional que protege y embellece, mostrando un motor impecable y listo
+                            para cualquier exigencia
+                        </p>
+                       <!-- <ul class="service-features">
+                            <li>Aplicación de cera protectora</li>
+                            <li>Brillo duradero</li>
+                            <li>Protección UV</li>
+                            <li>Repelente al agua</li>
+                        </ul>
+                        -->
+                        <div class="service-price">Desde 40€</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <i class="fas fa-spray-can service-icon"></i>
+                        <h3 class="service-title">Descontaminación</h3>
+                        <p class="service-description">Eliminación de contaminantes</p>
+                        <div class="service-price">45€</div>
+                    </div>
+                    <div class="card-back">
+                        <i class="fas fa-spray-can service-icon"></i>
+                        <h3 class="service-title">Descontaminación</h3>
+                        <ul class="service-features">
+                            <li>Clay bar treatment</li>
+                            <li>Eliminación de alquitrán</li>
+                            <li>Remoción de insectos</li>
+                            <li>Preparación para encerado</li>
+                        </ul>
+                        <div class="service-price">Desde 45€</div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Service Detail: Encerado y Pulido -->
-        <div class="service-detail-card" id="encerado-pulido">
-            <div class="content-wrapper">
-                <div class="text-content">
-                    <h2>Encerado y Pulido</h2>
-                    <div class="price">$120</div>
-                    <p>Devuelve el brillo original a la pintura de tu coche con nuestro servicio de Encerado y Pulido. Eliminamos imperfecciones superficiales, rayones leves y oxidación, preparando la superficie para una protección duradera y un acabado espejo.</p>
-                    <ul>
-                        <li>Descontaminación de la pintura.</li>
-                        <li>Pulido de un paso para eliminar remolinos y rayones leves.</li>
-                        <li>Aplicación de cera de carnauba de alta calidad o sellador sintético.</li>
-                        <li>Mejora significativa del brillo y la profundidad del color.</li>
-                        <li>Protección contra los elementos y los rayos UV.</li>
-                    </ul>
-                    <a href="cita.html" class="btn btn-primary">
-                        <i class="fas fa-calendar-check"></i>
-                        Agendar Encerado y Pulido
-                    </a>
-                </div>
-                <div class="image-content">
-                    <img src="/placeholder.svg?height=400&width=600" alt="Coche siendo pulido">
-                </div>
-            </div>
-        </div>
+        <button class="carousel-nav next" onclick="moveCarousel('basicos', 1)">
+            <i class="fas fa-chevron-right"></i>
+        </button>
 
-        <!-- Service Detail: Protección Cerámica -->
-        <div class="service-detail-card" id="proteccion-ceramica">
-            <div class="content-wrapper">
-                <div class="text-content">
-                    <h2>Protección Cerámica</h2>
-                    <div class="price">$300</div>
-                    <p>La Protección Cerámica es la máxima defensa para la pintura de tu vehículo. Un coating cerámico crea una capa protectora duradera que repele el agua, la suciedad y los contaminantes, manteniendo tu coche impecable por más tiempo y facilitando su limpieza.</p>
-                    <ul>
-                        <li>Preparación exhaustiva de la superficie (lavado, descontaminación, pulido).</li>
-                        <li>Aplicación de coating cerámico de grado profesional.</li>
-                        <li>Protección superior contra rayones, químicos y rayos UV.</li>
-                        <li>Brillo intenso y efecto hidrofóbico (repelente al agua).</li>
-                        <li>Durabilidad de varios años (dependiendo del coating).</li>
-                    </ul>
-                    <a href="cita.html" class="btn btn-primary">
-                        <i class="fas fa-calendar-check"></i>
-                        Agendar Protección Cerámica
-                    </a>
-                </div>
-                <div class="image-content">
-                    <img src="/placeholder.svg?height=400&width=600" alt="Aplicación de coating cerámico">
-                </div>
-            </div>
-        </div>
-
-        <!-- Service Detail: Detailing Interior -->
-        <div class="service-detail-card" id="detailing-interior">
-            <div class="content-wrapper">
-                <div class="text-content">
-                    <h2>Detailing Interior</h2>
-                    <div class="price">$80</div>
-                    <p>Transforma el interior de tu vehículo en un espacio fresco y renovado. Nuestro Detailing Interior se enfoca en cada rincón, eliminando suciedad, manchas y olores, y restaurando la apariencia original de cada superficie.</p>
-                    <ul>
-                        <li>Aspirado profundo de todo el interior.</li>
-                        <li>Limpieza y acondicionamiento de plásticos, vinilos y cuero.</li>
-                        <li>Limpieza de alfombras y tapicería con extractor (si aplica).</li>
-                        <li>Limpieza y desinfección de ventilas y consolas.</li>
-                        <li>Limpieza de cristales interiores.</li>
-                        <li>Eliminación de olores y aromatización.</li>
-                    </ul>
-                    <a href="cita.html" class="btn btn-primary">
-                        <i class="fas fa-calendar-check"></i>
-                        Agendar Detailing Interior
-                    </a>
-                </div>
-                <div class="image-content">
-                    <img src="/placeholder.svg?height=400&width=600" alt="Interior de coche limpio">
-                </div>
-            </div>
-        </div>
-
-        <!-- Service Detail: Restauración de Faros -->
-        <div class="service-detail-card" id="restauracion-faros">
-            <div class="content-wrapper">
-                <div class="text-content">
-                    <h2>Restauración de Faros</h2>
-                    <div class="price">$60</div>
-                    <p>Mejora la visibilidad y la estética de tu vehículo con nuestra Restauración de Faros. Eliminamos la opacidad y el amarillamiento causados por el sol y el tiempo, devolviendo la claridad original a tus faros.</p>
-                    <ul>
-                        <li>Lijado y pulido de faros para eliminar oxidación.</li>
-                        <li>Aplicación de sellador protector UV.</li>
-                        <li>Mejora drástica de la claridad y el rendimiento de la iluminación.</li>
-                        <li>Aumento de la seguridad al conducir de noche.</li>
-                    </ul>
-                    <a href="cita.html" class="btn btn-primary">
-                        <i class="fas fa-calendar-check"></i>
-                        Agendar Restauración de Faros
-                    </a>
-                </div>
-                <div class="image-content">
-                    <img src="/placeholder.svg?height=400&width=600" alt="Faros de coche restaurados">
-                </div>
-            </div>
-        </div>
-
-        <!-- Service Detail: Paquete Completo -->
-        <div class="service-detail-card" id="paquete-completo">
-            <div class="content-wrapper">
-                <div class="text-content">
-                    <h2>Paquete Completo</h2>
-                    <div class="price">$200</div>
-                    <p>Nuestro Paquete Completo es la solución definitiva para una transformación total de tu vehículo. Combina lo mejor de nuestros servicios para dejar tu coche como nuevo, tanto por dentro como por fuera.</p>
-                    <ul>
-                        <li>Incluye Lavado Premium.</li>
-                        <li>Incluye Encerado y Pulido.</li>
-                        <li>Incluye Detailing Interior.</li>
-                        <li>Descontaminación de pintura.</li>
-                        <li>Protección de larga duración.</li>
-                        <li>Ideal para una renovación completa.</li>
-                    </ul>
-                    <a href="cita.html" class="btn btn-primary">
-                        <i class="fas fa-calendar-check"></i>
-                        Agendar Paquete Completo
-                    </a>
-                </div>
-                <div class="image-content">
-                    <img src="/placeholder.svg?height=400&width=600" alt="Coche completamente detallado">
-                </div>
-            </div>
-        </div>
-
+        <div class="carousel-indicators" id="indicators-basicos"></div>
     </div>
+</div>
+
+<!-- Categoría 2: Servicios Premium -->
+<div class="category-section">
+    <h2 class="category-title"> Pulido </h2>
+    <p class="category-description">Corrección de pintura y detalles de acabado: brillo espejo y profundidad de color</p>
+
+    <div class="carousel-container" data-category="premium">
+        <button class="carousel-nav prev" onclick="moveCarousel('premium', -1)">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+
+        <div class="carousel-track" id="carousel-premium">
+            <div class="service-card">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <i class="fas fa-spray-can-sparkles service-icon"></i>
+                        <h3 class="service-title">Corrección de Pintura</h3>
+                        <p class="service-description">Corrección profesional de swirls, microarañazos y hologramas, dejando la
+                            pintura con un acabado impecable y duradero</p>
+                        <div class="service-price">Desde 190€</div>
+                    </div>
+                    <div class="card-back">
+                        <i class="fas fa-spray-can-sparkles service-icon"></i>
+                        <h3 class="service-title">Corrección de Pintura</h3>
+                        <p>
+                            Restauramos la pintura a su máxima expresión, eliminando
+                            imperfecciones que dañan la estética. Cada panel recibe atención meticulosa,
+                            devolviendo un brillo espejo y una profundidad de color que refleja cuidado y
+                            excelencia
+                        </p>
+                        <div class="service-price">Desde 190€</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <i class="fas fa-gem service-icon"></i>
+                        <h3 class="service-title"> Faros sin PPF o con PPF </h3>
+                        <p class="service-description">Pulido y restauración de faros y aplicación de PPF para proteger pintura y
+                            detalles de impactos y rayaduras</p>
+                        <div class="service-price">desde 50€/220€</div>
+                    </div>
+                    <div class="card-back">
+                        <i class="fas fa-gem service-icon"></i>
+                        <h3 class="service-title">Faros PPF desde 50€ / desde 220€ con ppf </h3>
+                      <p>Garantizamos máxima visibilidad y protección. Nuestros tratamientos
+                          prolongan la vida útil de tus faros y pintura, combinando estética y seguridad para
+                          que cada trayecto sea un placer</p>
+                        <div class="service-price">Desde 50€/220€</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <i class="fas fa-star service-icon"></i>
+                        <h3 class="service-title">Pulir Cromados </h3>
+                        <p class="service-description">Pulido especializado en superficies cromadas, eliminando marcas y
+                            restaurando un acabado espejo</p>
+                        <div class="service-price">Desde 30€</div>
+                    </div>
+                    <div class="card-back">
+                        <i class="fas fa-star service-icon"></i>
+                        <h3 class="service-title">Pulir Cromados </h3>
+                        <p>Cuidamos cada detalle metálico de tu coche con precisión y
+                            delicadeza, logrando un acabado brillante y duradero que refleja lujo y
+                            perfección</p>
+                        <div class="service-price">Desde 30€</div>
+                    </div>
+                </div>
+            </div>
+            <div class="service-card">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <i class="fas fa-burn service-icon"></i>
+                        <h3 class="service-title"> Pulir Escape</h3>
+                        <p class="service-description">“Pulido y limpieza profunda de colas de escape metálicas, eliminando
+                            hollín y marcas de oxidación</p>
+                        <div class="service-price">Desde 30€</div>
+                    </div>
+                    <div class="card-back">
+                        <i class="fas fa-burn service-icon"></i>
+                        <h3 class="service-title"> Pulir Escape </h3>
+                        <p>Transformamos incluso los detalles más pequeños. Cada escape
+                            recibe atención profesional para lucir impecable y complementar el estilo
+                            general del vehículo</p>
+                        <div class="service-price">Desde 30€</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <button class="carousel-nav next" onclick="moveCarousel('premium', 1)">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+
+        <div class="carousel-indicators" id="indicators-premium"></div>
+    </div>
+</div>
+
+<!-- Categoría 3: Servicios Especializados -->
+<div class="category-section">
+    <h2 class="category-title">Servicios Especializados</h2>
+    <p class="category-description">Tratamientos específicos para áreas particulares de tu vehículo</p>
+
+    <div class="carousel-container" data-category="especializados">
+        <button class="carousel-nav prev" onclick="moveCarousel('especializados', -1)">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+
+        <div class="carousel-track" id="carousel-especializados">
+            <div class="service-card">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <i class="fas fa-cog service-icon"></i>
+                        <h3 class="service-title">Limpieza de Motor</h3>
+                        <p class="service-description">Desengrase y limpieza del motor</p>
+                        <div class="service-price">60€</div>
+                    </div>
+                    <div class="card-back">
+                        <i class="fas fa-cog service-icon"></i>
+                        <h3 class="service-title">Limpieza de Motor</h3>
+                        <ul class="service-features">
+                            <li>Desengrase profesional</li>
+                            <li>Protección de componentes</li>
+                            <li>Acabado brillante</li>
+                            <li>Productos especializados</li>
+                        </ul>
+                        <div class="service-price">Desde 60€</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <i class="fas fa-circle service-icon"></i>
+                        <h3 class="service-title">Restauración Llantas</h3>
+                        <p class="service-description">Limpieza y protección de llantas</p>
+                        <div class="service-price">40€</div>
+                    </div>
+                    <div class="card-back">
+                        <i class="fas fa-circle service-icon"></i>
+                        <h3 class="service-title">Restauración Llantas</h3>
+                        <ul class="service-features">
+                            <li>Eliminación de suciedad incrustada</li>
+                            <li>Tratamiento anti-corrosión</li>
+                            <li>Brillo duradero</li>
+                            <li>Protección UV</li>
+                        </ul>
+                        <div class="service-price">Desde 40€</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <i class="fas fa-eye service-icon"></i>
+                        <h3 class="service-title">Cristales Premium</h3>
+                        <p class="service-description">Limpieza y tratamiento de cristales</p>
+                        <div class="service-price">35€</div>
+                    </div>
+                    <div class="card-back">
+                        <i class="fas fa-eye service-icon"></i>
+                        <h3 class="service-title">Cristales Premium</h3>
+                        <ul class="service-features">
+                            <li>Limpieza sin rayas</li>
+                            <li>Tratamiento hidrofóbico</li>
+                            <li>Visibilidad mejorada</li>
+                            <li>Repelente de lluvia</li>
+                        </ul>
+                        <div class="service-price">Desde 35€</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <i class="fas fa-leaf service-icon"></i>
+                        <h3 class="service-title">Ozono Sanitización</h3>
+                        <p class="service-description">Desinfección completa interior</p>
+                        <div class="service-price">50€</div>
+                    </div>
+                    <div class="card-back">
+                        <i class="fas fa-leaf service-icon"></i>
+                        <h3 class="service-title">Ozono Sanitización</h3>
+                        <ul class="service-features">
+                            <li>Eliminación de bacterias</li>
+                            <li>Neutralización de olores</li>
+                            <li>Ambiente saludable</li>
+                            <li>Tratamiento ecológico</li>
+                        </ul>
+                        <div class="service-price">Desde 50€</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button class="carousel-nav next" onclick="moveCarousel('especializados', 1)">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+
+        <div class="carousel-indicators" id="indicators-especializados"></div>
+    </div>
+</div>
+
+<!-- Categoría 4: Paquetes Completos -->
+<div class="category-section">
+    <h2 class="category-title">Paquetes Completos</h2>
+    <p class="category-description">Combinaciones de servicios con descuentos especiales</p>
+
+    <div class="carousel-container" data-category="paquetes">
+        <button class="carousel-nav prev" onclick="moveCarousel('paquetes', -1)">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+
+        <div class="carousel-track" id="carousel-paquetes">
+            <div class="service-card">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <i class="fas fa-gift service-icon"></i>
+                        <h3 class="service-title">Paquete Básico</h3>
+                        <p class="service-description">Exterior + Interior básico</p>
+                        <div class="service-price">50€</div>
+                    </div>
+                    <div class="card-back">
+                        <i class="fas fa-gift service-icon"></i>
+                        <h3 class="service-title">Paquete Básico</h3>
+                        <ul class="service-features">
+                            <li>Lavado exterior completo</li>
+                            <li>Limpieza interior básica</li>
+                            <li>Encerado básico</li>
+                            <li>Ahorro de 10€</li>
+                        </ul>
+                        <div class="service-price">50€ (60€)</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <i class="fas fa-crown service-icon"></i>
+                        <h3 class="service-title">Paquete Premium</h3>
+                        <p class="service-description">Detailing completo + extras</p>
+                        <div class="service-price">280€</div>
+                    </div>
+                    <div class="card-back">
+                        <i class="fas fa-crown service-icon"></i>
+                        <h3 class="service-title">Paquete Premium</h3>
+                        <ul class="service-features">
+                            <li>Detailing completo</li>
+                            <li>Pulido profesional</li>
+                            <li>Limpieza de motor</li>
+                            <li>Ahorro de 70€</li>
+                        </ul>
+                        <div class="service-price">280€ (350€)</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <i class="fas fa-diamond service-icon"></i>
+                        <h3 class="service-title">Paquete VIP</h3>
+                        <p class="service-description">Todo incluido + protección</p>
+                        <div class="service-price">450€</div>
+                    </div>
+                    <div class="card-back">
+                        <i class="fas fa-diamond service-icon"></i>
+                        <h3 class="service-title">Paquete VIP</h3>
+                        <ul class="service-features">
+                            <li>Todos los servicios</li>
+                            <li>Protección cerámica</li>
+                            <li>Garantía extendida</li>
+                            <li>Ahorro de 150€</li>
+                        </ul>
+                        <div class="service-price">450€ (600€)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button class="carousel-nav next" onclick="moveCarousel('paquetes', 1)">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+
+        <div class="carousel-indicators" id="indicators-paquetes"></div>
+    </div>
+</div>
+</div>
+
 </section>
 
 <!-- CTA Section -->
@@ -901,7 +1300,101 @@
     // Update schedule status on page load and every minute
     updateScheduleStatus();
     setInterval(updateScheduleStatus, 60000); // Update every minute
+    // Carousel functionality
+    const carousels = {
+        basicos: { currentIndex: 0, totalCards: 4 },
+        premium: { currentIndex: 0, totalCards: 3 },
+        especializados: { currentIndex: 0, totalCards: 4 },
+        paquetes: { currentIndex: 0, totalCards: 3 }
+    };
 
+    function initializeCarousels() {
+        Object.keys(carousels).forEach(category => {
+            createIndicators(category);
+            updateCarousel(category);
+        });
+    }
+
+    function createIndicators(category) {
+        const indicatorsContainer = document.getElementById(`indicators-${category}`);
+        const totalCards = carousels[category].totalCards;
+
+        indicatorsContainer.innerHTML = '';
+
+        for (let i = 0; i < totalCards; i++) {
+            const indicator = document.createElement('div');
+            indicator.className = 'indicator';
+            indicator.onclick = () => goToSlide(category, i);
+            indicatorsContainer.appendChild(indicator);
+        }
+    }
+
+    function updateCarousel(category) {
+        const track = document.getElementById(`carousel-${category}`);
+        const indicators = document.querySelectorAll(`#indicators-${category} .indicator`);
+        const currentIndex = carousels[category].currentIndex;
+
+        // Calculate transform based on card width and gap
+        const cardWidth = 350; // min-width of service-card
+        const gap = 32; // 2rem gap
+        const offset = -(currentIndex * (cardWidth + gap));
+
+        track.style.transform = `translateX(${offset}px)`;
+
+        // Update indicators
+        indicators.forEach((indicator, index) => {
+            indicator.classList.toggle('active', index === currentIndex);
+        });
+    }
+
+    function moveCarousel(category, direction) {
+        const carousel = carousels[category];
+        const newIndex = carousel.currentIndex + direction;
+
+        if (newIndex >= 0 && newIndex < carousel.totalCards) {
+            carousel.currentIndex = newIndex;
+            updateCarousel(category);
+        }
+    }
+
+    function goToSlide(category, index) {
+        carousels[category].currentIndex = index;
+        updateCarousel(category);
+    }
+
+    // Auto-advance carousel on hover (optional)
+    function setupAutoAdvance() {
+        Object.keys(carousels).forEach(category => {
+            const container = document.querySelector(`[data-category="${category}"]`);
+            let autoAdvanceInterval;
+
+            container.addEventListener('mouseenter', () => {
+                autoAdvanceInterval = setInterval(() => {
+                    const carousel = carousels[category];
+                    const nextIndex = (carousel.currentIndex + 1) % carousel.totalCards;
+                    carousel.currentIndex = nextIndex;
+                    updateCarousel(category);
+                }, 3000);
+            });
+
+            container.addEventListener('mouseleave', () => {
+                clearInterval(autoAdvanceInterval);
+            });
+        });
+    }
+
+    // Initialize everything when page loads
+    document.addEventListener('DOMContentLoaded', () => {
+        initializeCarousels();
+        setupAutoAdvance();
+    });
+
+    // Handle responsive behavior
+    window.addEventListener('resize', () => {
+        Object.keys(carousels).forEach(category => {
+            updateCarousel(category);
+        });
+    });
 </script>
 </body>
 </html>
