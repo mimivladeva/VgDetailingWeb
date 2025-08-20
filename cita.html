@@ -17,20 +17,17 @@
       --text-dark: #333333;
       --text-light: #666666;
     }
-
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-
     body {
       font-family: 'Montserrat', sans-serif;
       line-height: 1.6;
       color: var(--text-dark);
       overflow-x: hidden;
     }
-
     /* Header */
     header {
       background: linear-gradient(135deg,var(--pacific-cyan) , var(--honolulu-blue),var(--federal-blue));
@@ -43,7 +40,6 @@
       box-shadow: 0 4px 20px rgba(0,0,0,0.1);
       transition: all 0.3s ease;
     }
-
     nav {
       display: flex;
       justify-content: space-between;
@@ -52,30 +48,25 @@
       margin: 0 auto;
       padding: 0 2rem;
     }
-
     .logo-container {
       display: flex;
       align-items: center;
       gap: 1rem;
     }
-
     .logo {
       height: 40px;
       width: auto;
     }
-
     .logo-text {
       font-size: 1.5rem;
       font-weight: 700;
       color: var(--light-cyan);
     }
-
     .nav-links {
       display: flex;
       list-style: none;
       gap: 2.5rem;
     }
-
     .nav-links a {
       color: white;
       text-decoration: none;
@@ -84,13 +75,11 @@
       transition: all 0.3s ease;
       position: relative;
     }
-
     .nav-links a:hover,
     .nav-links a.active {
       color: var(--light-cyan);
       transform: translateY(-2px);
     }
-
     .nav-links a::after {
       content: '';
       position: absolute;
@@ -102,12 +91,10 @@
       transition: all 0.3s ease;
       transform: translateX(-50%);
     }
-
     .nav-links a:hover::after,
     .nav-links a.active::after {
       width: 100%;
     }
-
     .mobile-menu {
       display: none;
       background: none;
@@ -116,51 +103,44 @@
       font-size: 1.5rem;
       cursor: pointer;
     }
-
     /* Page Header */
     .page-header {
-      background: linear-gradient(135deg, rgba(3, 4, 94, 0.8), rgba(0, 119, 182, 0.8)), url('photos/logoVG.png') no-repeat center center;
-      background-size: contain; /* Cambiado de 'cover' a 'contain' */
+      background: linear-gradient(135deg, rgba(3, 4, 94, 0.8), rgba(0, 119, 182, 0.8)), url('/photos/logoVG.png') no-repeat center center;
+      background-size: contain;
       background-position: center;
       padding: 8rem 0 4rem;
       text-align: center;
       color: white;
       margin-top: 70px;
     }
-
     .page-header h1 {
       font-size: 3.5rem;
       font-weight: 700;
       margin-bottom: 1rem;
       text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
     }
-
     .page-header p {
       font-size: 1.3rem;
       opacity: 0.9;
       max-width: 600px;
       margin: 0 auto;
     }
-
     /* Container */
     .container {
       max-width: 1400px;
       margin: 0 auto;
       padding: 0 2rem;
     }
-
     /* Booking Section */
     .booking-section {
       padding: 6rem 0;
       background: var(--light-cyan);
     }
-
     .booking-content {
       display: grid;
-      grid-template-columns: 2fr 1fr; /* Main content and summary */
+      grid-template-columns: 2fr 1fr;
       gap: 4rem;
     }
-
     .section-title {
       text-align: center;
       font-size: 2.8rem;
@@ -168,7 +148,6 @@
       color: var(--federal-blue);
       margin-bottom: 1rem;
     }
-
     .section-subtitle {
       text-align: center;
       font-size: 1.2rem;
@@ -178,20 +157,17 @@
       margin-left: auto;
       margin-right: auto;
     }
-
     /* Service Selection */
     .service-selection h2 {
       font-size: 2rem;
       color: var(--federal-blue);
       margin-bottom: 2rem;
     }
-
     .services-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 1.5rem;
     }
-
     .service-card {
       background: white;
       border-radius: 15px;
@@ -205,21 +181,17 @@
       justify-content: space-between;
       min-height: 220px;
     }
-
     .service-card:hover {
       transform: translateY(-5px);
       box-shadow: 0 12px 40px rgba(0,0,0,0.15);
     }
-
     .service-card.selected {
       border-color: var(--pacific-cyan);
       box-shadow: 0 12px 40px rgba(0,0,0,0.2);
     }
-
-    .service-card input[type="radio"] {
-      display: none; /* Hide default radio button */
+    .service-card input[type="checkbox"] {
+      display: none;
     }
-
     .service-card label {
       display: block;
       cursor: pointer;
@@ -228,45 +200,38 @@
       flex-direction: column;
       justify-content: space-between;
     }
-
     .service-card h3 {
       font-size: 1.3rem;
       color: var(--federal-blue);
       margin-bottom: 0.5rem;
     }
-
     .service-card p {
       font-size: 0.95rem;
       color: var(--text-light);
       margin-bottom: 1rem;
       flex-grow: 1;
     }
-
     .service-card .price {
       font-size: 1.8rem;
       font-weight: 700;
       color: var(--pacific-cyan);
       text-align: right;
     }
-
     /* Booking Form */
     .booking-form h2 {
       font-size: 2rem;
       color: var(--federal-blue);
       margin-bottom: 2rem;
     }
-
     .form-group {
       margin-bottom: 1.5rem;
     }
-
     .form-group label {
       display: block;
       margin-bottom: 0.6rem;
       font-weight: 600;
       color: var(--federal-blue);
     }
-
     .form-group input,
     .form-group select,
     .form-group textarea {
@@ -280,7 +245,6 @@
       background-color: var(--white);
       transition: border-color 0.3s ease, box-shadow 0.3s ease;
     }
-
     .form-group input:focus,
     .form-group select:focus,
     .form-group textarea:focus {
@@ -288,12 +252,10 @@
       box-shadow: 0 0 0 3px rgba(0, 119, 182, 0.2);
       outline: none;
     }
-
     .form-group textarea {
       min-height: 120px;
       resize: vertical;
     }
-
     .btn {
       padding: 1.2rem 2.5rem;
       border: none;
@@ -310,7 +272,6 @@
       text-align: center;
       box-shadow: 0 4px 15px rgba(0,0,0,0.2);
     }
-
     .btn-primary {
       background: linear-gradient(135deg, var(--pacific-cyan), var(--honolulu-blue));
       color: white;
@@ -318,13 +279,30 @@
       justify-content: center;
       margin-top: 2rem;
     }
-
     .btn-primary:hover {
       background: linear-gradient(135deg, var(--honolulu-blue), var(--federal-blue));
       transform: translateY(-3px);
       box-shadow: 0 8px 25px rgba(0,0,0,0.3);
     }
-
+    .btn-primary:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+      transform: none;
+    }
+    /* Loading spinner */
+    .loading-spinner {
+      display: none;
+      width: 20px;
+      height: 20px;
+      border: 2px solid #ffffff;
+      border-top: 2px solid transparent;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
     /* Order Summary */
     .order-summary {
       background: white;
@@ -332,10 +310,9 @@
       padding: 2.5rem;
       box-shadow: 0 8px 30px rgba(0,0,0,0.1);
       position: sticky;
-      top: 100px; /* Adjust based on header height */
+      top: 100px;
       align-self: start;
     }
-
     .order-summary h2 {
       font-size: 1.8rem;
       color: var(--federal-blue);
@@ -343,7 +320,6 @@
       border-bottom: 2px solid var(--non-photo-blue);
       padding-bottom: 1rem;
     }
-
     .summary-item {
       display: flex;
       justify-content: space-between;
@@ -351,11 +327,9 @@
       font-size: 1.1rem;
       color: var(--text-dark);
     }
-
     .summary-item span:first-child {
       font-weight: 500;
     }
-
     .summary-total {
       display: flex;
       justify-content: space-between;
@@ -366,60 +340,53 @@
       font-weight: 700;
       color: var(--federal-blue);
     }
-
     .summary-total span:last-child {
       color: var(--pacific-cyan);
     }
-
-    /* Footer */
-
-
+    /* Success/Error Messages */
+    .message {
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      display: none;
+    }
+    .message.success {
+      background-color: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+    .message.error {
+      background-color: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
     /* Footer */
     footer {
       background: var(--federal-blue);
       color: white;
       padding: 4rem 0 2rem;
     }
-
     .footer-content {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 3rem;
       margin-bottom: 3rem;
     }
-
     .footer-section h3 {
       font-size: 1.3rem;
       font-weight: 600;
       margin-bottom: 1.5rem;
       color: var(--light-cyan);
     }
-
     .footer-section p {
       line-height: 1.8;
       opacity: 0.8;
     }
-
     .social-links {
       display: flex;
       gap: 1rem;
       margin-top: 1.5rem;
     }
-    footer .footer-section a,
-    footer .footer-section a:visited { color:#fff; text-decoration:none; }
-    footer .footer-section a:hover,
-    footer .footer-section a:focus { color:var(--light-cyan); text-decoration:underline; }
-
-
-    .status-open {
-      background: #4CAF50;
-    }
-
-    .status-closed {
-      background: #f44336;
-    }
-
-
     .social-links a {
       width: 45px;
       height: 45px;
@@ -432,84 +399,16 @@
       font-size: 1.2rem;
       transition: all 0.3s ease;
     }
-
     .social-links a:hover {
       background: var(--pacific-cyan);
       transform: translateY(-3px);
     }
-
-
-    /* Schedule Styles - Simplified */
-    .schedule-status {
-      display: flex;
-      align-items: center;
-      justify-content: flex-start; /* Cambiar de center a flex-start */
-      gap: 0.5rem;
-      margin-bottom: 1rem;
-      font-weight: 600;
-      font-size: 1.1rem;
-    }
-
-    .status-indicator {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      animation: pulse 2s infinite;
-    }
-
-    .status-open {
-      background: #4CAF50;
-    }
-
-    .status-closed {
-      background: #f44336;
-    }
-
-    @keyframes pulse {
-      0% { opacity: 1; }
-      50% { opacity: 0.5; }
-      100% { opacity: 1; }
-    }
-
-    .schedule-hours {
-      text-align: left; /* Cambiar de center a left */
-      margin-top: 1rem;
-    }
-
-    .weekdays-hours {
-      font-size: 1rem;
-      margin-bottom: 1rem;
-      opacity: 0.9;
-    }
-
-    .schedule-divider {
-      height: 1px;
-      background: rgba(255,255,255,0.3);
-      margin: 1rem 0;
-    }
-
-    .saturday-hours {
-      font-size: 0.9rem;
-      opacity: 0.8;
-      font-style: italic;
-    }
-
-    .current-day-highlight {
-      background: rgba(0, 186, 216, 0.2);
-      border-radius: 5px;
-      padding: 0.5rem;
-      margin: -0.2rem;
-    }
-
-
     .footer-bottom {
       text-align: center;
       padding-top: 2rem;
       border-top: 1px solid rgba(255,255,255,0.1);
       color: var(--non-photo-blue);
     }
-
-
     /* Responsive Design */
     @media (max-width: 1024px) {
       .booking-content {
@@ -520,7 +419,6 @@
         margin-top: 3rem;
       }
     }
-
     @media (max-width: 768px) {
       .nav-links {
         display: none;
@@ -533,37 +431,29 @@
         padding: 2rem;
         box-shadow: 0 4px 20px rgba(0,0,0,0.1);
       }
-
       .nav-links.active {
         display: flex;
       }
-
       .mobile-menu {
         display: block;
       }
-
       .page-header h1 {
         font-size: 2.5rem;
       }
-
       .section-title {
         font-size: 2.2rem;
       }
-
       .services-grid {
         grid-template-columns: 1fr;
       }
     }
-
     @media (max-width: 480px) {
       .container {
         padding: 0 1rem;
       }
-
       .page-header h1 {
         font-size: 2rem;
       }
-
       .btn {
         padding: 1rem 2rem;
         font-size: 1rem;
@@ -576,7 +466,7 @@
 <header>
   <nav>
     <div class="logo-container">
-      <img src="photos/logoBlanco.png" alt="VG Detailing Logo" class="logo">
+      <img src="/photos/logoBlanco.png" alt="VG Detailing Logo" class="logo">
       <div class="logo-text">DETAILING</div>
     </div>
     <ul class="nav-links" id="navLinks">
@@ -585,7 +475,7 @@
       <li><a href="servicios.html">Servicios</a></li>
       <li><a href="galeria.html">Galería</a></li>
       <li><a href="blog.html">Blog</a></li>
-      <li><a href="cita.html">Cita</a></li>
+      <li><a href="cita.html" class="active">Cita</a></li>
     </ul>
     <button class="mobile-menu" id="mobileMenu">
       <i class="fas fa-bars"></i>
@@ -606,68 +496,42 @@
   <div class="container">
     <h2 class="section-title">Tu Cita de Detailing</h2>
     <p class="section-subtitle">Elige el servicio perfecto para tu vehículo y déjanos el resto a nosotros.</p>
-
     <div class="booking-content">
       <div class="main-booking-area">
         <div class="service-selection">
           <h2>1. Selecciona tu Servicio</h2>
           <div class="services-grid">
-            <div class="service-card" data-service-id="premium-wash">
+            <div class="service-card" data-service-id="detailing-exterior">
               <label>
-                <input type="radio" name="service" value="Lavado Premium" data-price="50">
-                <h3>Lavado Premium</h3>
-                <p>Lavado completo exterior e interior, incluyendo aspirado, limpieza de tapicería y cristales.</p>
-                <div class="price">$50</div>
+                <input type="checkbox" name="service" value="Detailing Exterior" data-price="40">
+                <h3>Detailing Exterior</h3>
+                <p>Servicio completo de limpieza exterior que incluye prelavado sin contacto, lavado a mano con productos premium Gyeon y aplicación de sellador cerámico.</p>
+                <div class="price">Desde 40€</div>
               </label>
             </div>
-            <div class="service-card" data-service-id="wax-polish">
+            <div class="service-card" data-service-id="detailing-interior">
               <label>
-                <input type="radio" name="service" value="Encerado y Pulido" data-price="120">
-                <h3>Encerado y Pulido</h3>
-                <p>Pulido profesional para eliminar rayones menores y aplicación de cera de alta calidad.</p>
-                <div class="price">$120</div>
-              </label>
-            </div>
-            <div class="service-card" data-service-id="ceramic-protection">
-              <label>
-                <input type="radio" name="service" value="Protección Cerámica" data-price="300">
-                <h3>Protección Cerámica</h3>
-                <p>Aplicación de coating cerámico para máxima protección y brillo duradero.</p>
-                <div class="price">$300</div>
-              </label>
-            </div>
-            <div class="service-card" data-service-id="interior-detailing">
-              <label>
-                <input type="radio" name="service" value="Detailing Interior" data-price="80">
+                <input type="checkbox" name="service" value="Detailing Interior" data-price="50">
                 <h3>Detailing Interior</h3>
-                <p>Limpieza profunda del interior, tratamiento de cuero y desinfección completa.</p>
-                <div class="price">$80</div>
+                <p>Limpieza profunda y desinfección completa del interior sin siliconas, con tratamiento especializado para textiles, cuero y alcántara.</p>
+                <div class="price">Desde 50€</div>
               </label>
             </div>
-            <div class="service-card" data-service-id="headlight-restoration">
+            <div class="service-card" data-service-id="pulido">
               <label>
-                <input type="radio" name="service" value="Restauración de Faros" data-price="60">
-                <h3>Restauración de Faros</h3>
-                <p>Restauración completa de faros opacos para mejorar visibilidad y apariencia.</p>
-                <div class="price">$60</div>
-              </label>
-            </div>
-            <div class="service-card" data-service-id="full-package">
-              <label>
-                <input type="radio" name="service" value="Paquete Completo" data-price="200">
-                <h3>Paquete Completo</h3>
-                <p>Servicio integral que incluye lavado, pulido, encerado y detailing interior.</p>
-                <div class="price">$200</div>
+                <input type="checkbox" name="service" value="Pulido Profesional" data-price="150">
+                <h3>Pulido Profesional</h3>
+                <p>Proceso profesional de corrección de pintura que elimina imperfecciones, rayones y swirls, devolviendo el brillo original a tu vehículo.</p>
+                <div class="price">Desde 150€</div>
               </label>
             </div>
           </div>
         </div>
-
         <div class="booking-form">
           <h2>2. Tus Datos y Fecha</h2>
+          <div id="messageContainer"></div>
           <form id="bookingForm">
-
-          <div class="form-group">
+            <div class="form-group">
               <label for="name">Nombre Completo</label>
               <input type="text" id="name" name="name" required>
             </div>
@@ -679,18 +543,7 @@
               <label for="phone">Teléfono</label>
               <input type="tel" id="phone" name="phone" required>
             </div>
-            <div class="form-group">
-              <label for="date">Fecha Preferida</label>
-              <input type="date" id="date" name="date" required>
-            </div>
-            <div class="form-group">
-              <label for="time">Hora Preferida</label>
-              <!--<input type="time" id="time" name="time" required>-->
-              <select id="time" name="time" required>
-                <option value="" disabled selected>Selecciona una hora</option>
-                <!-- Generadas dinámicamente con JS -->
-              </select>
-            </div>
+
             <div class="form-group">
               <label for="car-model">Marca y Modelo del Vehículo</label>
               <input type="text" id="car-model" name="car-model" placeholder="Ej: Honda Civic 2020" required>
@@ -699,34 +552,30 @@
               <label for="message">Mensaje Adicional (Opcional)</label>
               <textarea id="message" name="message" placeholder="¿Alguna instrucción especial o pregunta?"></textarea>
             </div>
-            <input type="hidden" name="service" id="hidden-service">
-            <input type="hidden" name="price" id="hidden-price">
-            <input type="hidden" name="title" id="hidden-title">
-
-            <button type="submit" class="btn btn-primary">
-              <i class="fas fa-paper-plane"></i>
-              Confirmar Reserva
+            <button type="submit" class="btn btn-primary" id="submitBtn">
+              <span class="loading-spinner" id="loadingSpinner"></span>
+              <i class="fab fa-whatsapp" id="submitIcon"></i>
+              <span id="submitText">Enviar por WhatsApp</span>
             </button>
           </form>
         </div>
       </div>
-
       <div class="order-summary">
         <h2>Resumen de tu Cita</h2>
         <div class="summary-item">
-          <span>Servicio Seleccionado:</span>
+          <span>Servicios Seleccionados:</span>
           <span id="summaryService">Ninguno</span>
         </div>
         <div class="summary-item">
-          <span>Precio del Servicio:</span>
-          <span id="summaryPrice">$0.00</span>
+          <span>Precios:</span>
+          <span id="summaryPrice">0€</span>
         </div>
         <div class="summary-total">
-          <span>Total a Pagar:</span>
-          <span id="summaryTotal">$0.00</span>
+          <span>Total Estimado:</span>
+          <span id="summaryTotal">0€</span>
         </div>
         <p style="font-size: 0.9rem; color: var(--text-light); margin-top: 1.5rem;">
-          *El precio final puede variar ligeramente según la condición del vehículo y servicios adicionales solicitados en persona.
+          *Los precios son estimados y pueden variar según la condición del vehículo y servicios adicionales solicitados en persona.
         </p>
       </div>
     </div>
@@ -741,45 +590,28 @@
         <h3>VG Detailing</h3>
         <p>Elevando tu experiencia automotriz con servicios profesionales de detailing que transforman y protegen tu inversión.</p>
         <div class="social-links">
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
           <a href="https://www.instagram.com/vgdetailing_?igsh=MTh3N244YXc3ODh6Yg==" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-          <a href="https://www.tiktok.com/@vgdetaling?_t=ZN-8z0Nhz9jTr4&_r=1" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+          <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
         </div>
       </div>
-
       <div class="footer-section">
         <h3>Contacto</h3>
-        <p><i class="fas fa-phone"></i> <a href="tel:+34642977133">+34 642 977 133</a></p>
-        <p><i class="fas fa-envelope"></i> <a href="mailto:vgdetailing.oficial@gmail.com">vgdetailing.oficial@gmail.com</a></p>
-        <p><i class="fas fa-map-marker-alt"></i> Carrer de Guitarrista Salvador García, 14, Gandia</p>
+        <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+        <p><i class="fas fa-envelope"></i> info@vgdetailing.com</p>
+        <p><i class="fas fa-map-marker-alt"></i> 123 Main Street, Ciudad</p>
+        <p><i class="fas fa-clock"></i> Lun - Sáb: 8:00 AM - 6:00 PM</p>
       </div>
-
-      <div class="footer-section">
-        <h3>Horarios</h3>
-        <div class="schedule-status" id="scheduleStatus">
-          <div class="status-indicator" id="statusIndicator"></div>
-          <span id="statusText">Cargando...</span>
-        </div>
-        <div class="schedule-hours">
-          <div class="weekdays-hours" id="weekdaysHours">
-            Lun - Vie: 9:00 - 14:00 | 16:00 - 19:00
-          </div>
-          <div class="schedule-divider"></div>
-          <div class="saturday-hours" id="saturdayHours">
-            Sábado: Bajo reserva
-          </div>
-        </div>
-      </div>
-
       <div class="footer-section">
         <h3>Servicios</h3>
-        <p>• Detailing Exterior </p>
+        <p>• Detailing Exterior</p>
         <p>• Detailing Interior</p>
-        <p>• Pulido</p>
+        <p>• Pulido Profesional</p>
       </div>
     </div>
-
     <div class="footer-bottom">
-      <p>&copy; 2025 VG Detailing. Todos los derechos reservados. | Diseño por M.Vladeva</p>
+      <p>&copy; 2024 VG Detailing. Todos los derechos reservados. | Diseño por M.Vladeva</p>
     </div>
   </div>
 </footer>
@@ -788,7 +620,6 @@
   // Mobile menu toggle
   const mobileMenu = document.getElementById('mobileMenu');
   const navLinks = document.getElementById('navLinks');
-
   mobileMenu.addEventListener('click', () => {
     navLinks.classList.toggle('active');
   });
@@ -821,239 +652,219 @@
   });
 
   // Booking form logic
-  const serviceRadios = document.querySelectorAll('input[name="service"]');
+  const serviceCheckboxes = document.querySelectorAll('input[name="service"]');
   const serviceCards = document.querySelectorAll('.service-card');
   const summaryService = document.getElementById('summaryService');
   const summaryPrice = document.getElementById('summaryPrice');
   const summaryTotal = document.getElementById('summaryTotal');
   const bookingForm = document.getElementById('bookingForm');
+  const submitBtn = document.getElementById('submitBtn');
+  const loadingSpinner = document.getElementById('loadingSpinner');
+  const submitIcon = document.getElementById('submitIcon');
+  const submitText = document.getElementById('submitText');
+  const messageContainer = document.getElementById('messageContainer');
 
-  let selectedService = null;
-  let selectedPrice = 0;
+  let selectedServices = [];
+  let totalPrice = 0;
+
+  // Número de WhatsApp del negocio (sin el +)
+  const WHATSAPP_NUMBER = '34642977133';
 
   function updateSummary() {
-    if (selectedService) {
-      summaryService.textContent = selectedService;
-      summaryPrice.textContent = `$${selectedPrice.toFixed(2)}`;
-      summaryTotal.textContent = `$${selectedPrice.toFixed(2)}`;
+    if (selectedServices.length > 0) {
+      const serviceNames = selectedServices.map(s => s.name).join(', ');
+      const servicePrices = selectedServices.map(s => `${s.name}: desde ${s.price}€`).join('\n');
+
+      summaryService.textContent = serviceNames;
+      summaryPrice.innerHTML = servicePrices.replace(/\n/g, '<br>');
+      summaryTotal.textContent = `Desde ${totalPrice}€`;
     } else {
       summaryService.textContent = 'Ninguno';
-      summaryPrice.textContent = '$0.00';
-      summaryTotal.textContent = '$0.00';
+      summaryPrice.textContent = '0€';
+      summaryTotal.textContent = '0€';
     }
   }
 
-  serviceRadios.forEach(radio => {
-    radio.addEventListener('change', (event) => {
-      selectedService = event.target.value;
-      selectedPrice = parseFloat(event.target.dataset.price);
-      updateSummary();
+  function showMessage(message, type) {
+    messageContainer.innerHTML = `<div class="message ${type}">${message}</div>`;
+    messageContainer.querySelector('.message').style.display = 'block';
+    setTimeout(() => {
+      messageContainer.innerHTML = '';
+    }, 5000);
+  }
 
-      // Update card selection style
-      serviceCards.forEach(card => card.classList.remove('selected'));
-      event.target.closest('.service-card').classList.add('selected');
-    });
-  });
-
-  // Add click listener to service cards to select radio button
-  serviceCards.forEach(card => {
-    card.addEventListener('click', () => {
-      const radio = card.querySelector('input[type="radio"]');
-      if (radio) {
-        radio.checked = true;
-        radio.dispatchEvent(new Event('change')); // Manually trigger change event
-      }
-    });
-  });
-
-  //calendario google
-  bookingForm.addEventListener('submit', (event) => {
-    // validación antes de enviar
-    if (!selectedService) {
-      event.preventDefault();
-      alert('Por favor, selecciona un servicio antes de confirmar tu reserva.');
-      return;
+  function setLoading(isLoading) {
+    if (isLoading) {
+      submitBtn.disabled = true;
+      loadingSpinner.style.display = 'inline-block';
+      submitIcon.style.display = 'none';
+      submitText.textContent = 'Abriendo WhatsApp...';
+    } else {
+      submitBtn.disabled = false;
+      loadingSpinner.style.display = 'none';
+      submitIcon.style.display = 'inline-block';
+      submitText.textContent = 'Enviar por WhatsApp';
     }
+  }
 
-    // Insertar servicio y precio en campos ocultos del formulario
-    document.getElementById('hidden-service').value = selectedService;
-    document.getElementById('hidden-price').value = selectedPrice;
-    document.getElementById('hidden-title').value = selectedService;
+  function formatDate(dateString) {
+    const date = new Date(dateString);
+    const options = {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    };
+    return date.toLocaleDateString('es-ES', options);
+  }
 
-    // NO usamos fetch, dejamos que el formulario HTML lo envíe directamente
-    // El action del formulario ya apunta al Google Apps Script
+  function formatTime(timeString) {
+    const [hours, minutes] = timeString.split(':');
+    return `${hours}:${minutes}`;
+  }
+
+  function createWhatsAppMessage(data) {
+    const servicesText = data.services.map(s => `• ${s.name}: desde ${s.price}€`).join('\n');
+
+    const message = `🚗 *NUEVA SOLICITUD DE CITA - VG DETAILING*
+
+👤 *DATOS DEL CLIENTE:*
+• Nombre: ${data.name}
+• Email: ${data.email}
+• Teléfono: ${data.phone}
+
+🔧 *SERVICIOS SOLICITADOS:*
+${servicesText}
+
+• Precio total estimado: desde ${data.totalPrice}€
+• Vehículo: ${data.carModel}
+
+
+💬 *MENSAJE ADICIONAL:*
+${data.message || 'Sin mensaje adicional'}
+
+---
+*Solicitud enviada desde la web de VG Detailing*
+*Fecha de solicitud: ${new Date().toLocaleString('es-ES')}*`;
+
+    return encodeURIComponent(message);
+  }
+
+  serviceCheckboxes.forEach(checkbox => {
+    checkbox.addEventListener('change', (event) => {
+      const serviceName = event.target.value;
+      const servicePrice = parseFloat(event.target.dataset.price);
+      const serviceCard = event.target.closest('.service-card');
+
+      if (event.target.checked) {
+        selectedServices.push({ name: serviceName, price: servicePrice });
+        serviceCard.classList.add('selected');
+      } else {
+        selectedServices = selectedServices.filter(s => s.name !== serviceName);
+        serviceCard.classList.remove('selected');
+      }
+
+      totalPrice = selectedServices.reduce((sum, service) => sum + service.price, 0);
+      updateSummary();
+    });
   });
 
+  // Reemplaza el bloque que tenías para los clics en .service-card por este:
+  serviceCards.forEach(card => {
+    card.addEventListener('click', (e) => {
+      // Si el clic viene del propio checkbox, dejamos que el evento 'change' haga su trabajo
+      if (e.target.tagName.toLowerCase() === 'input') return;
 
+      // Si el clic fue dentro del label, no hacemos nada extra (el label ya alterna el checkbox)
+      if (e.target.closest('label')) return;
 
+      // Clic en otra parte de la tarjeta: alternamos el checkbox manualmente
+      const checkbox = card.querySelector('input[type="checkbox"]');
+      if (!checkbox) return;
+      checkbox.checked = !checkbox.checked;
+      // Disparamos el 'change' para actualizar arrays, estilos y totales
+      checkbox.dispatchEvent(new Event('change', { bubbles: true }));
+    });
+  });
 
-  //Llevar el usuario a confirmacion.html y guardar cita
-    bookingForm.addEventListener('submit', async (event) => {
+  // Por si acaso, evita duplicados y recalcula siempre el total al cambiar cualquier checkbox
+  serviceCheckboxes.forEach(checkbox => {
+    checkbox.addEventListener('change', (event) => {
+      const serviceName = event.target.value;
+      const servicePrice = parseFloat(event.target.dataset.price || '0');
+      const serviceCard = event.target.closest('.service-card');
+
+      if (event.target.checked) {
+        // Evita meter duplicados si se diera el caso
+        const exists = selectedServices.some(s => s.name === serviceName);
+        if (!exists) selectedServices.push({ name: serviceName, price: servicePrice });
+        serviceCard?.classList.add('selected');
+      } else {
+        selectedServices = selectedServices.filter(s => s.name !== serviceName);
+        serviceCard?.classList.remove('selected');
+      }
+
+      totalPrice = selectedServices.reduce((sum, s) => sum + (Number.isFinite(s.price) ? s.price : 0), 0);
+      updateSummary();
+    });
+  });
+  bookingForm.addEventListener('submit', (event) => {
     event.preventDefault();
 
-    if (!selectedService) {
-      alert('Por favor, selecciona un servicio antes de confirmar tu reserva.');
+    if (selectedServices.length === 0) {
+      showMessage('Por favor, selecciona al menos un servicio antes de confirmar tu reserva.', 'error');
       return;
     }
 
+    setLoading(true);
+
     const formData = new FormData(bookingForm);
-      formData.append("service", selectedService);
-      formData.append("price", selectedPrice);
-      formData.append("title", selectedService); // Aquí se manda como title
+    const data = {
+      services: selectedServices,
+      totalPrice: totalPrice,
+      name: formData.get('name'),
+      email: formData.get('email'),
+      phone: formData.get('phone'),
+      carModel: formData.get('car-model'),
+      message: formData.get('message') || 'Sin mensaje adicional'
+    };
 
     try {
-      const res = await fetch("https://script.google.com/macros/s/AKfycbwYuwsgjfzRVxVcczReVzx7IBwrtaTlLpdEZqdH23BTs6BNYHqXSGyRthucSl3_BYRv/exec", {
-        method: "POST",
-        body: formData
-      });
+      const whatsappMessage = createWhatsAppMessage(data);
+      // usa api.whatsapp.com (mejor compatibilidad escritorio/móvil)
+      const whatsappURL = `https://api.whatsapp.com/send?phone=${WHATSAPP_NUMBER}&text=${whatsappMessage}`;
 
-      const text = await res.text();
-      console.log("Respuesta del servidor:", text);
+      const serviceNames = selectedServices.map(s => s.name).join(', ');
 
-      if (text.includes("✅")) {
-        window.location.href = "confirmacion.html"; // Redirige si todo va bien
-      } else {
-        alert("Hubo un problema al crear tu cita. Inténtalo de nuevo.");
+      // Mensaje sin fecha/hora
+      showMessage(`¡Perfecto, ${data.name}! Se abrirá WhatsApp con tu solicitud para "${serviceNames}".`, 'success');
+
+      // Abrir inmediatamente (evita bloqueo de popups)
+      const newWin = window.open(whatsappURL, '_blank');
+
+      // Si el navegador lo bloquea, dejamos un enlace de respaldo clickable
+      if (!newWin || newWin.closed || typeof newWin.closed === 'undefined') {
+        messageContainer.innerHTML = `
+        <div class="message success" style="display:block">
+          Si no se abrió automáticamente, haz clic aquí:
+          <a href="${whatsappURL}" target="_blank" rel="noopener">Enviar por WhatsApp</a>
+        </div>`;
       }
+
+      // Reset inmediato (ya no esperamos 2s)
+      bookingForm.reset();
+      serviceCards.forEach(card => card.classList.remove('selected'));
+      selectedServices = [];
+      totalPrice = 0;
+      updateSummary();
 
     } catch (error) {
-      console.error("Error al enviar el formulario:", error);
-      alert("Error de conexión. Intenta más tarde.");
+      console.error('Error:', error);
+      showMessage('Hubo un problema al preparar el mensaje de WhatsApp. Por favor, inténtalo de nuevo o contáctanos directamente.', 'error');
+    } finally {
+      setLoading(false);
     }
   });
-
-  // Set minimum date for date input to today
-  const today = new Date();
-  const yyyy = today.getFullYear();
-  const mm = String(today.getMonth() + 1).padStart(2, '0'); // Months start at 0!
-  const dd = String(today.getDate()).padStart(2, '0');
-  const minDate = `${yyyy}-${mm}-${dd}`;
-  document.getElementById('date').setAttribute('min', minDate);
-
-  // Generar opciones de hora cada 30 minutos desde las 8:00 hasta las 19:00
-
-  const calendarURL = "https://script.google.com/macros/s/AKfycbwYuwsgjfzRVxVcczReVzx7IBwrtaTlLpdEZqdH23BTs6BNYHqXSGyRthucSl3_BYRv/exec";
-  const dateInput = document.getElementById("date");
-  const timeSelect = document.getElementById("time");
-
-  // Función para generar todas las horas del día cada 30 minutos
-  function generarHoras() {
-    const horas = [];
-    for (let h = 8; h <= 19; h++) {
-      for (let m of [0, 30]) {
-        if (h === 19 && m > 0) continue; // No incluir 19:30
-        horas.push(`${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`);
-      }
-    }
-    return horas;
-  }
-
-  dateInput.addEventListener("change", async () => {
-    const selectedDate = dateInput.value;
-    if (!selectedDate) return;
-
-    timeSelect.innerHTML = `<option value="">Cargando horas disponibles...</option>`;
-
-    try {
-      const res = await fetch(calendarURL);
-      const citas = await res.json();
-
-      const citasDelDia = citas.filter(cita =>
-              new Date(cita.start).toISOString().startsWith(selectedDate)
-      );
-
-      const ocupadas = citasDelDia.map(cita => ({
-        start: new Date(cita.start),
-        end: new Date(cita.end)
-      }));
-
-      const posiblesHoras = generarHoras();
-
-      const disponibles = posiblesHoras.filter(hora => {
-        const horaActual = new Date(`${selectedDate}T${hora}`);
-        return !ocupadas.some(cita =>
-                horaActual >= new Date(cita.start) &&
-                horaActual < new Date(new Date(cita.end).getTime() + 60 * 60 * 1000) // margen +1h
-        );
-      });
-
-      if (disponibles.length > 0) {
-        timeSelect.innerHTML = `<option value="">Selecciona una hora</option>` +
-                disponibles.map(h => `<option value="${h}">${h}</option>`).join('');
-      } else {
-        timeSelect.innerHTML = `<option value="">No hay horas disponibles</option>`;
-      }
-
-    } catch (err) {
-      console.error("Error al obtener disponibilidad:", err);
-      timeSelect.innerHTML = `<option value="">Error al cargar</option>`;
-    }
-  });
-
-  // Schedule Status Function - Simplified
-  function updateScheduleStatus() {
-    const now = new Date();
-    const currentDay = now.getDay(); // 0 = Sunday, 1 = Monday, etc.
-    const currentHour = now.getHours();
-    const currentMinute = now.getMinutes();
-    const currentTime = currentHour * 60 + currentMinute; // Convert to minutes
-
-    const statusIndicator = document.getElementById('statusIndicator');
-    const statusText = document.getElementById('statusText');
-    const weekdaysHours = document.getElementById('weekdaysHours');
-    const saturdayHours = document.getElementById('saturdayHours');
-
-    // Define working hours (in minutes from midnight)
-    const morningStart = 9 * 60; // 9:00
-    const morningEnd = 14 * 60; // 14:00
-    const afternoonStart = 16 * 60; // 16:00
-    const afternoonEnd = 19 * 60; // 19:00
-
-    let isOpen = false;
-    let statusMessage = '';
-
-    // Check if it's a working day (Monday to Friday)
-    if (currentDay >= 1 && currentDay <= 5) {
-      if ((currentTime >= morningStart && currentTime < morningEnd) ||
-              (currentTime >= afternoonStart && currentTime < afternoonEnd)) {
-        isOpen = true;
-        statusMessage = 'Abierto Ahora';
-      } else if (currentTime < morningStart) {
-        statusMessage = 'Cerrado - Abre a las 9:00';
-      } else if (currentTime >= morningEnd && currentTime < afternoonStart) {
-        statusMessage = 'Cerrado - Abre a las 16:00';
-      } else {
-        statusMessage = 'Cerrado - Abre mañana a las 9:00';
-      }
-
-      // Highlight current weekday
-      weekdaysHours.classList.add('current-day-highlight');
-      saturdayHours.classList.remove('current-day-highlight');
-    } else if (currentDay === 6) { // Saturday
-      statusMessage = 'Sábado - Solo con reserva';
-      weekdaysHours.classList.remove('current-day-highlight');
-      saturdayHours.classList.add('current-day-highlight');
-    } else { // Sunday
-      statusMessage = 'Cerrado - Abre el lunes a las 9:00';
-      weekdaysHours.classList.remove('current-day-highlight');
-      saturdayHours.classList.remove('current-day-highlight');
-    }
-
-    // Update the status indicator
-    if (isOpen) {
-      statusIndicator.className = 'status-indicator status-open';
-    } else {
-      statusIndicator.className = 'status-indicator status-closed';
-    }
-
-    statusText.textContent = statusMessage;
-  }
-
-  // Update schedule status on page load and every minute
-  updateScheduleStatus();
-  setInterval(updateScheduleStatus, 60000); // Update every minute
-
-
 
 
 </script>
