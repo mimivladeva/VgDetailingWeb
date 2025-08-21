@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Blog - VG Detailing</title>
+  <title>Blog VG Detailing - FAQ y Tutoriales</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root {
-      --federal-blue: #03045E;
-      --honolulu-blue: #0077B6;
+      --federal-blue: #03045e;
+      --honolulu-blue: #0077b6;
       --pacific-cyan: #00BAD8;
       --non-photo-blue: #90E0EF;
       --light-cyan: #CAF0F8;
@@ -29,6 +29,12 @@
       line-height: 1.6;
       color: var(--text-dark);
       overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 2rem;
     }
 
     /* Header */
@@ -85,8 +91,7 @@
       position: relative;
     }
 
-    .nav-links a:hover,
-    .nav-links a.active {
+    .nav-links a:hover {
       color: var(--light-cyan);
       transform: translateY(-2px);
     }
@@ -103,8 +108,7 @@
       transform: translateX(-50%);
     }
 
-    .nav-links a:hover::after,
-    .nav-links a.active::after {
+    .nav-links a:hover::after {
       width: 100%;
     }
 
@@ -117,194 +121,306 @@
       cursor: pointer;
     }
 
-    /* Page Header */
-    .page-header {
-      background: linear-gradient(135deg, rgba(3, 4, 94, 0.8), rgba(0, 119, 182, 0.8)), url('photos/logoVG.png') no-repeat center center;
-      background-size: contain;
-      background-position: center;
+    /* Blog Hero Section */
+    .blog-hero {
+      background: linear-gradient(135deg, var(--federal-blue), var(--honolulu-blue));
+      color: white;
       padding: 8rem 0 4rem;
       text-align: center;
-      color: white;
       margin-top: 70px;
     }
-    .page-header h1 {
+
+    .blog-hero h1 {
       font-size: 3.5rem;
       font-weight: 700;
       margin-bottom: 1rem;
-      text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
     }
 
-    .page-header p {
+    .blog-hero p {
       font-size: 1.3rem;
       opacity: 0.9;
       max-width: 600px;
       margin: 0 auto;
     }
 
-    /* Container */
-    .container {
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 0 2rem;
+    /* Blog Navigation */
+    .blog-nav {
+      background: white;
+      padding: 2rem 0;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 70px;
+      z-index: 100;
     }
 
-    /* Blog Section */
-    .blog-section {
-      padding: 6rem 0;
-      background: var(--light-cyan);
+    .blog-nav-links {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .blog-nav-links a {
+      color: var(--federal-blue);
+      text-decoration: none;
+      font-weight: 600;
+      padding: 0.5rem 1.5rem;
+      border-radius: 25px;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+    }
+
+    .blog-nav-links a:hover,
+    .blog-nav-links a.active {
+      background: var(--pacific-cyan);
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    /* Main Content */
+    .blog-content {
+      padding: 4rem 0;
+      background: #f8f9fa;
+    }
+
+    .section {
+      margin-bottom: 6rem;
     }
 
     .section-title {
-      text-align: center;
-      font-size: 2.8rem;
+      font-size: 2.5rem;
       font-weight: 700;
       color: var(--federal-blue);
+      text-align: center;
+      margin-bottom: 3rem;
+      position: relative;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: var(--pacific-cyan);
+      border-radius: 2px;
+    }
+
+    /* FAQ Section */
+    .faq-grid {
+      display: grid;
+      gap: 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .faq-item {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .faq-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    }
+
+    .faq-question {
+      background: var(--federal-blue);
+      color: white;
+      padding: 1.5rem 2rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+
+    .faq-question:hover {
+      background: var(--honolulu-blue);
+    }
+
+    .faq-icon {
+      font-size: 1.2rem;
+      transition: transform 0.3s ease;
+    }
+
+    .faq-item.active .faq-icon {
+      transform: rotate(180deg);
+    }
+
+    .faq-answer {
+      padding: 0 2rem;
+      max-height: 0;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      background: white;
+    }
+
+    .faq-item.active .faq-answer {
+      padding: 2rem;
+      max-height: 500px;
+    }
+
+    .faq-answer p {
+      color: var(--text-light);
+      line-height: 1.8;
       margin-bottom: 1rem;
     }
 
-    .section-subtitle {
-      text-align: center;
-      font-size: 1.2rem;
+    .faq-answer ul {
       color: var(--text-light);
-      margin-bottom: 4rem;
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
+      padding-left: 1.5rem;
     }
 
-    .blog-grid {
+    .faq-answer li {
+      margin-bottom: 0.5rem;
+    }
+
+    /* Tutorials Section */
+    .tutorials-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
       gap: 2.5rem;
     }
 
-    .blog-post-card {
+    .tutorial-card {
       background: white;
-      border-radius: 15px;
+      border-radius: 20px;
       overflow: hidden;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
       transition: all 0.3s ease;
+    }
+
+    .tutorial-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+    }
+
+    .tutorial-image {
+      height: 200px;
+      background: linear-gradient(135deg, var(--pacific-cyan), var(--honolulu-blue));
       display: flex;
-      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 3rem;
     }
 
-    .blog-post-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 20px 60px rgba(0,0,0,0.15);
-    }
-
-    .blog-post-card img {
-      width: 100%;
-      height: 250px;
-      object-fit: cover;
-    }
-
-    .blog-content {
+    .tutorial-content {
       padding: 2rem;
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
     }
 
-    .blog-content h3 {
-      font-size: 1.5rem;
-      font-weight: 600;
+    .tutorial-title {
+      font-size: 1.4rem;
+      font-weight: 700;
       color: var(--federal-blue);
-      margin-bottom: 0.8rem;
-    }
-
-    .blog-meta {
-      font-size: 0.9rem;
-      color: var(--text-light);
       margin-bottom: 1rem;
     }
 
-    .blog-meta span {
-      margin-right: 1rem;
+    .tutorial-description {
+      color: var(--text-light);
+      margin-bottom: 1.5rem;
+      line-height: 1.7;
     }
 
-    .blog-content p {
-      font-size: 1rem;
+    .tutorial-steps {
+      list-style: none;
+      counter-reset: step-counter;
+    }
+
+    .tutorial-steps li {
+      counter-increment: step-counter;
+      margin-bottom: 1rem;
+      padding-left: 2.5rem;
+      position: relative;
+      color: var(--text-dark);
+    }
+
+    .tutorial-steps li::before {
+      content: counter(step-counter);
+      position: absolute;
+      left: 0;
+      top: 0;
+      background: var(--pacific-cyan);
+      color: white;
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .tutorial-difficulty {
+      display: inline-block;
+      padding: 0.3rem 1rem;
+      border-radius: 15px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .difficulty-easy {
+      background: #d4edda;
+      color: #155724;
+    }
+
+    .difficulty-medium {
+      background: #fff3cd;
+      color: #856404;
+    }
+
+    .difficulty-hard {
+      background: #f8d7da;
+      color: #721c24;
+    }
+
+    /* Tips Section */
+    .tips-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .tip-card {
+      background: white;
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      border-left: 5px solid var(--pacific-cyan);
+      transition: all 0.3s ease;
+    }
+
+    .tip-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    }
+
+    .tip-icon {
+      font-size: 2.5rem;
+      color: var(--pacific-cyan);
+      margin-bottom: 1rem;
+    }
+
+    .tip-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--federal-blue);
+      margin-bottom: 1rem;
+    }
+
+    .tip-description {
       color: var(--text-light);
       line-height: 1.7;
-      margin-bottom: 1.5rem;
-      flex-grow: 1;
     }
-
-    .read-more {
-      display: inline-block;
-      color: var(--honolulu-blue);
-      text-decoration: none;
-      font-weight: 600;
-      transition: color 0.3s ease;
-      margin-top: auto; /* Pushes the button to the bottom */
-    }
-
-    .read-more:hover {
-      color: var(--federal-blue);
-    }
-
-    /* CTA Section */
-    .cta-section {
-      padding: 6rem 0;
-      background: linear-gradient(135deg, var(--federal-blue), var(--honolulu-blue));
-      color: white;
-      text-align: center;
-    }
-
-    .cta-content h2 {
-      font-size: 2.5rem;
-      font-weight: 700;
-      margin-bottom: 1rem;
-    }
-
-    .cta-content p {
-      font-size: 1.2rem;
-      margin-bottom: 3rem;
-      opacity: 0.9;
-    }
-
-    .btn {
-      padding: 1.2rem 2.5rem;
-      border: none;
-      border-radius: 50px;
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 600;
-      font-size: 1.1rem;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      text-align: center;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--pacific-cyan), var(--honolulu-blue));
-      color: white;
-    }
-
-    .btn-primary:hover {
-      background: linear-gradient(135deg, var(--honolulu-blue), var(--federal-blue));
-      transform: translateY(-3px);
-      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-    }
-
-    .btn-secondary {
-      background: transparent;
-      color: white;
-      border: 2px solid white;
-    }
-
-    .btn-secondary:hover {
-      background: white;
-      color: var(--federal-blue);
-      transform: translateY(-3px);
-    }
-
-
 
     /* Footer */
     footer {
@@ -337,20 +453,6 @@
       gap: 1rem;
       margin-top: 1.5rem;
     }
-    footer .footer-section a,
-    footer .footer-section a:visited { color:#fff; text-decoration:none; }
-    footer .footer-section a:hover,
-    footer .footer-section a:focus { color:var(--light-cyan); text-decoration:underline; }
-
-
-    .status-open {
-      background: #4CAF50;
-    }
-
-    .status-closed {
-      background: #f44336;
-    }
-
 
     .social-links a {
       width: 45px;
@@ -370,69 +472,15 @@
       transform: translateY(-3px);
     }
 
-
-    /* Schedule Styles - Simplified */
-    .schedule-status {
-      display: flex;
-      align-items: center;
-      justify-content: flex-start; /* Cambiar de center a flex-start */
-      gap: 0.5rem;
-      margin-bottom: 1rem;
-      font-weight: 600;
-      font-size: 1.1rem;
+    .footer-section a {
+      color: #fff;
+      text-decoration: none;
     }
 
-    .status-indicator {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      animation: pulse 2s infinite;
+    .footer-section a:hover {
+      color: var(--light-cyan);
+      text-decoration: underline;
     }
-
-    .status-open {
-      background: #4CAF50;
-    }
-
-    .status-closed {
-      background: #f44336;
-    }
-
-    @keyframes pulse {
-      0% { opacity: 1; }
-      50% { opacity: 0.5; }
-      100% { opacity: 1; }
-    }
-
-    .schedule-hours {
-      text-align: left; /* Cambiar de center a left */
-      margin-top: 1rem;
-    }
-
-    .weekdays-hours {
-      font-size: 1rem;
-      margin-bottom: 1rem;
-      opacity: 0.9;
-    }
-
-    .schedule-divider {
-      height: 1px;
-      background: rgba(255,255,255,0.3);
-      margin: 1rem 0;
-    }
-
-    .saturday-hours {
-      font-size: 0.9rem;
-      opacity: 0.8;
-      font-style: italic;
-    }
-
-    .current-day-highlight {
-      background: rgba(0, 186, 216, 0.2);
-      border-radius: 5px;
-      padding: 0.5rem;
-      margin: -0.2rem;
-    }
-
 
     .footer-bottom {
       text-align: center;
@@ -463,31 +511,28 @@
         display: block;
       }
 
-      .page-header h1 {
+      .blog-hero h1 {
         font-size: 2.5rem;
       }
 
+      .blog-nav-links {
+        gap: 1rem;
+      }
+
       .section-title {
-        font-size: 2.2rem;
-      }
-
-      .blog-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .container {
-        padding: 0 1rem;
-      }
-
-      .page-header h1 {
         font-size: 2rem;
       }
 
-      .btn {
-        padding: 1rem 2rem;
-        font-size: 1rem;
+      .tutorials-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .tips-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .container {
+        padding: 0 1rem;
       }
     }
   </style>
@@ -502,10 +547,10 @@
     </div>
     <ul class="nav-links" id="navLinks">
       <li><a href="index.html">Inicio</a></li>
-      <li><a href="sobre-nosotros.html">Sobre Nosotros</a></li>
       <li><a href="servicios.html">Servicios</a></li>
       <li><a href="galeria.html">Galería</a></li>
-      <li><a href="blog.html">Blog</a></li>
+      <li><a href="sobre-nosotros.html">Sobre Nosotros</a></li>
+      <li><a href="blog.html" class="active">Blog</a></li>
       <li><a href="cita.html">Cita</a></li>
     </ul>
     <button class="mobile-menu" id="mobileMenu">
@@ -514,102 +559,262 @@
   </nav>
 </header>
 
-<!-- Page Header -->
-<section class="page-header">
+<!-- Blog Hero Section -->
+<section class="blog-hero">
   <div class="container">
-    <h1>Nuestro Blog</h1>
-    <p>Opiniones, consejos y las últimas novedades sobre detailing automotriz.</p>
+    <h1>Blog VG Detailing</h1>
+    <p>Todo lo que necesitas saber sobre detailing profesional, consejos expertos y respuestas a tus dudas más frecuentes</p>
   </div>
 </section>
 
-<!-- Blog Section -->
-<section class="blog-section">
+<!-- Blog Navigation -->
+<section class="blog-nav">
   <div class="container">
-    <h2 class="section-title">Últimas Publicaciones</h2>
-    <p class="section-subtitle">Mantente al día con nuestras reseñas de productos, guías y secretos de detailing.</p>
-
-    <div class="blog-grid" id="entradas">
-
-    <!-- Example Blog Post 1
-      <div class="blog-post-card">
-        <img src="/placeholder.svg?height=300&width=500" alt="Botella de jabón para coche">
-        <div class="blog-content">
-          <h3>Mi Reseña del Mejor Jabón para Lavado a Mano</h3>
-          <div class="blog-meta">
-            <span><i class="fas fa-user"></i> Viktor Georgiev</span>
-            <span><i class="fas fa-calendar-alt"></i> 15 Julio, 2024</span>
-          </div>
-          <p>Descubre por qué este jabón se ha convertido en mi favorito para un lavado seguro y efectivo, dejando un brillo impecable sin esfuerzo.</p>
-          <a href="#" class="read-more">Leer Más <i class="fas fa-arrow-right"></i></a>
-        </div>
-      </div>
-
--->
-      <!-- Example Blog Post 2
-      <div class="blog-post-card">
-        <img src="/placeholder.svg?height=300&width=500" alt="Productos de limpieza interior de coche">
-        <div class="blog-content">
-          <h3>Guía Completa para un Detailing Interior Profesional</h3>
-          <div class="blog-meta">
-            <span><i class="fas fa-user"></i> Viktor Georgiev</span>
-            <span><i class="fas fa-calendar-alt"></i> 10 Julio, 2024</span>
-          </div>
-          <p>Aprende los pasos esenciales y los productos clave para transformar el interior de tu vehículo, eliminando suciedad y malos olores.</p>
-          <a href="#" class="read-more">Leer Más <i class="fas fa-arrow-right"></i></a>
-        </div>
-      </div>
--->
-      <!-- Example Blog Post 3
-      <div class="blog-post-card">
-        <img src="/placeholder.svg?height=300&width=500" alt="Aplicación de cera de coche">
-        <div class="blog-content">
-          <h3>Ceras y Selladores: ¿Cuál es el Ideal para tu Coche?</h3>
-          <div class="blog-meta">
-            <span><i class="fas fa-user"></i> Viktor Georgiev</span>
-            <span><i class="fas fa-calendar-alt"></i> 05 Julio, 2024</span>
-          </div>
-          <p>Exploramos las diferencias entre ceras naturales, sintéticas y selladores, ayudándote a elegir la mejor protección y brillo para tu pintura.</p>
-          <a href="#" class="read-more">Leer Más <i class="fas fa-arrow-right"></i></a>
-        </div>
-      </div>
--->
-      <!-- Example Blog Post 4
-      <div class="blog-post-card">
-        <img src="/placeholder.svg?height=300&width=500" alt="Toallas de microfibra para detailing">
-        <div class="blog-content">
-          <h3>La Importancia de las Microfibras en el Detailing</h3>
-          <div class="blog-meta">
-            <span><i class="fas fa-user"></i> Viktor Georgiev</span>
-            <span><i class="fas fa-calendar-alt"></i> 01 Julio, 2024</span>
-          </div>
-          <p>Un buen detailing no solo depende de los productos, sino también de las herramientas. Descubre por qué las microfibras son indispensables.</p>
-          <a href="#" class="read-more">Leer Más <i class="fas fa-arrow-right"></i></a>
-        </div>
-      </div>
-      -->
+    <div class="blog-nav-links">
+      <a href="#faq" class="active">FAQ</a>
+      <a href="#tutoriales">Tutoriales</a>
+      <a href="#consejos">Consejos Pro</a>
     </div>
   </div>
 </section>
 
-<!-- CTA Section -->
-<section class="cta-section">
+<!-- Main Content -->
+<main class="blog-content">
   <div class="container">
-    <div class="cta-content">
-      <h2>¿Listo para Transformar tu Vehículo?</h2>
-      <p>Experimenta la diferencia que hace un servicio profesional de detailing. Tu auto merece lo mejor.</p>
-      <div class="cta-buttons">
-        <a href="cita.html" class="btn btn-primary">
-          <i class="fas fa-calendar-check"></i>
-          Agendar Cita
-        </a>
-        <a href="sobre-nosotros.html" class="btn btn-secondary">
-          <i class="fas fa-info-circle"></i>
-          Conoce Más
-        </a>
+    <!-- FAQ Section -->
+    <section id="faq" class="section">
+      <h2 class="section-title">Preguntas Frecuentes</h2>
+      <div class="faq-grid">
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>¿Qué es el detailing automotriz?</span>
+            <i class="fas fa-chevron-down faq-icon"></i>
+          </div>
+          <div class="faq-answer">
+            <p>El detailing automotriz es un proceso completo de limpieza, restauración y protección de un vehículo, tanto en su interior como exterior. Va más allá de un lavado convencional, incluyendo técnicas especializadas para devolver al coche su aspecto original o incluso mejorarlo.</p>
+            <p>Incluye servicios como:</p>
+            <ul>
+              <li>Corrección de pintura y eliminación de rayones</li>
+              <li>Aplicación de ceras y selladores protectores</li>
+              <li>Limpieza profunda de tapicerías y cueros</li>
+              <li>Restauración de plásticos y gomas</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>¿Con qué frecuencia debo hacer detailing a mi coche?</span>
+            <i class="fas fa-chevron-down faq-icon"></i>
+          </div>
+          <div class="faq-answer">
+            <p>La frecuencia depende del uso del vehículo y las condiciones ambientales:</p>
+            <ul>
+              <li><strong>Detailing completo:</strong> Cada 3-6 meses</li>
+              <li><strong>Lavado y encerado:</strong> Mensualmente</li>
+              <li><strong>Mantenimiento básico:</strong> Cada 2 semanas</li>
+            </ul>
+            <p>Los vehículos expuestos a condiciones extremas (sal marina, polvo, sol intenso) requieren mayor frecuencia de mantenimiento.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>¿Cuál es la diferencia entre cera y sellador?</span>
+            <i class="fas fa-chevron-down faq-icon"></i>
+          </div>
+          <div class="faq-answer">
+            <p><strong>Cera:</strong> Producto natural (carnauba) o sintético que proporciona un brillo profundo y cálido. Duración: 2-3 meses. Ideal para vehículos de colección o uso ocasional.</p>
+            <p><strong>Sellador:</strong> Producto sintético que ofrece mayor durabilidad (6-12 meses) y mejor protección contra elementos ambientales. Recomendado para uso diario.</p>
+            <p>Muchos profesionales combinan ambos: sellador como base protectora y cera como capa final para el brillo.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>¿Puedo hacer detailing en casa o necesito un profesional?</span>
+            <i class="fas fa-chevron-down faq-icon"></i>
+          </div>
+          <div class="faq-answer">
+            <p>El mantenimiento básico se puede hacer en casa con las herramientas y productos adecuados. Sin embargo, para procesos complejos como corrección de pintura, es recomendable acudir a profesionales.</p>
+            <p><strong>En casa:</strong> Lavado, encerado básico, limpieza interior</p>
+            <p><strong>Profesional:</strong> Corrección de pintura, pulido, aplicación de recubrimientos cerámicos, restauración de faros</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>¿Qué es el recubrimiento cerámico y vale la pena?</span>
+            <i class="fas fa-chevron-down faq-icon"></i>
+          </div>
+          <div class="faq-answer">
+            <p>El recubrimiento cerámico es una capa protectora líquida que se endurece formando una barrera permanente sobre la pintura. Ofrece:</p>
+            <ul>
+              <li>Protección superior contra rayones menores</li>
+              <li>Resistencia a químicos y contaminantes</li>
+              <li>Facilidad de limpieza (efecto hidrofóbico)</li>
+              <li>Durabilidad de 2-5 años</li>
+              <li>Brillo profundo y duradero</li>
+            </ul>
+            <p>Vale la pena para vehículos nuevos o con pintura en excelente estado, especialmente si buscas protección a largo plazo.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>¿Cómo elimino rayones de mi coche?</span>
+            <i class="fas fa-chevron-down faq-icon"></i>
+          </div>
+          <div class="faq-answer">
+            <p>Depende de la profundidad del rayón:</p>
+            <ul>
+              <li><strong>Rayones superficiales:</strong> Pulimento suave y paño de microfibra</li>
+              <li><strong>Rayones medios:</strong> Compound de pulido y máquina pulidora</li>
+              <li><strong>Rayones profundos:</strong> Lijado húmedo progresivo + pulido profesional</li>
+            </ul>
+            <p><strong>Prueba del agua:</strong> Si el rayón desaparece al mojarlo, es superficial y se puede pulir fácilmente.</p>
+          </div>
+        </div>
       </div>
-    </div>
+    </section>
+
+    <!-- Tutorials Section -->
+    <section id="tutoriales" class="section">
+      <h2 class="section-title">Tutoriales Paso a Paso</h2>
+      <div class="tutorials-grid">
+        <div class="tutorial-card">
+          <div class="tutorial-image">
+            <i class="fas fa-car-wash"></i>
+          </div>
+          <div class="tutorial-content">
+            <span class="tutorial-difficulty difficulty-easy">Principiante</span>
+            <h3 class="tutorial-title">Lavado Perfecto en Casa</h3>
+            <p class="tutorial-description">Aprende la técnica correcta para lavar tu coche sin dañar la pintura, usando el método de los dos baldes.</p>
+            <ol class="tutorial-steps">
+              <li>Enjuaga el coche con agua para eliminar suciedad suelta</li>
+              <li>Prepara dos baldes: uno con champú y otro solo con agua</li>
+              <li>Lava de arriba hacia abajo usando movimientos rectos</li>
+              <li>Enjuaga la manopla en el balde de agua limpia entre secciones</li>
+              <li>Seca inmediatamente con toalla de microfibra</li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="tutorial-card">
+          <div class="tutorial-image">
+            <i class="fas fa-spray-can"></i>
+          </div>
+          <div class="tutorial-content">
+            <span class="tutorial-difficulty difficulty-medium">Intermedio</span>
+            <h3 class="tutorial-title">Aplicación de Cera Correcta</h3>
+            <p class="tutorial-description">Domina la técnica profesional para aplicar cera y conseguir un brillo duradero y uniforme.</p>
+            <ol class="tutorial-steps">
+              <li>Asegúrate de que el coche esté limpio y seco</li>
+              <li>Trabaja en sombra y con superficie fría</li>
+              <li>Aplica cera en movimientos circulares pequeños</li>
+              <li>Trabaja por secciones de 60x60 cm</li>
+              <li>Retira con paño limpio cuando forme velo blanquecino</li>
+              <li>Pule con movimientos lineales para brillo final</li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="tutorial-card">
+          <div class="tutorial-image">
+            <i class="fas fa-tools"></i>
+          </div>
+          <div class="tutorial-content">
+            <span class="tutorial-difficulty difficulty-hard">Avanzado</span>
+            <h3 class="tutorial-title">Corrección de Pintura Básica</h3>
+            <p class="tutorial-description">Elimina rayones menores y marcas de remolino usando técnicas de pulido profesional.</p>
+            <ol class="tutorial-steps">
+              <li>Evalúa el estado de la pintura con buena iluminación</li>
+              <li>Limpia la superficie con clay bar si es necesario</li>
+              <li>Aplica compound con máquina pulidora a baja velocidad</li>
+              <li>Trabaja en secciones pequeñas con presión moderada</li>
+              <li>Limpia residuos y evalúa el resultado</li>
+              <li>Aplica pulimento fino para acabado perfecto</li>
+              <li>Protege con cera o sellador</li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="tutorial-card">
+          <div class="tutorial-image">
+            <i class="fas fa-couch"></i>
+          </div>
+          <div class="tutorial-content">
+            <span class="tutorial-difficulty difficulty-medium">Intermedio</span>
+            <h3 class="tutorial-title">Limpieza Profunda Interior</h3>
+            <p class="tutorial-description">Restaura el interior de tu vehículo con técnicas profesionales para diferentes materiales.</p>
+            <ol class="tutorial-steps">
+              <li>Retira todos los objetos y alfombrillas</li>
+              <li>Aspira minuciosamente asientos y alfombras</li>
+              <li>Trata manchas específicas según el material</li>
+              <li>Limpia plásticos con producto específico</li>
+              <li>Acondiciona cueros con producto nutritivo</li>
+              <li>Limpia cristales interiores sin dejar marcas</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tips Section -->
+    <section id="consejos" class="section">
+      <h2 class="section-title">Consejos de Profesionales</h2>
+      <div class="tips-grid">
+        <div class="tip-card">
+          <div class="tip-icon">
+            <i class="fas fa-thermometer-half"></i>
+          </div>
+          <h3 class="tip-title">Temperatura Ideal</h3>
+          <p class="tip-description">Nunca trabajes bajo sol directo o con el coche caliente. La temperatura ideal está entre 15-25°C en sombra. Los productos se secan demasiado rápido con calor, dejando marcas difíciles de eliminar.</p>
+        </div>
+
+        <div class="tip-card">
+          <div class="tip-icon">
+            <i class="fas fa-tint"></i>
+          </div>
+          <h3 class="tip-title">Calidad del Agua</h3>
+          <p class="tip-description">Usa agua desmineralizada para el enjuague final. El agua del grifo con mucha cal deja manchas blancas que requieren pulido adicional para eliminar. Invierte en un sistema de filtrado si lavas frecuentemente.</p>
+        </div>
+
+        <div class="tip-card">
+          <div class="tip-icon">
+            <i class="fas fa-hand-paper"></i>
+          </div>
+          <h3 class="tip-title">Técnica de Secado</h3>
+          <p class="tip-description">Nunca arrastres la toalla. Usa la técnica de "patting" (presionar suavemente) o desliza la toalla sin presión. Una toalla de microfibra de calidad absorbe el agua sin necesidad de frotar.</p>
+        </div>
+
+        <div class="tip-card">
+          <div class="tip-icon">
+            <i class="fas fa-clock"></i>
+          </div>
+          <h3 class="tip-title">Timing Perfecto</h3>
+          <p class="tip-description">Planifica 3-4 horas para un detailing completo. Nunca tengas prisa: es mejor hacer menos secciones bien hechas que todo el coche de forma apresurada. La paciencia es clave en el detailing.</p>
+        </div>
+
+        <div class="tip-card">
+          <div class="tip-icon">
+            <i class="fas fa-eye"></i>
+          </div>
+          <h3 class="tip-title">Inspección Constante</h3>
+          <p class="tip-description">Usa diferentes ángulos de luz para evaluar tu trabajo. Una linterna LED te ayudará a detectar rayones, marcas de remolino y áreas que necesitan más atención durante el proceso.</p>
+        </div>
+
+        <div class="tip-card">
+          <div class="tip-icon">
+            <i class="fas fa-shield-alt"></i>
+          </div>
+          <h3 class="tip-title">Protección Preventiva</h3>
+          <p class="tip-description">La prevención es más barata que la corrección. Usa fundas para el coche, evita estacionar bajo árboles, y mantén una rutina de lavado regular para evitar que la suciedad se adhiera permanentemente.</p>
+        </div>
+      </div>
+    </section>
   </div>
-</section>
+</main>
 
 <!-- Footer -->
 <footer>
@@ -617,47 +822,35 @@
     <div class="footer-content">
       <div class="footer-section">
         <h3>VG Detailing</h3>
-        <p>Elevando tu experiencia automotriz con servicios profesionales de detailing que transforman y protegen tu inversión.</p>
+        <p>Especialistas en detailing automotriz con más de 5 años de experiencia. Transformamos tu vehículo con técnicas profesionales y productos de primera calidad.</p>
         <div class="social-links">
-          <a href="https://www.instagram.com/vgdetailing_?igsh=MTh3N244YXc3ODh6Yg==" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-          <a href="https://www.tiktok.com/@vgdetaling?_t=ZN-8z0Nhz9jTr4&_r=1" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-whatsapp"></i></a>
         </div>
       </div>
-
-      <div class="footer-section">
-        <h3>Contacto</h3>
-        <p><i class="fas fa-phone"></i> <a href="tel:+34642977133">+34 642 977 133</a></p>
-        <p><i class="fas fa-envelope"></i> <a href="mailto:vgdetailing.oficial@gmail.com">vgdetailing.oficial@gmail.com</a></p>
-        <p><i class="fas fa-map-marker-alt"></i> Carrer de Guitarrista Salvador García, 14, Gandia</p>
-      </div>
-
-      <div class="footer-section">
-        <h3>Horarios</h3>
-        <div class="schedule-status" id="scheduleStatus">
-          <div class="status-indicator" id="statusIndicator"></div>
-          <span id="statusText">Cargando...</span>
-        </div>
-        <div class="schedule-hours">
-          <div class="weekdays-hours" id="weekdaysHours">
-            Lun - Vie: 9:00 - 14:00 | 16:00 - 19:00
-          </div>
-          <div class="schedule-divider"></div>
-          <div class="saturday-hours" id="saturdayHours">
-            Sábado: Bajo reserva
-          </div>
-        </div>
-      </div>
-
       <div class="footer-section">
         <h3>Servicios</h3>
-        <p>• Detailing Exterior </p>
-        <p>• Detailing Interior</p>
-        <p>• Pulido</p>
+        <p><a href="servicios.html">Detailing Exterior</a></p>
+        <p><a href="servicios.html">Detailing Interior</a></p>
+        <p><a href="servicios.html">Corrección de Pintura</a></p>
+        <p><a href="servicios.html">Protección Cerámica</a></p>
+      </div>
+      <div class="footer-section">
+        <h3>Contacto</h3>
+        <p><i class="fas fa-map-marker-alt"></i> Calle Principal 123, Ciudad</p>
+        <p><i class="fas fa-phone"></i> +34 123 456 789</p>
+        <p><i class="fas fa-envelope"></i> info@vgdetailing.com</p>
+      </div>
+      <div class="footer-section">
+        <h3>Horarios</h3>
+        <p>Lunes - Viernes: 9:00 - 18:00</p>
+        <p>Sábados: 9:00 - 14:00</p>
+        <p>Domingos: Cerrado</p>
       </div>
     </div>
-
     <div class="footer-bottom">
-      <p>&copy; 2025 VG Detailing. Todos los derechos reservados. | Diseño por M.Vladeva</p>
+      <p>&copy; 2024 VG Detailing. Todos los derechos reservados.</p>
     </div>
   </div>
 </footer>
@@ -671,195 +864,76 @@
     navLinks.classList.toggle('active');
   });
 
-  // Smooth scrolling for navigation links
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-      e.preventDefault();
-      const target = document.querySelector(this.getAttribute('href'));
-      if (target) {
-        target.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
-        });
+  // FAQ accordion functionality
+  const faqItems = document.querySelectorAll('.faq-item');
+
+  faqItems.forEach(item => {
+    const question = item.querySelector('.faq-question');
+
+    question.addEventListener('click', () => {
+      const isActive = item.classList.contains('active');
+
+      // Close all FAQ items
+      faqItems.forEach(faqItem => {
+        faqItem.classList.remove('active');
+      });
+
+      // Open clicked item if it wasn't active
+      if (!isActive) {
+        item.classList.add('active');
       }
-      navLinks.classList.remove('active');
     });
   });
 
-  // Header scroll effect
-  window.addEventListener('scroll', () => {
-    const header = document.querySelector('header');
-    if (window.scrollY > 100) {
-      header.style.background = 'linear-gradient(135deg, var(--pacific-cyan), var(--honolulu-blue), var(--federal-blue))';
-      header.style.backdropFilter = 'blur(10px)';
-    } else {
-      header.style.background = 'linear-gradient(135deg, var(--pacific-cyan), var(--honolulu-blue), var(--federal-blue))';
-      header.style.backdropFilter = 'none';
-    }
+  // Smooth scrolling for navigation links
+  const blogNavLinks = document.querySelectorAll('.blog-nav-links a');
+
+  blogNavLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+
+      // Remove active class from all links
+      blogNavLinks.forEach(navLink => {
+        navLink.classList.remove('active');
+      });
+
+      // Add active class to clicked link
+      link.classList.add('active');
+
+      // Smooth scroll to target section
+      const targetId = link.getAttribute('href');
+      const targetSection = document.querySelector(targetId);
+
+      if (targetSection) {
+        const offsetTop = targetSection.offsetTop - 150; // Account for fixed header
+        window.scrollTo({
+          top: offsetTop,
+          behavior: 'smooth'
+        });
+      }
+    });
   });
 
+  // Update active navigation link on scroll
+  window.addEventListener('scroll', () => {
+    const sections = document.querySelectorAll('.section');
+    const scrollPos = window.scrollY + 200;
 
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop;
+      const sectionHeight = section.offsetHeight;
+      const sectionId = section.getAttribute('id');
 
-  // URL de tu Google Apps Script
-  const scriptURL = 'https://script.google.com/macros/s/AKfycbwhXAf069V0BB5NP8zkpbqMQesVksgsKF-KjYfIaQpzttxambMhPhSyDUdX3Q3oNQSXwg/exec';
-  function toDirectImageURL(url) {
-    if (!url) return "";
-    let u = url.trim();
-
-    // http -> https
-    if (u.startsWith("http://")) u = "https://" + u.slice(7);
-
-    // Google Drive /file/d/ID/view
-    let m = u.match(/https:\/\/drive\.google\.com\/file\/d\/([^/]+)\//);
-    if (m) return `https://drive.google.com/uc?export=view&id=${m[1]}`;
-    // Google Drive open?id=ID
-    m = u.match(/https:\/\/drive\.google\.com\/open\?id=([^&]+)/);
-    if (m) return `https://drive.google.com/uc?export=view&id=${m[1]}`;
-
-    // Dropbox -> raw=1
-    if (u.includes("dropbox.com")) {
-      u = u.replace("?dl=0", "").replace("?dl=1", "");
-      return u + (u.includes("?") ? "&raw=1" : "?raw=1");
-    }
-
-    // i.ibb.co es enlace directo
-    if (u.includes("ibb.co/") && !u.includes("i.ibb.co/")) {
-      console.warn("Enlace de ibb.co no es directo, usa el 'Direct link' de iBB.");
-      return "";
-    }
-
-    return u;
-  }
-
-  function cargarEntradasBlog() {
-    const contenedor = document.getElementById("entradas");
-
-    // Mensaje de carga inicial
-    contenedor.innerHTML = "<p>⏳ Cargando publicaciones...</p>";
-    fetch(scriptURL)
-            .then(async res => {
-              const text = await res.text();
-              try {
-                return JSON.parse(text);
-              } catch (e) {
-                console.error("La respuesta no es JSON válido:", text);
-                throw new Error("Respuesta no JSON del Apps Script");
-              }
-            })
-            .then(data => {
-              if (!Array.isArray(data)) {
-                console.error("El servidor devolvió un error:", data);
-                document.getElementById("entradas").innerHTML = "<p>Error del servidor: " + (data.error || "Desconocido") + "</p>";
-                return;
-              }
-
-             // const contenedor = document.getElementById("entradas");
-              contenedor.innerHTML = "";
-              const orden = [...data].reverse();
-
-              orden.forEach(entry => {
-                const card = document.createElement("div");
-                card.className = "blog-post-card";
-
-                const candidate =
-                        entry.imagenDataUrl && entry.imagenDataUrl.startsWith("data:")
-                                ? entry.imagenDataUrl
-                                : toDirectImageURL(entry.imagen || "");
-
-                const imgSrc = candidate || "https://placehold.co/800x450?text=VG+Detailing";
-
-                card.innerHTML = `
-          <img src="${imgSrc}" alt="${entry.titulo || 'Imagen'}" loading="lazy"
-               onerror="this.onerror=null; this.src='https://placehold.co/800x450?text=Imagen+no+disponible'">
-          <div class="blog-content">
-            <h3>${entry.titulo || ''}</h3>
-            <div class="blog-meta">
-              <span><i class="fas fa-user"></i> ${entry.autor || 'Anónimo'}</span>
-              <span><i class="fas fa-calendar-alt"></i> ${entry.fecha || ''}</span>
-            </div>
-            <p>${(entry.contenido || '').length > 150 ? entry.contenido.substring(0, 150) + '...' : (entry.contenido || '')}</p>
-            <a href="blog-page.html?id=${entry.id}" class="read-more">Leer Más <i class="fas fa-arrow-right"></i></a>
-
-
-          </div>
-        `;
-                contenedor.appendChild(card);
-              });
-            })
-            .catch(err => {
-              console.error("Error cargando entradas:", err);
-              document.getElementById("entradas").innerHTML = "<p>Error al cargar las publicaciones.</p>";
-            });
-  }
-
-  window.addEventListener('load', cargarEntradasBlog);
-
-  // Schedule Status Function - Simplified
-  function updateScheduleStatus() {
-    const now = new Date();
-    const currentDay = now.getDay(); // 0 = Sunday, 1 = Monday, etc.
-    const currentHour = now.getHours();
-    const currentMinute = now.getMinutes();
-    const currentTime = currentHour * 60 + currentMinute; // Convert to minutes
-
-    const statusIndicator = document.getElementById('statusIndicator');
-    const statusText = document.getElementById('statusText');
-    const weekdaysHours = document.getElementById('weekdaysHours');
-    const saturdayHours = document.getElementById('saturdayHours');
-
-    // Define working hours (in minutes from midnight)
-    const morningStart = 9 * 60; // 9:00
-    const morningEnd = 14 * 60; // 14:00
-    const afternoonStart = 16 * 60; // 16:00
-    const afternoonEnd = 19 * 60; // 19:00
-
-    let isOpen = false;
-    let statusMessage = '';
-
-    // Check if it's a working day (Monday to Friday)
-    if (currentDay >= 1 && currentDay <= 5) {
-      if ((currentTime >= morningStart && currentTime < morningEnd) ||
-              (currentTime >= afternoonStart && currentTime < afternoonEnd)) {
-        isOpen = true;
-        statusMessage = 'Abierto Ahora';
-      } else if (currentTime < morningStart) {
-        statusMessage = 'Cerrado - Abre a las 9:00';
-      } else if (currentTime >= morningEnd && currentTime < afternoonStart) {
-        statusMessage = 'Cerrado - Abre a las 16:00';
-      } else {
-        statusMessage = 'Cerrado - Abre mañana a las 9:00';
+      if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+        blogNavLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === `#${sectionId}`) {
+            link.classList.add('active');
+          }
+        });
       }
-
-      // Highlight current weekday
-      weekdaysHours.classList.add('current-day-highlight');
-      saturdayHours.classList.remove('current-day-highlight');
-    } else if (currentDay === 6) { // Saturday
-      statusMessage = 'Sábado - Solo con reserva';
-      weekdaysHours.classList.remove('current-day-highlight');
-      saturdayHours.classList.add('current-day-highlight');
-    } else { // Sunday
-      statusMessage = 'Cerrado - Abre el lunes a las 9:00';
-      weekdaysHours.classList.remove('current-day-highlight');
-      saturdayHours.classList.remove('current-day-highlight');
-    }
-
-    // Update the status indicator
-    if (isOpen) {
-      statusIndicator.className = 'status-indicator status-open';
-    } else {
-      statusIndicator.className = 'status-indicator status-closed';
-    }
-
-    statusText.textContent = statusMessage;
-  }
-
-  // Update schedule status on page load and every minute
-  updateScheduleStatus();
-  setInterval(updateScheduleStatus, 60000); // Update every minute
-
-
-
+    });
+  });
 </script>
 </body>
 </html>
-
