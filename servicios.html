@@ -70,6 +70,24 @@
             color: var(--light-cyan);
         }
 
+        /* logo link lleva a indiex.html */
+        .logo-link {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none; /* Quita subrayado */
+        }
+
+        .logo-link:hover {
+            transform: scale(1.1); /* aumenta un 10% al pasar el ratón */
+            text-decoration: none;
+            cursor: pointer; /* manita */
+        }
+
+        .logo-link:hover .logo-text {
+            color: var(--white); /* un poco más llamativo al pasar */
+        }
+
         .nav-links {
             display: flex;
             list-style: none;
@@ -806,8 +824,10 @@
 <header>
     <nav>
         <div class="logo-container">
+            <a href="index.html" class="logo-link">
             <img src="photos/logoBlanco.png" alt="VG Detailing Logo" class="logo">
             <div class="logo-text">DETAILING</div>
+            </a>
         </div>
         <ul class="nav-links" id="navLinks">
             <li><a href="index.html">Inicio</a></li>
@@ -987,7 +1007,7 @@
                         <h3 class="service-title"> Faros sin PPF o con PPF </h3>
                         <p class="service-description">Pulido y restauración de faros y aplicación de PPF para proteger pintura y
                             detalles de impactos y rayaduras</p>
-                        <div class="service-price">desde 50€/220€</div>
+                        <div class="service-price">Desde 50€/220€</div>
                     </div>
                     <div class="card-back">
                         <img src="iconos/pulidofaros.png" alt="Detailing Interior" class="service-icon-img">
@@ -1118,7 +1138,7 @@
                         <h3 class="service-title">Tratamiento Antilluvia</h3>
                         <p class="service-description">“Aplicación de productos hidrofóbicos que mejoran visibilidad y
                             repelen agua y suciedad</p>
-                        <div class="service-price">Desd 25€</div>
+                        <div class="service-price">Desde 25€</div>
                     </div>
                     <div class="card-back">
                         <img src="iconos/antillluvia.png" alt="Detailing Interior" class="service-icon-img3">
@@ -1154,14 +1174,14 @@
             <div class="service-card">
                 <div class="card-inner">
                     <div class="card-front">
-                        <i class="fas fa-leaf service-icon"></i>
+                        <img src="iconos/pulirinterior.png" alt="Detailing Interior" class="service-icon-img3">
                         <h3 class="service-title">Pulir Paneles Interior </h3>
                         <p class="service-description"> Pulido de superficies interiores brillantes o lacadas para eliminar
                             marcas y restaurar el acabado </p>
                         <div class="service-price">Desde 40€</div>
                     </div>
                     <div class="card-back">
-                        <i class="fas fa-leaf service-icon"></i>
+                        <img src="iconos/pulirinterior.png" alt="Detailing Interior" class="service-icon-img3">
                         <h3 class="service-title">Pulir Paneles Interior</h3>
                         <p>“Atendemos los detalles que hacen la diferencia dentro de tu coche.
                             Cada panel interior recibe cuidado profesional para mantener textura, color y
