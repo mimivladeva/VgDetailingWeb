@@ -451,16 +451,32 @@
         /* Responsive Design */
         @media (max-width: 768px) {
             .carousel-container {
-                padding: 0 20px;
-                margin: 30px 0;
+                padding: 0;  /* elimina padding lateral que empuja */
+                margin: 20px 0;
+                overflow: hidden; /* 🔑 evita desbordamiento horizontal */
+            }
+
+            .carousel-track {
+                display: flex;
+                gap: 0; /* 🔑 sin huecos entre slides en móvil */
             }
 
             .service-card {
-                /* Reduced min-width and changed to flexible height */
-                min-width: 280px;
-                min-height: 380px;
-                height: auto;
+                flex: 0 0 100%;  /* cada tarjeta ocupa todo el ancho */
+                max-width: 100%;
+                min-width: 100%;
+                margin: 0;       /* sin margen lateral */
             }
+
+            header nav {
+                padding: 0 1rem;
+            }
+
+            .page-header {
+                padding: 6rem 1rem 3rem;
+            }
+
+
 
             .card-inner {
                 /* Adjusted min-height for mobile */
@@ -834,7 +850,7 @@
             <li><a href="servicios.html">Servicios</a></li>
             <li><a href="galeria.html">Galería</a></li>
             <li><a href="sobre-nosotros.html">Sobre Nosotros</a></li>
-
+            <li><a href="blog.html">Blog</a></li>
             <li><a href="cita.html">Cita</a></li>
         </ul>
         <button class="mobile-menu" id="mobileMenu">
@@ -1490,23 +1506,30 @@
         }
     }
 
+
+
     function updateCarousel(category) {
         const track = document.getElementById(`carousel-${category}`);
         const indicators = document.querySelectorAll(`#indicators-${category} .indicator`);
         const currentIndex = carousels[category].currentIndex;
 
-        // Calculate transform based on card width and gap
-        const cardWidth = 350; // min-width of service-card
-        const gap = 32; // 2rem gap
-        const offset = -(currentIndex * (cardWidth + gap));
+        // Medir ancho de la primera tarjeta
+        const firstCard = track.querySelector('.service-card');
+        if (!firstCard) return;
 
+        const cardStyle = window.getComputedStyle(firstCard);
+        const cardWidth = firstCard.offsetWidth;
+        const gap = parseInt(cardStyle.marginRight) || 16;
+
+        const offset = -(currentIndex * (cardWidth + gap));
         track.style.transform = `translateX(${offset}px)`;
 
-        // Update indicators
         indicators.forEach((indicator, index) => {
             indicator.classList.toggle('active', index === currentIndex);
         });
     }
+
+
 
     function moveCarousel(category, direction) {
         const carousel = carousels[category];
