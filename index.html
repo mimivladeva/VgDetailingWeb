@@ -1139,7 +1139,13 @@
              } else if (currentTime >= morningEnd && currentTime < afternoonStart) {
                  statusMessage = 'Cerrado - Abre a las 16:00';
              } else {
-                 statusMessage = 'Cerrado - Abre mañana a las 9:00';
+                 // 🔑 Si es viernes por la tarde → abre lunes
+                 if (currentDay === 5) {
+                     statusMessage = 'Cerrado - Abre el lunes a las 9:00';
+                 } else {
+                     statusMessage = 'Cerrado - Abre mañana a las 9:00';
+
+                 }
              }
 
              // Highlight current weekday
