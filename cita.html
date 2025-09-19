@@ -3,11 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Reservar Cita - VG Detailing</title>
+  <title>Reserva tu Servicio de Detailing - VG Detailing</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
   <style>
     :root {
+      /*  Updated to brand colors */
       --federal-blue: #03045E;
       --honolulu-blue: #0077B6;
       --pacific-cyan: #00BAD8;
@@ -15,18 +17,24 @@
       --light-cyan: #CAF0F8;
       --white: #ffffff;
       --text-dark: #333333;
-      --text-light: #666666;
+      --text-light: #64748b;
+      --border-color: #e2e8f0;
+      --success-color: #10b981;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
     }
+
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
+
     body {
       font-family: 'Montserrat', sans-serif;
       line-height: 1.6;
       color: var(--text-dark);
       overflow-x: hidden;
+      background: var(--light-cyan);
     }
     /* Header */
     header {
@@ -40,6 +48,7 @@
       box-shadow: 0 4px 20px rgba(0,0,0,0.1);
       transition: all 0.3s ease;
     }
+
     nav {
       display: flex;
       justify-content: space-between;
@@ -48,15 +57,18 @@
       margin: 0 auto;
       padding: 0 2rem;
     }
+
     .logo-container {
       display: flex;
       align-items: center;
       gap: 1rem;
     }
+
     .logo {
       height: 40px;
       width: auto;
     }
+
     .logo-text {
       font-size: 1.5rem;
       font-weight: 700;
@@ -84,6 +96,7 @@
       list-style: none;
       gap: 2.5rem;
     }
+
     .nav-links a {
       color: white;
       text-decoration: none;
@@ -92,11 +105,13 @@
       transition: all 0.3s ease;
       position: relative;
     }
+
     .nav-links a:hover,
     .nav-links a.active {
       color: var(--light-cyan);
       transform: translateY(-2px);
     }
+
     .nav-links a::after {
       content: '';
       position: absolute;
@@ -108,10 +123,12 @@
       transition: all 0.3s ease;
       transform: translateX(-50%);
     }
+
     .nav-links a:hover::after,
     .nav-links a.active::after {
       width: 100%;
     }
+
     .mobile-menu {
       display: none;
       background: none;
@@ -120,10 +137,11 @@
       font-size: 1.5rem;
       cursor: pointer;
     }
+
     /* Page Header */
     .page-header {
-      background: linear-gradient(135deg, rgba(3, 4, 94, 0.8), rgba(0, 119, 182, 0.8)), url('/photos/logoVG.png') no-repeat center center;
-      background-size: contain;
+      background: linear-gradient(135deg, rgba(3, 4, 94, 0.8), rgba(0, 119, 182, 0.8)), url('photos/logoVG.png') no-repeat center center;
+      background-size: contain; /* Cambiado de 'cover' a 'contain' */
       background-position: center;
       padding: 8rem 0 4rem;
       text-align: center;
@@ -136,6 +154,7 @@
       margin-bottom: 1rem;
       text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
     }
+
     .page-header p {
       font-size: 1.3rem;
       opacity: 0.9;
@@ -143,136 +162,222 @@
       margin: 0 auto;
     }
     /* Container */
+
     .container {
       max-width: 1400px;
       margin: 0 auto;
       padding: 0 2rem;
     }
-    /* Booking Section */
-    .booking-section {
-      padding: 6rem 0;
-      background: var(--light-cyan);
+
+
+    /* Carousel Styles */
+    .carousel-container {
+      position: relative;
+      margin-bottom: 3rem;
+      background: var(--white);
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: var(--shadow);
     }
-    .booking-content {
-      display: grid;
-      grid-template-columns: 2fr 1fr;
-      gap: 4rem;
-    }
-    .section-title {
+
+    .carousel-header {
       text-align: center;
-      font-size: 2.8rem;
-      font-weight: 700;
-      color: var(--federal-blue);
-      margin-bottom: 1rem;
-    }
-    .section-subtitle {
-      text-align: center;
-      font-size: 1.2rem;
-      color: var(--text-light);
-      margin-bottom: 4rem;
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    /* Service Selection */
-    .service-selection h2 {
-      font-size: 2rem;
-      color: var(--federal-blue);
       margin-bottom: 2rem;
     }
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
-    }
-    .service-card {
-      background: white;
-      border-radius: 15px;
-      padding: 1.5rem;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.1);
-      transition: all 0.3s ease;
-      cursor: pointer;
-      border: 2px solid transparent;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      min-height: 220px;
-    }
-    .service-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.15);
-    }
-    .service-card.selected {
-      border-color: var(--pacific-cyan);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.2);
-    }
-    .service-card input[type="checkbox"] {
-      display: none;
-    }
-    .service-card label {
-      display: block;
-      cursor: pointer;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-    .service-card h3 {
-      font-size: 1.3rem;
-      color: var(--federal-blue);
+
+    .carousel-header h2 {
+      font-size: 1.8rem;
+      color: var(--federal-blue); /*  Updated to brand color */
       margin-bottom: 0.5rem;
     }
+
+    .carousel-wrapper {
+      overflow: hidden;
+      border-radius: 8px;
+    }
+
+    .carousel-track {
+      display: flex;
+      transition: transform 0.3s ease;
+    }
+
+    .carousel-slide {
+      min-width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 1.5rem;
+      padding: 1rem;
+    }
+
+    .service-card {
+      background: var(--white);
+      border: 2px solid var(--border-color);
+      border-radius: 8px;
+      padding: 1.5rem;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .service-card:hover {
+      border-color: var(--pacific-cyan); /*  Updated to brand color */
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+
+    .service-card input[type="radio"] {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    .service-card input[type="checkbox"] {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none; /* evita que moleste al hacer clic */
+    }
+
+    .service-card.selected {
+      border-color: var(--pacific-cyan);
+      background: linear-gradient(135deg, var(--light-cyan) 0%, var(--non-photo-blue) 100%); /*  Updated to brand gradient */
+    }
+
+    .service-card label {
+      cursor: pointer;
+      display: block;
+    }
+
+    .service-card h3 {
+      font-size: 1.2rem;
+      color: var(--federal-blue); /*  Updated to brand color */
+      margin-bottom: 0.5rem;
+    }
+
     .service-card p {
-      font-size: 0.95rem;
       color: var(--text-light);
+      font-size: 0.9rem;
       margin-bottom: 1rem;
-      flex-grow: 1;
+      line-height: 1.4;
     }
+
     .service-card .price {
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: var(--pacific-cyan);
-      text-align: right;
+      font-weight: bold;
+      color: var(--honolulu-blue); /*  Updated to brand color */
+      font-size: 1.1rem;
     }
-    /* Booking Form */
+
+    /* Carousel Navigation */
+    .carousel-nav {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .carousel-btn {
+      background: var(--pacific-cyan); /*  Updated to brand color */
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.3s ease;
+    }
+
+    .carousel-btn:hover {
+      background: var(--honolulu-blue); /*  Updated to brand color */
+    }
+
+    .carousel-btn:disabled {
+      background: var(--text-light);
+      cursor: not-allowed;
+    }
+
+    .carousel-indicators {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .indicator {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--border-color);
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .indicator.active {
+      background: var(--pacific-cyan); /*  Updated to brand color */
+    }
+
+    /* Main Content Layout */
+    .main-content {
+      display: grid;
+      grid-template-columns: 1fr 350px;
+      gap: 2rem;
+      align-items: start;
+      padding: 2rem;
+      background: var(--light-cyan);
+    }
+
+    /* Form Styles */
+    .booking-form {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: var(--shadow);
+    }
+
     .booking-form h2 {
-      font-size: 2rem;
-      color: var(--federal-blue);
-      margin-bottom: 2rem;
+      font-size: 1.5rem;
+      color: var(--federal-blue); /*  Updated to brand color */
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
     }
+
     .form-group {
       margin-bottom: 1.5rem;
     }
+
     .form-group label {
       display: block;
-      margin-bottom: 0.6rem;
-      font-weight: 600;
-      color: var(--federal-blue);
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: var(--text-dark);
     }
+
     .form-group input,
     .form-group select,
     .form-group textarea {
       width: 100%;
-      padding: 0.9rem 1.2rem;
-      border: 1px solid var(--non-photo-blue);
-      border-radius: 8px;
-      font-family: 'Montserrat', sans-serif;
+      padding: 0.75rem;
+      border: 2px solid var(--border-color);
+      border-radius: 6px;
       font-size: 1rem;
-      color: var(--text-dark);
-      background-color: var(--white);
-      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      transition: border-color 0.3s ease;
     }
+
     .form-group input:focus,
     .form-group select:focus,
     .form-group textarea:focus {
-      border-color: var(--honolulu-blue);
-      box-shadow: 0 0 0 3px rgba(0, 119, 182, 0.2);
       outline: none;
+      border-color: var(--pacific-cyan); /*  Updated to brand color */
     }
+
     .form-group textarea {
-      min-height: 120px;
       resize: vertical;
+      min-height: 100px;
     }
+
     .btn {
       padding: 1.2rem 2.5rem;
       border: none;
@@ -285,99 +390,112 @@
       text-decoration: none;
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 0.5rem;
       text-align: center;
       box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    }
-    .btn-primary {
+
       background: linear-gradient(135deg, var(--pacific-cyan), var(--honolulu-blue));
       color: white;
       width: 100%;
-      justify-content: center;
-      margin-top: 2rem;
     }
-    .btn-primary:hover {
+    .btn:hover {
       background: linear-gradient(135deg, var(--honolulu-blue), var(--federal-blue));
       transform: translateY(-3px);
       box-shadow: 0 8px 25px rgba(0,0,0,0.3);
     }
-    .btn-primary:disabled {
+    .btn:disabled {
       background: #ccc;
       cursor: not-allowed;
       transform: none;
     }
-    /* Loading spinner */
-    .loading-spinner {
-      display: none;
-      width: 20px;
-      height: 20px;
-      border: 2px solid #ffffff;
-      border-top: 2px solid transparent;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-    }
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-    /* Order Summary */
+
+
+
+    /* Order Summary Styles */
     .order-summary {
-      background: white;
-      border-radius: 15px;
-      padding: 2.5rem;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+      background: var(--white);
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: var(--shadow);
       position: sticky;
-      top: 100px;
-      align-self: start;
+      top: 2rem;
     }
+
     .order-summary h2 {
-      font-size: 1.8rem;
-      color: var(--federal-blue);
+      font-size: 1.5rem;
+      color: var(--federal-blue); /*  Updated to brand color */
       margin-bottom: 1.5rem;
-      border-bottom: 2px solid var(--non-photo-blue);
-      padding-bottom: 1rem;
+      text-align: center;
     }
+
     .summary-item {
       display: flex;
       justify-content: space-between;
-      margin-bottom: 1rem;
-      font-size: 1.1rem;
-      color: var(--text-dark);
+      align-items: center;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border-color);
     }
-    .summary-item span:first-child {
-      font-weight: 500;
+
+    .summary-item:last-child {
+      border-bottom: none;
     }
+
     .summary-total {
       display: flex;
       justify-content: space-between;
-      margin-top: 1.5rem;
-      padding-top: 1.5rem;
-      border-top: 2px dashed var(--non-photo-blue);
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--federal-blue);
-    }
-    .summary-total span:last-child {
-      color: var(--pacific-cyan);
-    }
-    /* Success/Error Messages */
-    .message {
-      padding: 1rem;
-      border-radius: 8px;
-      margin-bottom: 1rem;
-      display: none;
-    }
-    .message.success {
-      background-color: #d4edda;
-      color: #155724;
-      border: 1px solid #c3e6cb;
-    }
-    .message.error {
-      background-color: #f8d7da;
-      color: #721c24;
-      border: 1px solid #f5c6cb;
+      align-items: center;
+      padding: 1rem 0;
+      border-top: 2px solid var(--border-color);
+      font-weight: bold;
+      font-size: 1.1rem;
+      color: var(--honolulu-blue); /*  Updated to brand color */
     }
 
+    .empty-selection {
+      text-align: center;
+      color: var(--text-light);
+      font-style: italic;
+      padding: 2rem 0;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+      .main-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .order-summary {
+        position: static;
+      }
+
+      .nav-links {
+        position: fixed;
+        top: 70px;
+        left: -100%;
+        width: 100%;
+        height: calc(100vh - 70px);
+        background: var(--federal-blue);
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        padding-top: 2rem;
+        transition: left 0.3s ease;
+      }
+
+      .nav-links.active {
+        left: 0;
+      }
+
+      .mobile-menu {
+        display: block;
+      }
+    }
+
+
+
+    /* Footer */
     /* Footer */
     footer {
       background: var(--federal-blue);
@@ -404,16 +522,58 @@
       opacity: 0.8;
     }
 
+    footer .footer-section a,
+    footer .footer-section a:visited {
+      color: #fff;
+      text-decoration: none;
+    }
+    footer .footer-section a:hover,
+    footer .footer-section a:focus {
+      color: var(--light-cyan);
+      text-decoration: underline;
+    }
+
     .social-links {
       display: flex;
       gap: 1rem;
       margin-top: 1.5rem;
     }
-    footer .footer-section a,
-    footer .footer-section a:visited { color:#fff; text-decoration:none; }
-    footer .footer-section a:hover,
-    footer .footer-section a:focus { color:var(--light-cyan); text-decoration:underline; }
 
+    .social-links a {
+      width: 45px;
+      height: 45px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+    }
+
+    .social-links a:hover {
+      background: var(--pacific-cyan);
+      transform: translateY(-3px);
+    }
+
+    /* Schedule Styles */
+    .schedule-status {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+
+    .status-indicator {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
 
     .status-open {
       background: #4CAF50;
@@ -422,6 +582,50 @@
     .status-closed {
       background: #f44336;
     }
+
+    @keyframes pulse {
+      0% { opacity: 1; }
+      50% { opacity: 0.5; }
+      100% { opacity: 1; }
+    }
+
+    .schedule-hours {
+      text-align: left;
+      margin-top: 1rem;
+    }
+
+    .weekdays-hours {
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      opacity: 0.9;
+    }
+
+    .schedule-divider {
+      height: 1px;
+      background: rgba(255,255,255,0.3);
+      margin: 1rem 0;
+    }
+
+    .saturday-hours {
+      font-size: 0.9rem;
+      opacity: 0.8;
+      font-style: italic;
+    }
+
+    .current-day-highlight {
+      background: rgba(0, 186, 216, 0.2);
+      border-radius: 5px;
+      padding: 0.5rem;
+      margin: -0.2rem;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      color: var(--non-photo-blue);
+    }
+
 
 
     .social-links a {
@@ -468,7 +672,6 @@
     .status-closed {
       background: #f44336;
     }
-
     @keyframes pulse {
       0% { opacity: 1; }
       50% { opacity: 0.5; }
@@ -512,66 +715,36 @@
       border-top: 1px solid rgba(255,255,255,0.1);
       color: var(--non-photo-blue);
     }
-    /* Responsive Design */
-    @media (max-width: 1024px) {
-      .booking-content {
-        grid-template-columns: 1fr;
-      }
-      .order-summary {
-        position: static;
-        margin-top: 3rem;
-      }
-    }
+
     @media (max-width: 768px) {
-      .nav-links {
-        display: none;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 100%;
-        background: var(--federal-blue);
-        flex-direction: column;
-        padding: 2rem;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-      }
-      .nav-links.active {
-        display: flex;
-      }
-      .mobile-menu {
-        display: block;
-      }
-      .page-header h1 {
-        font-size: 2.5rem;
-      }
-      .section-title {
-        font-size: 2.2rem;
-      }
-      .services-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-    @media (max-width: 480px) {
       .container {
-        padding: 0 1rem;
+        padding: 1rem;
       }
-      .page-header h1 {
+
+      .carousel-slide {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(4, 1fr);
+      }
+
+      .header h1 {
         font-size: 2rem;
       }
-      .btn {
-        padding: 1rem 2rem;
-        font-size: 1rem;
+
+      .service-card {
+        padding: 1rem;
       }
     }
   </style>
 </head>
 <body>
+<!--  Added navigation header -->
 <!-- Header -->
 <header>
-  <nav>
+  <nav class="navbar">
     <div class="logo-container">
       <a href="index.html" class="logo-link">
-      <img src="/photos/logoBlanco.png" alt="VG Detailing Logo" class="logo">
-      <div class="logo-text">DETAILING</div>
+        <img src="photos/logoBlanco.png" alt="VG Detailing Logo" class="logo">
+        <div class="logo-text">DETAILING</div>
       </a>
     </div>
     <ul class="nav-links" id="navLinks">
@@ -588,6 +761,7 @@
   </nav>
 </header>
 
+
 <!-- Page Header -->
 <section class="page-header">
   <div class="container">
@@ -596,97 +770,244 @@
   </div>
 </section>
 
-<!-- Booking Section -->
-<section class="booking-section">
-  <div class="container">
-    <h2 class="section-title">Tu Cita de Detailing</h2>
-    <p class="section-subtitle">Elige el servicio perfecto para tu vehículo y déjanos el resto a nosotros.</p>
-    <div class="booking-content">
-      <div class="main-booking-area">
-        <div class="service-selection">
-          <h2>1. Selecciona tu Servicio</h2>
-          <div class="services-grid">
-            <div class="service-card" data-service-id="detailing-exterior">
-              <label>
-                <input type="checkbox" name="service" value="Detailing Exterior" data-price="40">
-                <h3>Detailing Exterior</h3>
-                <p>Servicio completo de limpieza exterior que incluye prelavado sin contacto, lavado a mano con productos premium Gyeon y aplicación de sellador cerámico.</p>
-                <div class="price">Desde 40€</div>
-              </label>
-            </div>
-            <div class="service-card" data-service-id="detailing-interior">
-              <label>
-                <input type="checkbox" name="service" value="Detailing Interior" data-price="50">
-                <h3>Detailing Interior</h3>
-                <p>Limpieza profunda y desinfección completa del interior sin siliconas, con tratamiento especializado para textiles, cuero y alcántara.</p>
-                <div class="price">Desde 50€</div>
-              </label>
-            </div>
-            <div class="service-card" data-service-id="pulido">
-              <label>
-                <input type="checkbox" name="service" value="Pulido Profesional" data-price="150">
-                <h3>Pulido Profesional</h3>
-                <p>Proceso profesional de corrección de pintura que elimina imperfecciones, rayones y swirls, devolviendo el brillo original a tu vehículo.</p>
-                <div class="price">Desde 150€</div>
-              </label>
-            </div>
-          </div>
-        </div>
-        <div class="booking-form">
-          <h2>2. Tus Datos y Fecha</h2>
-          <div id="messageContainer"></div>
-          <form id="bookingForm">
-            <div class="form-group">
-              <label for="name">Nombre Completo</label>
-              <input type="text" id="name" name="name" required>
-            </div>
-            <div class="form-group">
-              <label for="email">Email</label>
-              <input type="email" id="email" name="email" required>
-            </div>
-            <div class="form-group">
-              <label for="phone">Teléfono</label>
-              <input type="tel" id="phone" name="phone" required>
-            </div>
 
-            <div class="form-group">
-              <label for="car-model">Marca y Modelo del Vehículo</label>
-              <input type="text" id="car-model" name="car-model" placeholder="Ej: Honda Civic 2020" required>
-            </div>
-            <div class="form-group">
-              <label for="message">Mensaje Adicional (Opcional)</label>
-              <textarea id="message" name="message" placeholder="¿Alguna instrucción especial o pregunta?"></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary" id="submitBtn">
-              <span class="loading-spinner" id="loadingSpinner"></span>
-              <i class="fab fa-whatsapp" id="submitIcon"></i>
-              <span id="submitText">Enviar por WhatsApp</span>
-            </button>
-          </form>
+
+<!-- Carousel de Servicios -->
+<div class="carousel-container">
+  <div class="carousel-header">
+    <h2><i class="fas fa-list"></i> 1. Elige tu Servicio</h2>
+  </div>
+
+  <div class="carousel-wrapper">
+    <div class="carousel-track" id="carouselTrack">
+      <!-- ... existing code ... -->
+      <!-- Slide 1 -->
+      <div class="carousel-slide">
+        <div class="service-card" data-service-id="interior-detailing">
+          <input type="checkbox" name="service" value="Detailing Interior" data-price="50" id="interior-detailing">
+          <label for="interior-detailing">
+            <h3>Detailing Interior</h3>
+            <p>Limpieza profunda de tapicerías, plásticos y superficies, aspirado profesional y neutralización de olores.</p>
+            <div class="price">Desde 50€</div>
+          </label>
+        </div>
+        <div class="service-card" data-service-id="exterior-detailing">
+          <input type="checkbox" name="service" value="Detailing Exterior" data-price="50" id="exterior-detailing">
+          <label for="exterior-detailing">
+            <h3>Detailing Exterior</h3>
+            <p>Lavado premium, descontaminado y tratamiento de pintura para devolver brillo y protección.</p>
+            <div class="price">Desde 50€</div>
+          </label>
+        </div>
+        <div class="service-card" data-service-id="engine-cleaning">
+          <input type="checkbox" name="service" value="Limpieza Motor" data-price="40" id="engine-cleaning">
+          <label for="engine-cleaning">
+            <h3>Limpieza Motor</h3>
+            <p>Limpieza segura de vano motor, eliminando grasa y suciedad sin dañar componentes.</p>
+            <div class="price">Desde 40€</div>
+          </label>
+        </div>
+        <div class="service-card" data-service-id="wax-polish">
+          <input type="checkbox" name="service" value="Encerado y Pulido" data-price="120" id="wax-polish">
+          <label for="wax-polish">
+            <h3>Encerado y Pulido</h3>
+            <p>Pulido profesional para eliminar microarañazos y aplicación de cera de alta calidad.</p>
+            <div class="price">Desde 120€</div>
+          </label>
         </div>
       </div>
-      <div class="order-summary">
-        <h2>Resumen de tu Cita</h2>
-        <div class="summary-item">
-          <span>Servicios Seleccionados:</span>
-          <span id="summaryService">Ninguno</span>
+
+      <!-- Slide 2 -->
+      <div class="carousel-slide">
+        <div class="service-card" data-service-id="paint-correction">
+          <input type="checkbox" name="service" value="Corrección de Pintura" data-price="190" id="paint-correction">
+          <label for="paint-correction">
+            <h3>Corrección de Pintura</h3>
+            <p>Eliminación de swirls y hologramas, dejando un acabado espejo y duradero.</p>
+            <div class="price">Desde 190€</div>
+          </label>
         </div>
-        <div class="summary-item">
-          <span>Precios:</span>
-          <span id="summaryPrice">0€</span>
+        <div class="service-card" data-service-id="headlight-restoration">
+          <input type="checkbox"name="service" value="Restauración de Faros" data-price="50" id="headlight-restoration">
+          <label for="headlight-restoration">
+            <h3>Restauración de Faros</h3>
+            <p>Pulido de faros opacos y opción de protección con PPF para máxima duración.</p>
+            <div class="price">Desde 50€/220€</div>
+          </label>
         </div>
-        <div class="summary-total">
-          <span>Total Estimado:</span>
-          <span id="summaryTotal">0€</span>
+        <div class="service-card" data-service-id="chrome-polish">
+          <input type="checkbox" name="service" value="Pulir Cromados" data-price="30" id="chrome-polish">
+          <label for="chrome-polish">
+            <h3>Pulir Cromados</h3>
+            <p>Pulido especializado en cromados, eliminando marcas y restaurando acabado espejo.</p>
+            <div class="price">Desde 30€</div>
+          </label>
         </div>
-        <p style="font-size: 0.9rem; color: var(--text-light); margin-top: 1.5rem;">
-          *Los precios son estimados y pueden variar según la condición del vehículo y servicios adicionales solicitados en persona.
-        </p>
+        <div class="service-card" data-service-id="exhaust-polish">
+          <input type="checkbox" name="service" value="Pulir Escape" data-price="30" id="exhaust-polish">
+          <label for="exhaust-polish">
+            <h3>Pulir Escape</h3>
+            <p>Pulido y limpieza profunda de colas de escape metálicas, eliminando hollín y oxidación.</p>
+            <div class="price">Desde 30€</div>
+          </label>
+        </div>
+      </div>
+
+      <!-- Slide 3 -->
+      <div class="carousel-slide">
+        <div class="service-card" data-service-id="body-ceramic">
+          <input type="checkbox" name="service" value="Tratamiento Carrocería" data-price="170" id="body-ceramic">
+          <label for="body-ceramic">
+            <h3>Tratamiento Carrocería</h3>
+            <p>Protección con cera, grafeno o coating cerámico para máxima resistencia y brillo.</p>
+            <div class="price">Desde 60€/170€</div>
+          </label>
+        </div>
+        <div class="service-card" data-service-id="wheels-ceramic">
+          <input type="checkbox" name="service" value="Cerámico Llantas" data-price="40" id="wheels-ceramic">
+          <label for="wheels-ceramic">
+            <h3>Cerámico Llantas</h3>
+            <p>Protección cerámica contra polvo de freno, suciedad y desgaste.</p>
+            <div class="price">Desde 40€</div>
+          </label>
+        </div>
+        <div class="service-card" data-service-id="rain-repellent">
+          <input type="checkbox" name="service" value="Tratamiento Antilluvia" data-price="25" id="rain-repellent">
+          <label for="rain-repellent">
+            <h3>Tratamiento Antilluvia</h3>
+            <p>Aplicación de productos hidrofóbicos para mejorar visibilidad y repeler agua.</p>
+            <div class="price">Desde 25€</div>
+          </label>
+        </div>
+        <div class="service-card" data-service-id="piano-black-exterior">
+          <input type="checkbox" name="service" value="Pulir Negro Piano Exterior" data-price="40" id="piano-black-exterior">
+          <label for="piano-black-exterior">
+            <h3>Pulir Negro Piano Exterior</h3>
+            <p>Pulido especializado en negro piano exterior, eliminando microarañazos.</p>
+            <div class="price">Desde 40€</div>
+          </label>
+        </div>
+      </div>
+
+      <!-- Slide 4 -->
+      <div class="carousel-slide">
+        <div class="service-card" data-service-id="interior-panels-polish">
+          <input type="checkbox" name="service" value="Pulir Paneles Interior" data-price="40" id="interior-panels-polish">
+          <label for="interior-panels-polish">
+            <h3>Pulir Paneles Interior</h3>
+            <p>Pulido de superficies interiores brillantes o lacadas, restaurando acabado.</p>
+            <div class="price">Desde 40€</div>
+          </label>
+        </div>
+        <div class="service-card" data-service-id="window-tint">
+          <input type="checkbox" name="service" value="Tintado de Lunas" data-price="130" id="window-tint">
+          <label for="window-tint">
+            <h3>Tintado de Lunas</h3>
+            <p>Instalación de láminas de alta calidad para confort, privacidad y protección solar.</p>
+            <div class="price">Desde 130€</div>
+          </label>
+        </div>
+        <div class="service-card" data-service-id="darken-headlights">
+          <input type="checkbox" name="service" value="Oscurecer Faros" data-price="70" id="darken-headlights">
+          <label for="darken-headlights">
+            <h3>Oscurecer Faros</h3>
+            <p>Aplicación de vinilos o tratamientos para un acabado elegante y moderno.</p>
+            <div class="price">Desde 70€</div>
+          </label>
+        </div>
+        <div class="service-card" data-service-id="roof-upholstery">
+          <input type="checkbox" name="service" value="Retapizado de Techos" data-price="130" id="roof-upholstery">
+          <label for="roof-upholstery">
+            <h3>Retapizado de Techos</h3>
+            <p>Renovación de tapizados en techos y paneles para un interior impecable.</p>
+            <div class="price">Desde 130€</div>
+          </label>
+        </div>
+      </div>
+
+      <!-- Slide 5 -->
+      <div class="carousel-slide">
+        <div class="service-card" data-service-id="panel-upholstery">
+          <input type="checkbox" name="service" value="Retapizado de Paneles" data-price="40" id="panel-upholstery">
+          <label for="panel-upholstery">
+            <h3>Retapizado de Paneles</h3>
+            <p>Revestimiento profesional de paneles interiores para un acabado elegante.</p>
+            <div class="price">Desde 40€</div>
+          </label>
+        </div>
+        <!-- Espacios vacíos para mantener la estructura -->
+        <div></div>
+        <div></div>
+        <div></div>
       </div>
     </div>
   </div>
-</section>
 
+  <div class="carousel-nav">
+    <button class="carousel-btn" id="prevBtn">
+      <i class="fas fa-chevron-left"></i>
+    </button>
+    <div class="carousel-indicators" id="indicators"></div>
+    <button class="carousel-btn" id="nextBtn">
+      <i class="fas fa-chevron-right"></i>
+    </button>
+  </div>
+</div>
+
+<!-- Contenido Principal -->
+<div class="main-content">
+  <!-- Formulario de Reserva -->
+  <div class="booking-form">
+    <h2><i class="fas fa-calendar-alt"></i> 2. Tus Datos y Fecha</h2>
+    <form id="bookingForm">
+      <div class="form-group">
+        <label for="name">Nombre Completo</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      <div class="form-group">
+        <label for="phone">Teléfono</label>
+        <input type="tel" id="phone" name="phone" required>
+      </div>
+
+
+      <div class="form-group">
+        <label for="car-model">Marca y Modelo del Vehículo</label>
+        <input type="text" id="car-model" name="car-model" placeholder="Ej: Honda Civic 2020" required>
+      </div>
+      <div class="form-group">
+        <label for="message">Mensaje Adicional (Opcional)</label>
+        <textarea id="message" name="message" placeholder="¿Alguna instrucción especial o pregunta?"></textarea>
+      </div>
+      <input type="hidden" name="service" id="hidden-service">
+      <input type="hidden" name="price" id="hidden-price">
+      <input type="hidden" name="title" id="hidden-title">
+
+      <button type="submit" class="btn">
+        <i class="fab fa-whatsapp"></i>
+        Confirmar Reserva por WhatsApp
+      </button>
+    </form>
+  </div>
+
+  <!-- Resumen del Pedido -->
+  <div class="order-summary">
+    <h2><i class="fas fa-receipt"></i> Resumen de tu Cita</h2>
+    <div id="summaryContent">
+      <div class="empty-selection">
+        <i class="fas fa-hand-pointer" style="font-size: 2rem; color: var(--text-light); margin-bottom: 1rem;"></i>
+        <p>Selecciona un servicio para ver el resumen</p>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+<!-- Footer -->
 <!-- Footer -->
 <footer>
   <div class="container">
@@ -723,8 +1044,6 @@
           </div>
         </div>
       </div>
-
-
     </div>
 
     <div class="footer-bottom">
@@ -733,281 +1052,243 @@
   </div>
 </footer>
 
+
 <script>
-  // Mobile menu toggle
+  // ... existing code ...
+  // Carousel functionality
+  let currentSlide = 0;
+  const slides = document.querySelectorAll('.carousel-slide');
+  const totalSlides = slides.length;
+  const track = document.getElementById('carouselTrack');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const indicatorsContainer = document.getElementById('indicators');
+
+  // Create indicators
+  for (let i = 0; i < totalSlides; i++) {
+    const indicator = document.createElement('div');
+    indicator.className = 'indicator';
+    if (i === 0) indicator.classList.add('active');
+    indicator.addEventListener('click', () => goToSlide(i));
+    indicatorsContainer.appendChild(indicator);
+  }
+
+  const indicators = document.querySelectorAll('.indicator');
+
+  function updateCarousel() {
+    track.style.transform = `translateX(-${currentSlide * 100}%)`;
+
+    // Update indicators
+    indicators.forEach((indicator, index) => {
+      indicator.classList.toggle('active', index === currentSlide);
+    });
+
+    // Update navigation buttons
+    prevBtn.disabled = currentSlide === 0;
+    nextBtn.disabled = currentSlide === totalSlides - 1;
+  }
+
+  function goToSlide(slideIndex) {
+    currentSlide = slideIndex;
+    updateCarousel();
+  }
+
+  function nextSlide() {
+    if (currentSlide < totalSlides - 1) {
+      currentSlide++;
+      updateCarousel();
+    }
+  }
+
+  function prevSlide() {
+    if (currentSlide > 0) {
+      currentSlide--;
+      updateCarousel();
+    }
+  }
+
+  prevBtn.addEventListener('click', prevSlide);
+  nextBtn.addEventListener('click', nextSlide);
+
+  // Initialize carousel
+  updateCarousel();
+
+  // Service selection functionality
+  // Service selection functionality (ahora con múltiples servicios)
+  const serviceCards = document.querySelectorAll('.service-card');
+  const summaryContent = document.getElementById('summaryContent');
+  let selectedServices = [];
+
+  serviceCards.forEach(card => {
+    const checkbox = card.querySelector('input[type="checkbox"]');
+
+    // clic en toda la tarjeta
+    card.addEventListener('click', function (e) {
+      if (e.target.tagName !== 'INPUT') {
+        checkbox.checked = !checkbox.checked;
+      }
+
+      // alternar clase visual
+      card.classList.toggle('selected', checkbox.checked);
+
+      // actualizar resumen
+      updateSummary();
+    });
+  });
+
+  function updateSummary() {
+    selectedServices = [];
+    let total = 0;
+
+    document.querySelectorAll('input[name="service"]:checked').forEach(checkbox => {
+      const serviceName = checkbox.value;
+      const servicePrice = parseFloat(checkbox.getAttribute('data-price'));
+      selectedServices.push({name: serviceName, price: servicePrice});
+      total += servicePrice;
+    });
+
+    if (selectedServices.length === 0) {
+      summaryContent.innerHTML = `
+      <div class="empty-selection">
+        <i class="fas fa-hand-pointer" style="font-size: 2rem; color: var(--text-light); margin-bottom: 1rem;"></i>
+        <p>Selecciona al menos un servicio para ver el resumen</p>
+      </div>
+    `;
+      return;
+    }
+
+    let summaryHtml = "";
+    selectedServices.forEach(service => {
+      summaryHtml += `
+      <div class="summary-item">
+        <span>${service.name}</span>
+        <span>${service.price}€</span>
+      </div>
+    `;
+    });
+
+    summaryHtml += `
+    <div class="summary-total">
+      <span>Total a Pagar:</span>
+      <span>${total}€</span>
+    </div>
+    <p style="font-size: 0.9rem; color: var(--text-light); margin-top: 1.5rem;">
+      *El precio final puede variar según la condición del vehículo y servicios adicionales solicitados en persona.
+    </p>
+  `;
+
+    summaryContent.innerHTML = summaryHtml;
+  }
+
+
+  // Generate time options
+  function generateTimeOptions() {
+    const timeSelect = document.getElementById('time');
+    const times = [
+      '09:00', '09:30', '10:00', '10:30', '11:00', '11:30',
+      '12:00', '12:30', '13:00', '13:30', '14:00', '14:30',
+      '15:00', '15:30', '16:00', '16:30', '17:00', '17:30'
+    ];
+
+    times.forEach(time => {
+      const option = document.createElement('option');
+      option.value = time;
+      option.textContent = time;
+      timeSelect.appendChild(option);
+    });
+  }
+
+  // Set minimum date to today
+  function setMinDate() {
+    const dateInput = document.getElementById('date');
+    const today = new Date().toISOString().split('T')[0];
+    dateInput.min = today;
+  }
+
+  //  Updated form submission to use WhatsApp
+  document.getElementById('bookingForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const selectedServiceRadio = document.querySelector('input[name="service"]:checked');
+    if (!selectedServiceRadio) {
+      alert('Por favor, selecciona un servicio antes de continuar.');
+      return;
+    }
+
+    // Get form data
+    const formData = new FormData(this);
+    const nombre = formData.get("name");
+    const email = formData.get("email");
+    const telefono = formData.get("phone");
+
+    const coche = formData.get("car-model");
+    const notas = formData.get("message") || "—";
+
+    // WhatsApp business number
+    const whatsappNegocio = "34642977133";
+    // Crear mensaje con todos los servicios
+    let serviciosTexto = selectedServices.map(s => `• ${s.name}: ${s.price}€`).join("\n");
+    let total = selectedServices.reduce((acc, s) => acc + s.price, 0);
+    // Create WhatsApp message
+    const texto = `📝 Nueva solicitud de cita
+• Nombre: ${nombre}
+• Teléfono: ${telefono}
+• Email: ${email}
+• Servicios: ${serviciosTexto}
+• Total estimado: ${total}€
+
+• Vehículo: ${coche}
+• Notas: ${notas}`;
+
+    // Open WhatsApp with pre-filled message
+    const whatsappUrl = `https://wa.me/${whatsappNegocio}?text=${encodeURIComponent(texto)}`;
+    window.open(whatsappUrl, '_blank');
+  });
+
+  //  Added mobile menu functionality
   const mobileMenu = document.getElementById('mobileMenu');
   const navLinks = document.getElementById('navLinks');
+
   mobileMenu.addEventListener('click', () => {
     navLinks.classList.toggle('active');
   });
 
-  // Smooth scrolling for navigation links
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-      e.preventDefault();
-      const target = document.querySelector(this.getAttribute('href'));
-      if (target) {
-        target.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
-        });
-      }
-      navLinks.classList.remove('active');
-    });
-  });
+  // Initialize
+  generateTimeOptions();
+  setMinDate();
 
-  // Header scroll effect
-  window.addEventListener('scroll', () => {
-    const header = document.querySelector('header');
-    if (window.scrollY > 100) {
-      header.style.background = 'linear-gradient(135deg, var(--pacific-cyan), var(--honolulu-blue), var(--federal-blue))';
-      header.style.backdropFilter = 'blur(10px)';
-    } else {
-      header.style.background = 'linear-gradient(135deg, var(--pacific-cyan), var(--honolulu-blue), var(--federal-blue))';
-      header.style.backdropFilter = 'none';
-    }
-  });
-
-  // Booking form logic
-  const serviceCheckboxes = document.querySelectorAll('input[name="service"]');
-  const serviceCards = document.querySelectorAll('.service-card');
-  const summaryService = document.getElementById('summaryService');
-  const summaryPrice = document.getElementById('summaryPrice');
-  const summaryTotal = document.getElementById('summaryTotal');
-  const bookingForm = document.getElementById('bookingForm');
-  const submitBtn = document.getElementById('submitBtn');
-  const loadingSpinner = document.getElementById('loadingSpinner');
-  const submitIcon = document.getElementById('submitIcon');
-  const submitText = document.getElementById('submitText');
-  const messageContainer = document.getElementById('messageContainer');
-
-  let selectedServices = [];
-  let totalPrice = 0;
-
-  // Número de WhatsApp del negocio (sin el +)
-  const WHATSAPP_NUMBER = '34642977133';
-
-  function updateSummary() {
-    if (selectedServices.length > 0) {
-      const serviceNames = selectedServices.map(s => s.name).join(', ');
-      const servicePrices = selectedServices.map(s => `${s.name}: desde ${s.price}€`).join('\n');
-
-      summaryService.textContent = serviceNames;
-      summaryPrice.innerHTML = servicePrices.replace(/\n/g, '<br>');
-      summaryTotal.textContent = `Desde ${totalPrice}€`;
-    } else {
-      summaryService.textContent = 'Ninguno';
-      summaryPrice.textContent = '0€';
-      summaryTotal.textContent = '0€';
-    }
-  }
-
-  function showMessage(message, type) {
-    messageContainer.innerHTML = `<div class="message ${type}">${message}</div>`;
-    messageContainer.querySelector('.message').style.display = 'block';
-    setTimeout(() => {
-      messageContainer.innerHTML = '';
-    }, 5000);
-  }
-
-  function setLoading(isLoading) {
-    if (isLoading) {
-      submitBtn.disabled = true;
-      loadingSpinner.style.display = 'inline-block';
-      submitIcon.style.display = 'none';
-      submitText.textContent = 'Abriendo WhatsApp...';
-    } else {
-      submitBtn.disabled = false;
-      loadingSpinner.style.display = 'none';
-      submitIcon.style.display = 'inline-block';
-      submitText.textContent = 'Enviar por WhatsApp';
-    }
-  }
-
-  function formatDate(dateString) {
-    const date = new Date(dateString);
-    const options = {
-      weekday: 'long',
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    };
-    return date.toLocaleDateString('es-ES', options);
-  }
-
-  function formatTime(timeString) {
-    const [hours, minutes] = timeString.split(':');
-    return `${hours}:${minutes}`;
-  }
-
-  function createWhatsAppMessage(data) {
-    const servicesText = data.services.map(s => `• ${s.name}: desde ${s.price}€`).join('\n');
-
-    const message = `🚗 *NUEVA SOLICITUD DE CITA - VG DETAILING*
-
-👤 *DATOS DEL CLIENTE:*
-• Nombre: ${data.name}
-• Email: ${data.email}
-• Teléfono: ${data.phone}
-
-🔧 *SERVICIOS SOLICITADOS:*
-${servicesText}
-
-• Precio total estimado: desde ${data.totalPrice}€
-• Vehículo: ${data.carModel}
-
-
-💬 *MENSAJE ADICIONAL:*
-${data.message || 'Sin mensaje adicional'}
-
----
-*Solicitud enviada desde la web de VG Detailing*
-*Fecha de solicitud: ${new Date().toLocaleString('es-ES')}*`;
-
-    return encodeURIComponent(message);
-  }
-
-  serviceCheckboxes.forEach(checkbox => {
-    checkbox.addEventListener('change', (event) => {
-      const serviceName = event.target.value;
-      const servicePrice = parseFloat(event.target.dataset.price);
-      const serviceCard = event.target.closest('.service-card');
-
-      if (event.target.checked) {
-        selectedServices.push({ name: serviceName, price: servicePrice });
-        serviceCard.classList.add('selected');
-      } else {
-        selectedServices = selectedServices.filter(s => s.name !== serviceName);
-        serviceCard.classList.remove('selected');
-      }
-
-      totalPrice = selectedServices.reduce((sum, service) => sum + service.price, 0);
-      updateSummary();
-    });
-  });
-
-  // Reemplaza el bloque que tenías para los clics en .service-card por este:
-  serviceCards.forEach(card => {
-    card.addEventListener('click', (e) => {
-      // Si el clic viene del propio checkbox, dejamos que el evento 'change' haga su trabajo
-      if (e.target.tagName.toLowerCase() === 'input') return;
-
-      // Si el clic fue dentro del label, no hacemos nada extra (el label ya alterna el checkbox)
-      if (e.target.closest('label')) return;
-
-      // Clic en otra parte de la tarjeta: alternamos el checkbox manualmente
-      const checkbox = card.querySelector('input[type="checkbox"]');
-      if (!checkbox) return;
-      checkbox.checked = !checkbox.checked;
-      // Disparamos el 'change' para actualizar arrays, estilos y totales
-      checkbox.dispatchEvent(new Event('change', { bubbles: true }));
-    });
-  });
-
-  // Por si acaso, evita duplicados y recalcula siempre el total al cambiar cualquier checkbox
-  serviceCheckboxes.forEach(checkbox => {
-    checkbox.addEventListener('change', (event) => {
-      const serviceName = event.target.value;
-      const servicePrice = parseFloat(event.target.dataset.price || '0');
-      const serviceCard = event.target.closest('.service-card');
-
-      if (event.target.checked) {
-        // Evita meter duplicados si se diera el caso
-        const exists = selectedServices.some(s => s.name === serviceName);
-        if (!exists) selectedServices.push({ name: serviceName, price: servicePrice });
-        serviceCard?.classList.add('selected');
-      } else {
-        selectedServices = selectedServices.filter(s => s.name !== serviceName);
-        serviceCard?.classList.remove('selected');
-      }
-
-      totalPrice = selectedServices.reduce((sum, s) => sum + (Number.isFinite(s.price) ? s.price : 0), 0);
-      updateSummary();
-    });
-  });
-  bookingForm.addEventListener('submit', (event) => {
-    event.preventDefault();
-
-    if (selectedServices.length === 0) {
-      showMessage('Por favor, selecciona al menos un servicio antes de confirmar tu reserva.', 'error');
-      return;
-    }
-
-    setLoading(true);
-
-    const formData = new FormData(bookingForm);
-    const data = {
-      services: selectedServices,
-      totalPrice: totalPrice,
-      name: formData.get('name'),
-      email: formData.get('email'),
-      phone: formData.get('phone'),
-      carModel: formData.get('car-model'),
-      message: formData.get('message') || 'Sin mensaje adicional'
-    };
-
-    try {
-      const whatsappMessage = createWhatsAppMessage(data);
-      // usa api.whatsapp.com (mejor compatibilidad escritorio/móvil)
-      const whatsappURL = `https://api.whatsapp.com/send?phone=${WHATSAPP_NUMBER}&text=${whatsappMessage}`;
-
-      const serviceNames = selectedServices.map(s => s.name).join(', ');
-
-      // Mensaje sin fecha/hora
-      showMessage(`¡Perfecto, ${data.name}! Se abrirá WhatsApp con tu solicitud para "${serviceNames}".`, 'success');
-
-      // Abrir inmediatamente (evita bloqueo de popups)
-      const newWin = window.open(whatsappURL, '_blank');
-
-      // Si el navegador lo bloquea, dejamos un enlace de respaldo clickable
-      if (!newWin || newWin.closed || typeof newWin.closed === 'undefined') {
-        messageContainer.innerHTML = `
-        <div class="message success" style="display:block">
-          Si no se abrió automáticamente, haz clic aquí:
-          <a href="${whatsappURL}" target="_blank" rel="noopener">Enviar por WhatsApp</a>
-        </div>`;
-      }
-
-      // Reset inmediato (ya no esperamos 2s)
-      bookingForm.reset();
-      serviceCards.forEach(card => card.classList.remove('selected'));
-      selectedServices = [];
-      totalPrice = 0;
-      updateSummary();
-
-    } catch (error) {
-      console.error('Error:', error);
-      showMessage('Hubo un problema al preparar el mensaje de WhatsApp. Por favor, inténtalo de nuevo o contáctanos directamente.', 'error');
-    } finally {
-      setLoading(false);
+  // Keyboard navigation for carousel
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowLeft') {
+      prevSlide();
+    } else if (e.key === 'ArrowRight') {
+      nextSlide();
     }
   });
 
 
-
+  // Schedule Status Function - Simplified
   // Schedule Status Function - Simplified
   function updateScheduleStatus() {
     const now = new Date();
     const currentDay = now.getDay(); // 0 = Sunday, 1 = Monday, etc.
     const currentHour = now.getHours();
     const currentMinute = now.getMinutes();
-    const currentTime = currentHour * 60 + currentMinute; // Convert to minutes
+    const currentTime = currentHour * 60 + currentMinute;
 
     const statusIndicator = document.getElementById('statusIndicator');
     const statusText = document.getElementById('statusText');
     const weekdaysHours = document.getElementById('weekdaysHours');
     const saturdayHours = document.getElementById('saturdayHours');
 
-    // Define working hours (in minutes from midnight)
-    const morningStart = 9 * 60; // 9:00
-    const morningEnd = 14 * 60; // 14:00
-    const afternoonStart = 16 * 60; // 16:00
-    const afternoonEnd = 19 * 60; // 19:00
+    const morningStart = 9 * 60;
+    const morningEnd = 14 * 60;
+    const afternoonStart = 16 * 60;
+    const afternoonEnd = 19 * 60;
 
     let isOpen = false;
     let statusMessage = '';
 
-    // Check if it's a working day (Monday to Friday)
     if (currentDay >= 1 && currentDay <= 5) {
       if ((currentTime >= morningStart && currentTime < morningEnd) ||
               (currentTime >= afternoonStart && currentTime < afternoonEnd)) {
@@ -1021,32 +1302,26 @@ ${data.message || 'Sin mensaje adicional'}
         statusMessage = 'Cerrado - Abre mañana a las 9:00';
       }
 
-      // Highlight current weekday
       weekdaysHours.classList.add('current-day-highlight');
       saturdayHours.classList.remove('current-day-highlight');
-    } else if (currentDay === 6) { // Saturday
+    } else if (currentDay === 6) {
       statusMessage = 'Sábado - Solo con reserva';
       weekdaysHours.classList.remove('current-day-highlight');
       saturdayHours.classList.add('current-day-highlight');
-    } else { // Sunday
+    } else {
       statusMessage = 'Cerrado - Abre el lunes a las 9:00';
       weekdaysHours.classList.remove('current-day-highlight');
       saturdayHours.classList.remove('current-day-highlight');
     }
 
-    // Update the status indicator
-    if (isOpen) {
-      statusIndicator.className = 'status-indicator status-open';
-    } else {
-      statusIndicator.className = 'status-indicator status-closed';
-    }
-
+    statusIndicator.className = isOpen ? 'status-indicator status-open'
+            : 'status-indicator status-closed';
     statusText.textContent = statusMessage;
   }
 
   // Update schedule status on page load and every minute
   updateScheduleStatus();
-  setInterval(updateScheduleStatus, 60000); // Update every minute
+  setInterval(updateScheduleStatus, 60000);
 
 </script>
 </body>
