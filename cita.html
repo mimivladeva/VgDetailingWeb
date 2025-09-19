@@ -496,7 +496,6 @@
 
 
     /* Footer */
-    /* Footer */
     footer {
       background: var(--federal-blue);
       color: white;
@@ -522,58 +521,16 @@
       opacity: 0.8;
     }
 
-    footer .footer-section a,
-    footer .footer-section a:visited {
-      color: #fff;
-      text-decoration: none;
-    }
-    footer .footer-section a:hover,
-    footer .footer-section a:focus {
-      color: var(--light-cyan);
-      text-decoration: underline;
-    }
-
     .social-links {
       display: flex;
       gap: 1rem;
       margin-top: 1.5rem;
     }
+    footer .footer-section a,
+    footer .footer-section a:visited { color:#fff; text-decoration:none; }
+    footer .footer-section a:hover,
+    footer .footer-section a:focus { color:var(--light-cyan); text-decoration:underline; }
 
-    .social-links a {
-      width: 45px;
-      height: 45px;
-      background: rgba(255,255,255,0.1);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-size: 1.2rem;
-      transition: all 0.3s ease;
-    }
-
-    .social-links a:hover {
-      background: var(--pacific-cyan);
-      transform: translateY(-3px);
-    }
-
-    /* Schedule Styles */
-    .schedule-status {
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      gap: 0.5rem;
-      margin-bottom: 1rem;
-      font-weight: 600;
-      font-size: 1.1rem;
-    }
-
-    .status-indicator {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      animation: pulse 2s infinite;
-    }
 
     .status-open {
       background: #4CAF50;
@@ -582,50 +539,6 @@
     .status-closed {
       background: #f44336;
     }
-
-    @keyframes pulse {
-      0% { opacity: 1; }
-      50% { opacity: 0.5; }
-      100% { opacity: 1; }
-    }
-
-    .schedule-hours {
-      text-align: left;
-      margin-top: 1rem;
-    }
-
-    .weekdays-hours {
-      font-size: 1rem;
-      margin-bottom: 1rem;
-      opacity: 0.9;
-    }
-
-    .schedule-divider {
-      height: 1px;
-      background: rgba(255,255,255,0.3);
-      margin: 1rem 0;
-    }
-
-    .saturday-hours {
-      font-size: 0.9rem;
-      opacity: 0.8;
-      font-style: italic;
-    }
-
-    .current-day-highlight {
-      background: rgba(0, 186, 216, 0.2);
-      border-radius: 5px;
-      padding: 0.5rem;
-      margin: -0.2rem;
-    }
-
-    .footer-bottom {
-      text-align: center;
-      padding-top: 2rem;
-      border-top: 1px solid rgba(255,255,255,0.1);
-      color: var(--non-photo-blue);
-    }
-
 
 
     .social-links a {
@@ -672,6 +585,7 @@
     .status-closed {
       background: #f44336;
     }
+
     @keyframes pulse {
       0% { opacity: 1; }
       50% { opacity: 0.5; }
@@ -1004,10 +918,10 @@
     </div>
   </div>
 </div>
-</div>
 
 
-<!-- Footer -->
+
+
 <!-- Footer -->
 <footer>
   <div class="container">
@@ -1044,6 +958,7 @@
           </div>
         </div>
       </div>
+
     </div>
 
     <div class="footer-bottom">
@@ -1253,9 +1168,6 @@
     navLinks.classList.toggle('active');
   });
 
-  // Initialize
-  generateTimeOptions();
-  setMinDate();
 
   // Keyboard navigation for carousel
   document.addEventListener('keydown', function (e) {
@@ -1274,21 +1186,23 @@
     const currentDay = now.getDay(); // 0 = Sunday, 1 = Monday, etc.
     const currentHour = now.getHours();
     const currentMinute = now.getMinutes();
-    const currentTime = currentHour * 60 + currentMinute;
+    const currentTime = currentHour * 60 + currentMinute; // Convert to minutes
 
     const statusIndicator = document.getElementById('statusIndicator');
     const statusText = document.getElementById('statusText');
     const weekdaysHours = document.getElementById('weekdaysHours');
     const saturdayHours = document.getElementById('saturdayHours');
 
-    const morningStart = 9 * 60;
-    const morningEnd = 14 * 60;
-    const afternoonStart = 16 * 60;
-    const afternoonEnd = 19 * 60;
+    // Define working hours (in minutes from midnight)
+    const morningStart = 9 * 60; // 9:00
+    const morningEnd = 14 * 60; // 14:00
+    const afternoonStart = 16 * 60; // 16:00
+    const afternoonEnd = 19 * 60; // 19:00
 
     let isOpen = false;
     let statusMessage = '';
 
+    // Check if it's a working day (Monday to Friday)
     if (currentDay >= 1 && currentDay <= 5) {
       if ((currentTime >= morningStart && currentTime < morningEnd) ||
               (currentTime >= afternoonStart && currentTime < afternoonEnd)) {
@@ -1302,26 +1216,33 @@
         statusMessage = 'Cerrado - Abre mañana a las 9:00';
       }
 
+      // Highlight current weekday
       weekdaysHours.classList.add('current-day-highlight');
       saturdayHours.classList.remove('current-day-highlight');
-    } else if (currentDay === 6) {
+    } else if (currentDay === 6) { // Saturday
       statusMessage = 'Sábado - Solo con reserva';
       weekdaysHours.classList.remove('current-day-highlight');
       saturdayHours.classList.add('current-day-highlight');
-    } else {
+    } else { // Sunday
       statusMessage = 'Cerrado - Abre el lunes a las 9:00';
       weekdaysHours.classList.remove('current-day-highlight');
       saturdayHours.classList.remove('current-day-highlight');
     }
 
-    statusIndicator.className = isOpen ? 'status-indicator status-open'
-            : 'status-indicator status-closed';
+    // Update the status indicator
+    if (isOpen) {
+      statusIndicator.className = 'status-indicator status-open';
+    } else {
+      statusIndicator.className = 'status-indicator status-closed';
+    }
+
     statusText.textContent = statusMessage;
   }
 
-  // Update schedule status on page load and every minute
-  updateScheduleStatus();
-  setInterval(updateScheduleStatus, 60000);
+  document.addEventListener("DOMContentLoaded", () => {
+    updateScheduleStatus();
+    setInterval(updateScheduleStatus, 60000);
+  });
 
 </script>
 </body>
