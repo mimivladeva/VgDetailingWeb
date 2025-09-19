@@ -1036,22 +1036,22 @@
   const summaryContent = document.getElementById('summaryContent');
   let selectedServices = [];
 
+
   serviceCards.forEach(card => {
     const checkbox = card.querySelector('input[type="checkbox"]');
+    const label = card.querySelector('label');
 
-    // clic en toda la tarjeta
-    card.addEventListener('click', function (e) {
-      if (e.target.tagName !== 'INPUT') {
-        checkbox.checked = !checkbox.checked;
-      }
-
-      // alternar clase visual
+    // Cuando cambia el checkbox → aplicar clase .selected
+    checkbox.addEventListener('change', () => {
       card.classList.toggle('selected', checkbox.checked);
-
-      // actualizar resumen
       updateSummary();
     });
+
+    // Opcional: si quieres que se pueda hacer clic en toda la card
+    label.style.display = "block";
   });
+
+
 
   function updateSummary() {
     selectedServices = [];
