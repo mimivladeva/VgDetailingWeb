@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Ruleta VG Detailing</title>
+  <style>
+    :root {
+      --federal-blue: #03045e;
+      --honolulu-blue: #0077b6;
+      --pacific-cyan: #00BAD8;
+      --non-photo-blue: #90E0EF;
+      --light-cyan: #CAF0F8;
+      --white: #ffffff;
+    }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    html, body { height:100%; }
+    body {
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background: linear-gradient(to top,  var(--honolulu-blue) ,var(--pacific-cyan),var(--federal-blue));
+      font-family: 'Montserrat', system-ui, sans-serif;
+      color: var(--white);
+      text-align: center;
+      padding: 20px;
+    }
+    .wrap {
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:20px;
+      width:100%;
+      max-width:600px;
+    }
+    .logo {
+      width:120px;
+      height:auto;
+    }
+    .wheel-wrap {
+      position:relative;
+      width:100%;
+      max-width:450px;
+      aspect-ratio:1/1;
+    }
+    canvas {
+      width:100%;
+      height:100%;
+      border-radius:50%;
+      box-shadow:0 0 20px rgba(0,0,0,0.4);
+    }
+    .pin {
+      position:absolute;
+      top:50%;
+      left:50%;
+      transform:translate(-50%,-52%);
+      width:60px;
+      aspect-ratio:1/1;
+      border-radius:50%;
+      background:var(--pacific-cyan);
+      border:5px solid var(--federal-blue);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:bold;
+      color:var(--federal-blue);
+    }
+    .pin::after {
+      content:"";
+      position:absolute;
+      top:-18px;
+      left:50%;
+      transform:translateX(-50%);
+      width:0; height:0;
+      border-left:12px solid transparent;
+      border-right:12px solid transparent;
+
+      border-bottom:18px solid #0043ff;
+    }
+    button {
+      cursor:pointer;
+      border:none;
+      border-radius:10px;
+      padding:12px 20px;
+      font-weight:700;
+      background:linear-gradient(180deg, var(--pacific-cyan), var(--honolulu-blue));
+      color:var(--white);
+      box-shadow:0 6px 14px rgba(0,0,0,0.3);
+      transition: transform 0.2s ease;
+    }
+    button:hover { transform: scale(1.05); }
+    button:disabled { opacity:0.6; cursor:not-allowed; }
+    .result {
+      margin-top:10px;
+      padding:10px 16px;
+      border-radius:10px;
+      background:var(--light-cyan);
+      color:var(--federal-blue);
+      font-weight:600;
+      display:none;
+    }
+    @media (max-width:500px){
+      .logo { width:90px; }
+      .pin { width:48px; }
+      button { padding:10px 16px; font-size:0.9rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <img src="photos/logoBlanco.png" alt="VG Detailing" class="logo" />
+  <div class="wheel-wrap">
+    <canvas id="wheel" width="900" height="900"></canvas>
+    <div class="pin">GO</div>
+  </div>
+  <button id="spinBtn">🎯 Girar</button>
+  <div id="resultBox" class="result"></div>
+
+</div>
+
+<script>
+  const CONFIG = {
+    spinDurationMs: 4800,
+    minSpins: 5,
+    prizes: [
+      { label: "10% de descuento",  weight: 40, color: "#00BAD8" },
+      { label: "–10 € en Servicios Detailing",  weight: 25, color: "#0077B6" },
+      { label: "Antilluvia Cristales (Requiere Detailing Exterior)",  weight: 23, color: "#90E0EF" },
+      { label: "Cerámico Llantas (Requiere Detailing Interior y Exteriror) ",  weight: 10,  color: "#03045e" },
+      { label: "Detailing Exterior GRATIS", weight: 2, color: "#42cce8" }
+    ]
+  };
+
+  function normalizeWeights(items){
+    const total = items.reduce((s,p)=>s+Math.max(0,Number(p.weight)||0),0);
+    return items.map(p=>({...p, prob: total? (Math.max(0,Number(p.weight)||0))/total : 1/items.length}));
+  }
+  function pickWeighted(items){
+    const r = Math.random(); let acc = 0;
+    for(let i=0;i<items.length;i++){ acc+=items[i].prob; if(r<=acc) return i; }
+    return items.length-1;
+  }
+  // --- función para generar código promocional ---
+  function generarCodigoPromo() {
+    const letras = "ABCDEFGHJKLMNPQRSTUVWXYZ";
+    const numeros = "0123456789";
+    let codigo = "VG";
+    for(let i=0; i<3; i++) codigo += letras[Math.floor(Math.random()*letras.length)];
+    for(let i=0; i<3; i++) codigo += numeros[Math.floor(Math.random()*numeros.length)];
+    return codigo;
+  }
+
+
+  const TAU=Math.PI*2;
+  const canvas=document.getElementById("wheel"), ctx=canvas.getContext("2d");
+  const spinBtn=document.getElementById("spinBtn"), resultBox=document.getElementById("resultBox");
+
+  let PRIZES=normalizeWeights(CONFIG.prizes), angles=[], currentRotation=0;
+  function layoutAngles(){angles=[];const slice=TAU/PRIZES.length;let start=0;
+    for(let i=0;i<PRIZES.length;i++){angles.push([start,start+slice]);start+=slice;}}
+  function drawWheel(){
+    const W=canvas.width,H=canvas.height,cx=W/2,cy=H/2,R=Math.min(W,H)*0.48;
+    ctx.clearRect(0,0,W,H);ctx.save();ctx.translate(cx,cy);ctx.rotate(currentRotation);
+    for(let i=0;i<PRIZES.length;i++){const[a0,a1]=angles[i];
+      ctx.beginPath();ctx.moveTo(0,0);ctx.arc(0,0,R,a0,a1,false);ctx.closePath();
+      ctx.fillStyle=PRIZES[i].color;ctx.fill();ctx.strokeStyle="rgba(255,255,255,.2)";ctx.stroke();
+      const mid=(a0+a1)/2;ctx.save();ctx.rotate(mid);ctx.translate(R*0.65,0);ctx.rotate(Math.PI/2);
+      ctx.fillStyle=ctx.fillStyle="#fff";
+      ctx.font="bold 22px Montserrat, sans-serif";
+      ctx.textAlign="center";
+      ctx.textBaseline="middle";
+
+      const txt = PRIZES[i].label;
+      const maxWidth = R * 0.8;   // ancho máximo en cada sector
+      const words = txt.split(" ");
+      let line = "";
+      let lines = [];
+
+      for (let w of words) {
+        const testLine = line ? line + " " + w : w;
+        if (ctx.measureText(testLine).width > maxWidth) {
+          lines.push(line);
+          line = w;
+        } else {
+          line = testLine;
+        }
+      }
+      if (line) lines.push(line);
+
+      lines.forEach((l, idx) => {
+        ctx.fillText(l, 0, (idx - (lines.length - 1) / 2) * 24);
+      });
+      ;ctx.restore();}
+    ctx.restore();}
+  function deltaToIndex(idx){const[a0,a1]=angles[idx],mid=(a0+a1)/2;
+    const current=((currentRotation%TAU)+TAU)%TAU;let delta=(Math.PI*1.5-mid)-current;
+    delta=((delta%TAU)+TAU)%TAU;delta+=TAU*Math.max(3,CONFIG.minSpins);return delta;}
+  function easeOutCubic(t){return 1-Math.pow(1-t,3);}
+  let spinning=false;
+  function spin(){if(spinning)return;spinning=true;spinBtn.disabled=true;resultBox.style.display="none";
+    const idx=pickWeighted(PRIZES),delta=deltaToIndex(idx),start=performance.now(),startRot=currentRotation,finalRot=startRot+delta;
+    function frame(now){const t=Math.min(1,(now-start)/CONFIG.spinDurationMs),eased=easeOutCubic(t);
+      currentRotation=startRot+(finalRot-startRot)*eased;drawWheel();
+      if(t<1){requestAnimationFrame(frame);}else{currentRotation=((currentRotation%TAU)+TAU)%TAU;
+        announceWin(idx);spinning=false;spinBtn.disabled=false;}}requestAnimationFrame(frame);}
+  function announceWin(idx){
+    const prize = PRIZES[idx];
+    const codigo = generarCodigoPromo();
+    resultBox.innerHTML = `🎉 ¡Has ganado: <b>${prize.label}</b>!<br>
+  Tu código promocional es: <b>${codigo}</b>`;
+    resultBox.style.display = "block";
+  }
+
+  layoutAngles();drawWheel();spinBtn.addEventListener("click",spin);
+</script>
+</body>
+</html>
