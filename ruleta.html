@@ -592,7 +592,7 @@
   </div>
 
   <div id="codeBox" class="code-box" style="margin-top:15px;">
-    <input type="text" id="codigoInput" placeholder="Introduce tu código" maxlength="8" />
+    <input type="text" id="codigoInput" placeholder="Introduce tu código" maxlength="36" />
     <button id="validarBtn">✅ Validar</button>
   </div>
 
@@ -702,6 +702,19 @@
 
   // 🔹 Guardar referencia del documento actual
   let codigoDocRef = null;
+  // ================= UTILIDAD PARA PARAMETROS =================
+  function getParametroURL(nombre) {
+    const params = new URLSearchParams(window.location.search);
+    return params.get(nombre);
+  }
+
+  // ================= AUTO RELLENAR CODIGO =================
+  const codigoUrl = getParametroURL("codigo");
+  if (codigoUrl) {
+    codigoInput.value = codigoUrl;
+    validarCodigo(); // ✅ intenta validar directamente
+  }
+
 
   // ================= VALIDAR CODIGO =================
   async function validarCodigo() {
