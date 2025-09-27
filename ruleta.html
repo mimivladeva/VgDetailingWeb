@@ -666,79 +666,105 @@
 </footer>
 
 
+<script type="module">
+  import {
+    initializeApp
+  } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+  import {
+    getFirestore, collection, query, where, getDocs, doc, updateDoc
+  } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
 
-<script>
-  const mobileMenu = document.getElementById('mobileMenu');
-  const navLinks = document.getElementById('navLinks');
+  // 🔹 Configuración Firebase
+  const firebaseConfig = {
+    apiKey: "AIzaSyBXqIJLMnEh0tHR1sIdHR-ZeoZRMJx6Jb4",
+    authDomain: "vgdetailing-9ae86.firebaseapp.com",
+    projectId: "vgdetailing-9ae86",
+    storageBucket: "vgdetailing-9ae86.firebasestorage.app",
+    messagingSenderId: "962139309197",
+    appId: "1:962139309197:web:5af8d8098e9aa3ea440ec4",
+    measurementId: "G-ZBSKSXC4ZK"
+  };
 
-  mobileMenu.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
-  });
+  // 🔹 Inicializar Firebase
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
 
-  // --- CANDADO ---
-  const CODIGOS_VALIDOS = ["VGABC123", "VGXYZ456", "VG777888"]; // puedes cambiarlos
-
+  // 🔹 Referencias DOM
   const codigoInput = document.getElementById("codigoInput");
   const validarBtn = document.getElementById("validarBtn");
   const lockIcon = document.getElementById("lockIcon");
   const codeSection = document.getElementById("codeSection");
   const ruletaBox = document.getElementById("ruletaBox");
   const errorMessage = document.getElementById("errorMessage");
+  const spinBtn = document.getElementById("spinBtn");
+  const canvas = document.getElementById("wheel");
+  const ctx = canvas.getContext("2d");
+
+  // 🔹 Guardar referencia del documento actual
+  let codigoDocRef = null;
+
+  // ================= VALIDAR CODIGO =================
+  async function validarCodigo() {
+    const codigo = codigoInput.value.trim();
+    if (!codigo) {
+      mostrarError("Por favor, introduce un código");
+      return;
+    }
+
+    try {
+      const q = query(collection(db, "codigos"), where("codigo", "==", codigo));
+      const querySnapshot = await getDocs(q);
+
+      if (!querySnapshot.empty) {
+        const docSnap = querySnapshot.docs[0];
+        const data = docSnap.data();
+
+        if (data.premio === "pendiente" || data.usado === false) {
+          codigoDocRef = docSnap.ref; // ✅ guardar referencia
+          codigoInput.disabled = true;
+          validarBtn.disabled = true;
+          lockIcon.classList.add("unlocked");
+          mostrarExito("¡Código válido! Desbloqueando...");
+
+          setTimeout(() => {
+            codeSection.style.display = "none";
+            ruletaBox.style.display = "block";
+          }, 1000);
+        } else {
+          mostrarError("⚠️ Este código ya fue usado");
+        }
+      } else {
+        mostrarError("❌ Código inválido");
+      }
+    } catch (err) {
+      console.error(err);
+      mostrarError("Error de conexión con la base de datos");
+    }
+  }
 
   validarBtn.addEventListener("click", validarCodigo);
   codigoInput.addEventListener("keypress", (e) => {
     if (e.key === "Enter") validarCodigo();
   });
 
-  function validarCodigo() {
-    const codigo = codigoInput.value.trim().toUpperCase();
-
-    if (!codigo) {
-      mostrarError("Por favor, introduce un código");
-      return;
-    }
-
-    if (CODIGOS_VALIDOS.includes(codigo)) {
-      // Bloquear input
-      codigoInput.disabled = true;
-      validarBtn.disabled = true;
-
-      // Animar candado
-      lockIcon.classList.add("unlocked");
-      mostrarExito("¡Código correcto! Desbloqueando...");
-
-      // Mostrar ruleta después de animación
-      setTimeout(() => {
-        codeSection.style.display = "none";
-        ruletaBox.style.display = "block";
-      }, 1000);
-    } else {
-      mostrarError("Código inválido. Inténtalo de nuevo.");
-      codigoInput.value = "";
-      codigoInput.focus();
-    }
+  function mostrarError(msg) {
+    errorMessage.textContent = msg;
+    errorMessage.style.color = "red";
+  }
+  function mostrarExito(msg) {
+    errorMessage.textContent = msg;
+    errorMessage.style.color = "green";
   }
 
-  function mostrarError(mensaje) {
-    errorMessage.textContent = mensaje;
-    errorMessage.className = "error-message";
-  }
-
-  function mostrarExito(mensaje) {
-    errorMessage.textContent = mensaje;
-    errorMessage.className = "success-message";
-  }
-
-  // -- CODIGO RULETA ---
-
+  // ================= RULETA =================
   const CONFIG = {
     spinDurationMs: 4800,
     minSpins: 5,
     prizes: [
-      { label: "10% de descuento",  weight: 40, color: "#00BAD8" },
-      { label: "–10 € en Servicios Detailing",  weight: 25, color: "#0077B6" },
-      { label: "Antilluvia Cristales (Requiere Detailing Exterior)",  weight: 23, color: "#90E0EF" },
-      { label: "Cerámico Llantas (Requiere Detailing Interior y Exteriror) ",  weight: 10,  color: "#03045e" },
+      { label: "10% de descuento", weight: 40, color: "#00BAD8" },
+      { label: "–10 € en Servicios Detailing", weight: 25, color: "#0077B6" },
+      { label: "Antilluvia Cristales (Requiere Detailing Exterior)", weight: 23, color: "#90E0EF" },
+      { label: "Cerámico Llantas (Requiere Detailing Interior y Exterior)", weight: 10, color: "#03045e" },
       { label: "Detailing Exterior GRATIS", weight: 2, color: "#42cce8" }
     ]
   };
@@ -753,16 +779,7 @@
     return items.length-1;
   }
 
-
-
-  // --- función para generar código promocional ---
-
-
-
   const TAU=Math.PI*2;
-  const canvas=document.getElementById("wheel"), ctx=canvas.getContext("2d");
-  const spinBtn=document.getElementById("spinBtn"), resultBox=document.getElementById("resultBox");
-
   let PRIZES=normalizeWeights(CONFIG.prizes), angles=[], currentRotation=0;
   function layoutAngles(){angles=[];const slice=TAU/PRIZES.length;let start=0;
     for(let i=0;i<PRIZES.length;i++){angles.push([start,start+slice]);start+=slice;}}
@@ -773,32 +790,11 @@
       ctx.beginPath();ctx.moveTo(0,0);ctx.arc(0,0,R,a0,a1,false);ctx.closePath();
       ctx.fillStyle=PRIZES[i].color;ctx.fill();ctx.strokeStyle="rgba(255,255,255,.2)";ctx.stroke();
       const mid=(a0+a1)/2;ctx.save();ctx.rotate(mid);ctx.translate(R*0.65,0);ctx.rotate(Math.PI/2);
-      ctx.fillStyle=ctx.fillStyle="#fff";
-      ctx.font="bold 22px Montserrat, sans-serif";
-      ctx.textAlign="center";
-      ctx.textBaseline="middle";
-
+      ctx.fillStyle="#fff"; ctx.font="bold 22px Montserrat, sans-serif";
+      ctx.textAlign="center"; ctx.textBaseline="middle";
       const txt = PRIZES[i].label;
-      const maxWidth = R * 0.8;   // ancho máximo en cada sector
-      const words = txt.split(" ");
-      let line = "";
-      let lines = [];
-
-      for (let w of words) {
-        const testLine = line ? line + " " + w : w;
-        if (ctx.measureText(testLine).width > maxWidth) {
-          lines.push(line);
-          line = w;
-        } else {
-          line = testLine;
-        }
-      }
-      if (line) lines.push(line);
-
-      lines.forEach((l, idx) => {
-        ctx.fillText(l, 0, (idx - (lines.length - 1) / 2) * 24);
-      });
-      ;ctx.restore();}
+      ctx.fillText(txt, 0, 0);
+      ctx.restore();}
     ctx.restore();}
   function deltaToIndex(idx){const[a0,a1]=angles[idx],mid=(a0+a1)/2;
     const current=((currentRotation%TAU)+TAU)%TAU;let delta=(Math.PI*1.5-mid)-current;
@@ -812,132 +808,42 @@
       if(t<1){requestAnimationFrame(frame);}else{currentRotation=((currentRotation%TAU)+TAU)%TAU;
         announceWin(idx);spinning=false;spinBtn.disabled=false;}}requestAnimationFrame(frame);}
 
-
-  // -----CONFETI -----
-  function lanzarConfeti() {
-    const colores = ["#00BAD8", "#0077B6", "#90E0EF", "#CAF0F8"];
-    for (let i = 0; i < 80; i++) {
-      const confeti = document.createElement("div");
-      confeti.classList.add("confeti");
-      document.body.appendChild(confeti);
-
-      const size = Math.random() * 8 + 4;
-      confeti.style.width = `${size}px`;
-      confeti.style.height = `${size}px`;
-      confeti.style.background = colores[Math.floor(Math.random() * colores.length)];
-
-      confeti.style.left = Math.random() * 100 + "vw";
-      confeti.style.top = "-10px";
-
-      const animacion = confeti.animate(
-              [
-                { transform: `translateY(0) rotate(0deg)` },
-                { transform: `translateY(100vh) rotate(${Math.random() * 720}deg)` }
-              ],
-              {
-                duration: Math.random() * 3000 + 3000,
-                easing: "ease-out",
-                iterations: 1,
-                fill: "forwards"
-              }
-      );
-
-      animacion.onfinish = () => confeti.remove();
-    }
-  }
-  function announceWin(idx) {
+  // ================= GANADOR =================
+  async function announceWin(idx) {
     const prize = PRIZES[idx];
 
-    // 🎊 Lanzar confeti
-    lanzarConfeti();
+    // 🎊 Confeti (opcional)
+    console.log("Ganaste:", prize.label);
 
-    // Ocultar la ruleta completa
-    const ruletaBox = document.getElementById("ruletaBox");
-    ruletaBox.innerHTML = `
-    <div class="premio-final">
-      <h2>🎉 ¡Felicidades!</h2>
-      <p>Has ganado: <b>${prize.label}</b></p>
-    </div>
-  `;
-  }
-
-
-  layoutAngles();drawWheel();spinBtn.addEventListener("click",spin);
-
-
-
-
-
-  // ----- FOOTER -----
-  // Schedule Status Function - Simplified
-  function updateScheduleStatus() {
-    const now = new Date();
-    const currentDay = now.getDay(); // 0 = Sunday, 1 = Monday, etc.
-    const currentHour = now.getHours();
-    const currentMinute = now.getMinutes();
-    const currentTime = currentHour * 60 + currentMinute; // Convert to minutes
-
-    const statusIndicator = document.getElementById('statusIndicator');
-    const statusText = document.getElementById('statusText');
-    const weekdaysHours = document.getElementById('weekdaysHours');
-    const saturdayHours = document.getElementById('saturdayHours');
-
-    // Define working hours (in minutes from midnight)
-    const morningStart = 9 * 60; // 9:00
-    const morningEnd = 14 * 60; // 14:00
-    const afternoonStart = 16 * 60; // 16:00
-    const afternoonEnd = 19 * 60; // 19:00
-
-    let isOpen = false;
-    let statusMessage = '';
-
-    // Check if it's a working day (Monday to Friday)
-    if (currentDay >= 1 && currentDay <= 5) {
-      if ((currentTime >= morningStart && currentTime < morningEnd) ||
-              (currentTime >= afternoonStart && currentTime < afternoonEnd)) {
-        isOpen = true;
-        statusMessage = 'Abierto Ahora';
-      } else if (currentTime < morningStart) {
-        statusMessage = 'Cerrado - Abre a las 9:00';
-      } else if (currentTime >= morningEnd && currentTime < afternoonStart) {
-        statusMessage = 'Cerrado - Abre a las 16:00';
-      } else {
-        // 🔑 Si es viernes por la tarde → abre lunes
-        if (currentDay === 5) {
-          statusMessage = 'Cerrado - Abre el lunes a las 9:00';
-        } else {
-          statusMessage = 'Cerrado - Abre mañana a las 9:00';
-
-        }
+    // 🔹 Actualizar Firestore
+    if (codigoDocRef) {
+      try {
+        await updateDoc(codigoDocRef, {
+          premio: prize.label,
+          usado: true,
+          fechaUso: new Date(),
+          clienteNombre: "mimi"
+        });
+        console.log("Documento actualizado en Firestore ✅");
+      } catch (err) {
+        console.error("Error al actualizar:", err);
       }
-
-      // Highlight current weekday
-      weekdaysHours.classList.add('current-day-highlight');
-      saturdayHours.classList.remove('current-day-highlight');
-    } else if (currentDay === 6) { // Saturday
-      statusMessage = 'Sábado - Solo con reserva';
-      weekdaysHours.classList.remove('current-day-highlight');
-      saturdayHours.classList.add('current-day-highlight');
-    } else { // Sunday
-      statusMessage = 'Cerrado - Abre el lunes a las 9:00';
-      weekdaysHours.classList.remove('current-day-highlight');
-      saturdayHours.classList.remove('current-day-highlight');
     }
 
-    // Update the status indicator
-    if (isOpen) {
-      statusIndicator.className = 'status-indicator status-open';
-    } else {
-      statusIndicator.className = 'status-indicator status-closed';
-    }
-
-    statusText.textContent = statusMessage;
+    // Mostrar resultado
+    ruletaBox.innerHTML = `
+      <div class="premio-final">
+        <h2>🎉 ¡Felicidades!</h2>
+        <p>Has ganado: <b>${prize.label}</b></p>
+      </div>`;
   }
 
-  // Update schedule status on page load and every minute
-  updateScheduleStatus();
-  setInterval(updateScheduleStatus, 60000); // Update every minute
+  layoutAngles(); drawWheel(); spinBtn.addEventListener("click", spin);
+
 </script>
+
+
+
 
 </body>
 </html>
